@@ -15,11 +15,11 @@ export default defineConfig({
     extend: {
       tokens: {
         colors: {
-          primary: { value: "#0D1B2A" }, // The Steel
-          secondary: { value: "#415A77" }, // The Slate
-          surface: { value: "#1B263B" }, // The Canvas
-          tertiary: { value: "#E09F3E" }, // The Draftsman's Ink
-          appBackground: { value: "#F9F9FF" },
+          steel: { value: "#0D1B2A" }, // The structural core
+          slate: { value: "#415A77" }, // Supporting structural tones
+          canvas: { value: "#1B263B" }, // Neutral base for backgrounds
+          draftsmansInk: { value: "#E09F3E" }, // Accent/Highlights
+          siteBackground: { value: "#F9F9FF" },
         },
         fonts: {
           headline: { value: "var(--font-space-grotesk), sans-serif" },
@@ -28,10 +28,15 @@ export default defineConfig({
       },
       semanticTokens: {
         colors: {
+          primary: { value: "{colors.steel}" },
+          secondary: { value: "{colors.slate}" },
+          surface: { value: "{colors.canvas}" },
+          tertiary: { value: "{colors.draftsmansInk}" },
+          background: { value: "{colors.siteBackground}" },
           text: {
-            main: { value: "{colors.primary}" },
-            muted: { value: "{colors.secondary}" },
-            inverse: { value: "{colors.appBackground}" },
+            main: { value: "{colors.steel}" },
+            muted: { value: "{colors.slate}" },
+            inverse: { value: "{colors.siteBackground}" },
           },
         },
       },

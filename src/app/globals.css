@@ -7,7 +7,7 @@
   }
 
   body {
-    background-color: var(--colors-app-background);
+    background-color: var(--colors-background);
     color: var(--colors-text-main);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
