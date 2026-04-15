@@ -1,0 +1,6 @@
+.agent
+.claude
+.worktrees
+.env
+.env.local
+docs
