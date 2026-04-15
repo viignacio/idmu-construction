@@ -2,11 +2,14 @@ import dynamic from "next/dynamic";
 
 const Hero = dynamic(() => import("./Hero"));
 const TextWithGrid = dynamic(() => import("./TextWithGrid"));
+const StatsGrid = dynamic(() => import("./StatsGrid"));
 
 const components: { [key: string]: any } = {
   hero: Hero,
   textWithGrid: TextWithGrid,
+  statsGrid: StatsGrid,
 };
+
 
 
 interface ModuleRendererProps {

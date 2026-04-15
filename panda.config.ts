@@ -20,6 +20,7 @@ export default defineConfig({
           canvas: { value: "#1B263B" }, // Neutral base for backgrounds
           draftsmansInk: { value: "#E09F3E" }, // Accent/Highlights
           siteBackground: { value: "#F9F9FF" },
+          iceBlue: { value: "#3B82F6" }, // The 'Ice Blue' from the design
         },
         fonts: {
           headline: { value: "var(--font-space-grotesk), sans-serif" },
@@ -33,6 +34,7 @@ export default defineConfig({
           surface: { value: "{colors.canvas}" },
           tertiary: { value: "{colors.draftsmansInk}" },
           background: { value: "{colors.siteBackground}" },
+          blueprint: { value: "{colors.iceBlue}" },
           text: {
             main: { value: "{colors.steel}" },
             muted: { value: "{colors.slate}" },

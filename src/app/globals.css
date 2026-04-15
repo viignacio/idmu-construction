@@ -9,6 +9,7 @@
   body {
     background-color: var(--colors-background);
     color: var(--colors-text-main);
+    font-family: var(--font-inter), sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
