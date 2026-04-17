@@ -37,11 +37,11 @@ export default function ProjectCard({
   const containerClass = css({
     position: "relative",
     overflow: "hidden",
-    // Use proportional aspect ratios so that Landscape (span 8) 
-    // and Portrait (span 4) have the exact same pixel height in the grid.
-    aspectRatio: { 
-      base: size === "landscape" ? "16 / 10" : "4 / 5", 
-      md: size === "landscape" ? "16 / 10" : "8 / 10" 
+    // Use clamp() to ensure that cards in the same row have the exact same height,
+    // scaling with the viewport while staying within reasonable bounds.
+    height: { 
+      base: size === "landscape" ? "300px" : "400px", 
+      md: "clamp(500px, 38vw, 700px)" 
     },
     gridColumn: { base: "span 12", md: size === "landscape" ? "span 8" : "span 4" },
     backgroundColor: "surface",
