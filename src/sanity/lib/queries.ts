@@ -58,6 +58,18 @@ export const PAGE_QUERY = defineQuery(`*[_type == "page" && (slug.current == $sl
         ...,
         "iconUrl": icon.asset->url
       }
+    },
+    _type == "projectShowcase" => {
+      ...,
+      projects[]{
+        ...,
+        project->{
+          title,
+          sector,
+          year,
+          "imageUrl": mainImage.asset->url
+        }
+      }
     }
 
   }
