@@ -2,6 +2,7 @@
 
 import { usePathname } from "next/navigation";
 import { css } from "../../../styled-system/css";
+import Link from "next/link";
 
 interface NavLink {
   text: string;
@@ -22,7 +23,7 @@ export default function NavLinks({ links }: { links?: NavLink[] }) {
       {links.map((link) => {
         const isActive = pathname === link.url;
         return (
-          <a
+          <Link
             key={link.url}
             href={link.url}
             className={css({
@@ -37,7 +38,7 @@ export default function NavLinks({ links }: { links?: NavLink[] }) {
             })}
           >
             {link.text}
-          </a>
+          </Link>
         );
       })}
     </div>

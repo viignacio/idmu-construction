@@ -67,7 +67,8 @@ export const PAGE_QUERY = defineQuery(`*[_type == "page" && (slug.current == $sl
           title,
           sector,
           year,
-          "imageUrl": mainImage.asset->url
+          "imageUrl": mainImage.asset->url,
+          "slug": slug.current
         }
       }
     },
@@ -79,7 +80,8 @@ export const PAGE_QUERY = defineQuery(`*[_type == "page" && (slug.current == $sl
         category,
         date,
         author,
-        "imageUrl": mainImage.asset->url
+        "imageUrl": mainImage.asset->url,
+        "slug": slug.current
       },
       "recentNews": *[_type == "news" && category != "Update"] | order(date desc)[0...2] {
         title,
@@ -87,11 +89,35 @@ export const PAGE_QUERY = defineQuery(`*[_type == "page" && (slug.current == $sl
         category,
         date,
         author,
-        "imageUrl": mainImage.asset->url
+        "imageUrl": mainImage.asset->url,
+        "slug": slug.current
       }
     }
 
   }
+}`);
+
+export const PROJECT_QUERY = defineQuery(`*[_type == "project" && slug.current == $slug][0]{
+  title,
+  sector,
+  year,
+  client,
+  "imageUrl": mainImage.asset->url,
+  description,
+  gallery[]{
+    ...,
+    "url": asset->url
+  }
+}`);
+
+export const NEWS_QUERY = defineQuery(`*[_type == "news" && slug.current == $slug][0]{
+  title,
+  category,
+  date,
+  author,
+  "imageUrl": mainImage.asset->url,
+  excerpt,
+  content
 }`);
 
 

@@ -7,24 +7,29 @@ interface NewsCardProps {
     title: string;
     category: string;
     imageUrl?: string;
-    slug?: { current: string };
+    slug?: string;
   };
 }
 
 export default function NewsCard({ news }: NewsCardProps) {
   if (!news) return null;
 
-  const { title, category, imageUrl } = news;
+  const { title, category, imageUrl, slug } = news;
 
   return (
-    <div className={"group " + css({
-      backgroundColor: "white",
-      display: "flex",
-      flexDirection: "column",
-      height: "full",
-      overflow: "hidden",
-      cursor: "pointer",
-    })}>
+    <Link 
+      href={slug ? `/news/${slug}` : "#"}
+      className={"group " + css({
+        backgroundColor: "white",
+        display: "flex",
+        flexDirection: "column",
+        height: "full",
+        overflow: "hidden",
+        cursor: "pointer",
+        textDecoration: "none",
+        color: "inherit",
+      })}
+    >
       {/* Image Container */}
       <div className={css({
         height: "12rem", // h-48
@@ -105,6 +110,6 @@ export default function NewsCard({ news }: NewsCardProps) {
           </span>
         </div>
       </div>
-    </div>
+    </Link>
   );
 }

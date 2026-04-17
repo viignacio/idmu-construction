@@ -2,6 +2,7 @@
 
 import { PortableText } from "@portabletext/react";
 import { css } from "../../../styled-system/css";
+import Link from "next/link";
 
 export default function Footer({ data, business }: any) {
   if (!data) return null;
@@ -28,7 +29,7 @@ export default function Footer({ data, business }: any) {
           flexDirection: "column",
         })}
       >
-        <a
+        <Link
           href="/"
           className={css({
             height: "8rem",
@@ -63,7 +64,7 @@ export default function Footer({ data, business }: any) {
               {data?.brandName || business?.name || "IDMU Construction"}
             </span>
           )}
-        </a>
+        </Link>
         <div
           className={css({
             color: "#CBD5E1",
@@ -97,7 +98,7 @@ export default function Footer({ data, business }: any) {
           {data.column1?.title || "Navigation"}
         </h5>
         {data.column1?.links?.map((link: any) => (
-          <a
+          <Link
             key={link.url}
             href={link.url}
             className={css({
@@ -108,7 +109,7 @@ export default function Footer({ data, business }: any) {
             })}
           >
             {link.text}
-          </a>
+          </Link>
         ))}
       </div>
 
@@ -130,7 +131,7 @@ export default function Footer({ data, business }: any) {
           {data.column2?.title || "Insights"}
         </h5>
         {data.column2?.links?.map((link: any) => (
-          <a
+          <Link
             key={link.url}
             href={link.url}
             className={css({
@@ -141,7 +142,7 @@ export default function Footer({ data, business }: any) {
             })}
           >
             {link.text}
-          </a>
+          </Link>
         ))}
       </div>
 

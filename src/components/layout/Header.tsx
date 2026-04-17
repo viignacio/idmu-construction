@@ -1,5 +1,4 @@
-"use client";
-
+import Link from "next/link";
 import { css } from "../../../styled-system/css";
 import NavLinks from "./NavLinks";
 
@@ -32,7 +31,7 @@ export default function Header({ data, business }: any) {
           margin: "0 auto",
         })}
       >
-        <a
+        <Link
           href="/"
           className={css({
             height: "full",
@@ -59,11 +58,11 @@ export default function Header({ data, business }: any) {
           ) : (
             brandName
           )}
-        </a>
+        </Link>
 
         <NavLinks links={data?.links} />
 
-        <a
+        <Link
           href={data?.cta?.url || "#"}
           className={css({ textDecoration: "none" })}
         >
@@ -86,7 +85,7 @@ export default function Header({ data, business }: any) {
           >
             {data?.cta?.text || "Get a Quote"}
           </button>
-        </a>
+        </Link>
       </div>
     </nav>
   );

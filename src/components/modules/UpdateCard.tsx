@@ -1,17 +1,19 @@
 import { css } from "../../../styled-system/css";
+import Link from "next/link";
 
 interface UpdateCardProps {
   news: {
     excerpt: string;
     author?: string;
     date: string;
+    slug?: string;
   };
 }
 
 export default function UpdateCard({ news }: UpdateCardProps) {
   if (!news) return null;
 
-  const { excerpt, author = "IDMU Construction", date } = news;
+  const { excerpt, author = "IDMU Construction", date, slug } = news;
 
   // Initials logic: first and last strings
   const getInitials = (name: string) => {
@@ -33,13 +35,25 @@ export default function UpdateCard({ news }: UpdateCardProps) {
   };
 
   return (
-    <div className={css({
-      padding: "2rem",
-      backgroundColor: "white",
-      borderLeftWidth: "4px",
-      borderLeftColor: "tertiary-fixed-dim",
-      boxShadow: "sm",
-    })}>
+    <Link 
+      href={slug ? `/news/${slug}` : "#"}
+      className={css({
+        display: "block",
+        textDecoration: "none",
+        color: "inherit",
+        padding: "2rem",
+        backgroundColor: "white",
+        borderLeftWidth: "4px",
+        borderLeftColor: "tertiary-fixed-dim",
+        boxShadow: "sm",
+        transition: "all 0.3s",
+        cursor: "pointer",
+        _hover: {
+          backgroundColor: "#F8FAFC", // Light slate background on hover
+          transform: "translateX(4px)",
+        }
+      })}
+    >
       {/* Author Header */}
       <div className={css({
         display: "flex",
@@ -89,6 +103,6 @@ export default function UpdateCard({ news }: UpdateCardProps) {
       })}>
         "{excerpt}"
       </p>
-    </div>
+    </Link>
   );
 }

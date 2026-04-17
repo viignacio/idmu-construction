@@ -1,5 +1,6 @@
 import { css, cx } from "../../../styled-system/css";
 import Image from "next/image";
+import Link from "next/link";
 
 interface ProjectCardProps {
   project: {
@@ -7,6 +8,7 @@ interface ProjectCardProps {
     sector?: string;
     year?: string;
     imageUrl?: string;
+    slug?: string;
   };
   size?: "landscape" | "portrait";
   hoverEffect?: "cardPeek" | "showText" | "zoomOut" | "zoomIn";
@@ -25,7 +27,7 @@ export default function ProjectCard({
 }: ProjectCardProps) {
   if (!project) return null;
 
-  const { title, sector, year, imageUrl } = project;
+  const { title, sector, year, imageUrl, slug } = project;
   const hasMetadata = sector && year;
 
   // Determine styling mode
@@ -46,8 +48,11 @@ export default function ProjectCard({
     gridColumn: { base: "span 12", md: size === "landscape" ? "span 8" : "span 4" },
     backgroundColor: "surface",
     cursor: "pointer",
+    display: "block",
+    textDecoration: "none",
   });
 
+  // ... (rest of the classes remain the same)
   // Image wrapper for zoom effects
   const imageWrapperClass = css({
     width: "100%",
@@ -119,7 +124,7 @@ export default function ProjectCard({
   });
 
   return (
-    <div className={cx("group", containerClass)}>
+    <Link href={slug ? `/projects/${slug}` : "#"} className={cx("group", containerClass)}>
       {imageUrl && (
         <div className={imageWrapperClass}>
           <Image
@@ -190,6 +195,6 @@ export default function ProjectCard({
           </h4>
         </div>
       )}
-    </div>
+    </Link>
   );
 }
