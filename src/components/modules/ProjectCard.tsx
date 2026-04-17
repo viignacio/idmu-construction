@@ -67,12 +67,22 @@ export default function ProjectCard({
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "rgba(13, 27, 42, 0)", // Transparent primary
-    transition: "background-color 0.5s ease",
+    transition: "all 0.5s ease",
     opacity: 0,
+    backgroundColor:
+      cardColor === "yellow"
+        ? "rgba(224, 159, 62, 0)"
+        : cardColor === "white"
+        ? "rgba(249, 249, 255, 0)"
+        : "rgba(13, 27, 42, 0)",
     _groupHover: {
       opacity: 1,
-      backgroundColor: "rgba(13, 27, 42, 0.6)", // Tonal overlay
+      backgroundColor:
+        cardColor === "yellow"
+          ? "rgba(224, 159, 62, 0.8)"
+          : cardColor === "white"
+          ? "rgba(249, 249, 255, 0.8)"
+          : "rgba(13, 27, 42, 0.8)",
     },
   });
 
@@ -80,20 +90,24 @@ export default function ProjectCard({
   const cardBoxClass = css({
     position: "absolute",
     padding: "3rem",
-    maxWidth: "400px",
-    transition: "all 0.5s ease-out",
+    width: "fit-content",
+    minWidth: "280px",
+    maxWidth: "calc(100% - 6rem)",
+    transition: "all 0.6s cubic-bezier(0.16, 1, 0.3, 1)",
     backgroundColor: cardColor === "yellow" ? "tertiary" : cardColor === "white" ? "background" : "primary",
-    color: cardColor === "yellow" ? "primary" : "white",
-    
-    // Positioning logic
+    color: cardColor === "yellow" ? "primary" : cardColor === "white" ? "primary" : "white",
+    boxShadow: "0 20px 40px rgba(0,0,0,0.1)",
+
+    // Positioning logic (relative to corners)
     top: position.includes("top") ? (isOffset ? "3rem" : "0") : "auto",
     bottom: position.includes("bottom") ? (isOffset ? "3rem" : "0") : "auto",
     left: position.includes("left") ? (isOffset ? "3rem" : "0") : "auto",
     right: position.includes("right") ? (isOffset ? "3rem" : "0") : "auto",
 
-    // Animation: Card Peek
-    transform: hoverEffect === "cardPeek" ? "translateY(1rem)" : "none",
-    opacity: hoverEffect === "cardPeek" ? 0.9 : 1,
+    // Animation: Card Peek (slides from outside or slightly offset)
+    transform: hoverEffect === "cardPeek" ? "translateY(1.5rem)" : "none",
+    opacity: hoverEffect === "cardPeek" ? 0 : 1,
+
     _groupHover: {
       transform: "translateY(0)",
       opacity: 1,
