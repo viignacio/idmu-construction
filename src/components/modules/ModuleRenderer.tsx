@@ -4,12 +4,14 @@ const Hero = dynamic(() => import("./Hero"));
 const TextWithGrid = dynamic(() => import("./TextWithGrid"));
 const StatsGrid = dynamic(() => import("./StatsGrid"));
 const ProjectShowcase = dynamic(() => import("./ProjectShowcase"));
+const NewsShowcase = dynamic(() => import("./NewsShowcase"));
 
-const components: { [key: string]: any } = {
+const components: Record<string, any> = {
   hero: Hero,
   textWithGrid: TextWithGrid,
   statsGrid: StatsGrid,
   projectShowcase: ProjectShowcase,
+  newsShowcase: NewsShowcase,
 };
 
 
