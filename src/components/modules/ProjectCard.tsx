@@ -104,10 +104,10 @@ export default function ProjectCard({
     boxShadow: "0 24px 48px rgba(0,0,0,0.15)",
 
     // Positioning logic (relative to corners)
-    top: position.includes("top") ? (isOffset ? "3rem" : "0") : "auto",
-    bottom: position.includes("bottom") ? (isOffset ? "3rem" : "0") : "auto",
-    left: position.includes("left") ? (isOffset ? "3rem" : "0") : "auto",
-    right: position.includes("right") ? (isOffset ? "3rem" : "0") : "auto",
+    top: position.toLowerCase().includes("top") ? (isOffset ? "3rem" : "0") : "auto",
+    bottom: position.toLowerCase().includes("bottom") ? (isOffset ? "3rem" : "0") : "auto",
+    left: position.toLowerCase().includes("left") ? (isOffset ? "3rem" : "0") : "auto",
+    right: position.toLowerCase().includes("right") ? (isOffset ? "3rem" : "0") : "auto",
 
     // Animation: Card Peek (vibration/slide effect)
     // It remains visible (opacity: 1) and just shifts slightly
