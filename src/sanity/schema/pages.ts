@@ -237,8 +237,8 @@ export const page = defineType({
           title: "Project Showcase",
           groups: [
             { name: "content", title: "Content" },
-            { name: "items", title: "Projects" },
             { name: "cta", title: "CTA" },
+            { name: "items", title: "Projects" },
           ],
           fields: [
             {
