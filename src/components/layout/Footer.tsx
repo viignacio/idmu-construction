@@ -12,6 +12,7 @@ export default function Footer({ data, business }: any) {
         width: "full",
         padding: "4rem 2rem",
         backgroundColor: "primary",
+        backgroundImage: "linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3))",
         color: "white",
         display: "grid",
         gridTemplateColumns: { base: "1fr", md: "repeat(5, 1fr)" },
