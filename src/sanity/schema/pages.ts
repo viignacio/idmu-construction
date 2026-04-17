@@ -201,6 +201,12 @@ export const page = defineType({
           title: "Stats Grid",
           fields: [
             {
+              name: "internalTitle",
+              title: "Internal Title",
+              type: "string",
+              description: "For studio purposes only (e.g. 'Project Stats')",
+            },
+            {
               name: "stats",
               type: "array",
               of: [
@@ -214,12 +220,28 @@ export const page = defineType({
               ],
             },
           ],
+          preview: {
+            select: {
+              title: "internalTitle",
+            },
+            prepare({ title }) {
+              return {
+                title: title || "Stats Grid",
+              };
+            },
+          },
         },
         {
           type: "object",
           name: "projectShowcase",
           title: "Project Showcase (Monolithic Scale)",
           fields: [
+            {
+              name: "internalTitle",
+              title: "Internal Title",
+              type: "string",
+              description: "For studio purposes only (e.g. 'Home - Featured Projects')",
+            },
             { name: "heading", type: "string", title: "Heading" },
             { name: "subheading", type: "text", title: "Subheading" },
             {
@@ -313,6 +335,16 @@ export const page = defineType({
               ],
             },
           ],
+          preview: {
+            select: {
+              title: "internalTitle",
+            },
+            prepare({ title }) {
+              return {
+                title: title || "Project Showcase",
+              };
+            },
+          },
         },
       ],
     }),
