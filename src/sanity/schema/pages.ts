@@ -422,7 +422,7 @@ export const page = defineType({
                 list: [
                   { title: "Primary (Steel)", value: "primary" },
                   { title: "Secondary (Slate)", value: "secondary" },
-                  { title: "Tertiary (Mustard)", value: "tertiary" },
+                  { title: "Tertiary (Draftsman's Ink)", value: "tertiary" },
                   { title: "Surface (Canvas)", value: "surface" },
                   { title: "Background (Site Background)", value: "background" },
                   { title: "Blueprint (Ice Blue)", value: "blueprint" },
