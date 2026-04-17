@@ -3,11 +3,13 @@ import dynamic from "next/dynamic";
 const Hero = dynamic(() => import("./Hero"));
 const TextWithGrid = dynamic(() => import("./TextWithGrid"));
 const StatsGrid = dynamic(() => import("./StatsGrid"));
+const ProjectShowcase = dynamic(() => import("./ProjectShowcase"));
 
 const components: { [key: string]: any } = {
   hero: Hero,
   textWithGrid: TextWithGrid,
   statsGrid: StatsGrid,
+  projectShowcase: ProjectShowcase,
 };
 
 
