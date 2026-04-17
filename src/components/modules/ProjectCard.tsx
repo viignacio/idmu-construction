@@ -37,7 +37,12 @@ export default function ProjectCard({
   const containerClass = css({
     position: "relative",
     overflow: "hidden",
-    height: { base: "400px", md: size === "landscape" ? "600px" : "500px" },
+    // Use proportional aspect ratios so that Landscape (span 8) 
+    // and Portrait (span 4) have the exact same pixel height in the grid.
+    aspectRatio: { 
+      base: size === "landscape" ? "16 / 10" : "4 / 5", 
+      md: size === "landscape" ? "16 / 10" : "8 / 10" 
+    },
     gridColumn: { base: "span 12", md: size === "landscape" ? "span 8" : "span 4" },
     backgroundColor: "surface",
     cursor: "pointer",
@@ -47,15 +52,15 @@ export default function ProjectCard({
   const imageWrapperClass = css({
     width: "100%",
     height: "100%",
-    transition: "transform 0.7s ease-out",
-    transform: hoverEffect === "zoomIn" ? "scale(1)" : "scale(1.05)",
+    transition: "transform 1s cubic-bezier(0.16, 1, 0.3, 1)", // Smoother zoom
+    transform: hoverEffect === "zoomIn" ? "scale(1)" : "scale(1.08)",
     _groupHover: {
       transform:
         hoverEffect === "zoomIn"
-          ? "scale(1.1)"
+          ? "scale(1.15)"
           : hoverEffect === "zoomOut" || hoverEffect === "cardPeek" || hoverEffect === "showText"
           ? "scale(1)"
-          : "scale(1.05)",
+          : "scale(1.08)",
     },
   });
 
@@ -67,7 +72,7 @@ export default function ProjectCard({
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
-    transition: "all 0.5s ease",
+    transition: "all 0.6s cubic-bezier(0.16, 1, 0.3, 1)",
     opacity: 0,
     backgroundColor:
       cardColor === "yellow"
@@ -79,10 +84,10 @@ export default function ProjectCard({
       opacity: 1,
       backgroundColor:
         cardColor === "yellow"
-          ? "rgba(224, 159, 62, 0.8)"
+          ? "rgba(224, 159, 62, 0.85)"
           : cardColor === "white"
-          ? "rgba(249, 249, 255, 0.8)"
-          : "rgba(13, 27, 42, 0.8)",
+          ? "rgba(249, 249, 255, 0.85)"
+          : "rgba(13, 27, 42, 0.85)",
     },
   });
 
@@ -93,10 +98,10 @@ export default function ProjectCard({
     width: "fit-content",
     minWidth: "280px",
     maxWidth: "calc(100% - 6rem)",
-    transition: "all 0.6s cubic-bezier(0.16, 1, 0.3, 1)",
+    transition: "all 0.8s cubic-bezier(0.16, 1, 0.3, 1)",
     backgroundColor: cardColor === "yellow" ? "tertiary" : cardColor === "white" ? "background" : "primary",
     color: cardColor === "yellow" ? "primary" : cardColor === "white" ? "primary" : "white",
-    boxShadow: "0 20px 40px rgba(0,0,0,0.1)",
+    boxShadow: "0 24px 48px rgba(0,0,0,0.15)",
 
     // Positioning logic (relative to corners)
     top: position.includes("top") ? (isOffset ? "3rem" : "0") : "auto",
@@ -104,13 +109,13 @@ export default function ProjectCard({
     left: position.includes("left") ? (isOffset ? "3rem" : "0") : "auto",
     right: position.includes("right") ? (isOffset ? "3rem" : "0") : "auto",
 
-    // Animation: Card Peek (slides from outside or slightly offset)
+    // Animation: Card Peek (vibration/slide effect)
+    // It remains visible (opacity: 1) and just shifts slightly
     transform: hoverEffect === "cardPeek" ? "translateY(1.5rem)" : "none",
-    opacity: hoverEffect === "cardPeek" ? 0 : 1,
+    opacity: 1, // Explicitly always visible as requested
 
     _groupHover: {
       transform: "translateY(0)",
-      opacity: 1,
     },
   });
 
