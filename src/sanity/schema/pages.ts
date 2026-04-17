@@ -215,6 +215,105 @@ export const page = defineType({
             },
           ],
         },
+        {
+          type: "object",
+          name: "projectShowcase",
+          title: "Project Showcase (Monolithic Scale)",
+          fields: [
+            { name: "heading", type: "string", title: "Heading" },
+            { name: "subheading", type: "text", title: "Subheading" },
+            {
+              name: "cta",
+              type: "object",
+              title: "CTA Link",
+              fields: [
+                { name: "label", type: "string" },
+                { name: "link", type: "string" },
+              ],
+            },
+            {
+              name: "projects",
+              type: "array",
+              title: "Projects",
+              of: [
+                {
+                  type: "object",
+                  name: "projectItem",
+                  title: "Project Item",
+                  fields: [
+                    {
+                      name: "project",
+                      type: "reference",
+                      to: [{ type: "project" }],
+                      title: "Project Reference",
+                    },
+                    {
+                      name: "size",
+                      type: "string",
+                      title: "Size",
+                      options: {
+                        list: [
+                          { title: "Landscape (2/3 Grid)", value: "landscape" },
+                          { title: "Portrait (1/3 Grid)", value: "portrait" },
+                        ],
+                      },
+                      initialValue: "portrait",
+                    },
+                    {
+                      name: "hoverEffect",
+                      type: "string",
+                      title: "Hover Animation",
+                      options: {
+                        list: [
+                          { title: "Card Peek", value: "cardPeek" },
+                          { title: "Show Text (Immersive Overlay)", value: "showText" },
+                          { title: "Zoom Out Only", value: "zoomOut" },
+                          { title: "Zoom In Only", value: "zoomIn" },
+                        ],
+                      },
+                      initialValue: "zoomOut",
+                    },
+                    {
+                      name: "cardColor",
+                      type: "string",
+                      title: "Card Background Color",
+                      options: {
+                        list: [
+                          { title: "Navy (Primary)", value: "navy" },
+                          { title: "Yellow (Tertiary)", value: "yellow" },
+                          { title: "White (Surface)", value: "white" },
+                        ],
+                      },
+                      initialValue: "navy",
+                    },
+                    {
+                      name: "position",
+                      type: "string",
+                      title: "Content Position",
+                      description: "Ignored if 'Show Text' is selected.",
+                      options: {
+                        list: [
+                          { title: "Top Left", value: "topLeft" },
+                          { title: "Top Right", value: "topRight" },
+                          { title: "Bottom Left", value: "bottomLeft" },
+                          { title: "Bottom Right", value: "bottomRight" },
+                        ],
+                      },
+                      initialValue: "bottomLeft",
+                    },
+                    {
+                      name: "isOffset",
+                      type: "boolean",
+                      title: "Add Offset Margin",
+                      description: "Adds padding from the edge so the card isn't flushed.",
+                      initialValue: false,
+                    },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
       ],
     }),
   ],
