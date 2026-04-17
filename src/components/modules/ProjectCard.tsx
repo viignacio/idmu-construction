@@ -130,9 +130,7 @@ export default function ProjectCard({
             className={css({ 
               objectFit: "cover", 
               filter: "grayscale(20%)",
-              userSelect: "none",
-              userDrag: "none",
-              WebkitUserDrag: "none"
+              userSelect: "none"
             })}
           />
         </div>

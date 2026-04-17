@@ -48,31 +48,39 @@ export default function NewsCard({ news }: NewsCardProps) {
       </div>
 
       {/* Content Area */}
-      <div className={css({ padding: "2rem" })}>
-        <span className={css({
-          color: "tertiary",
-          fontWeight: "bold",
-          fontSize: "10px",
-          textTransform: "uppercase",
-          letterSpacing: "0.4em", // tracking-widest
-          display: "block",
-          marginBottom: "0.5rem",
-        })}>
-          {category}
-        </span>
-        
-        <h5 className={css({
-          fontFamily: "headline",
-          fontWeight: "bold",
-          fontSize: "xl",
-          marginBottom: "1rem",
-          transition: "color 0.3s",
-          _groupHover: {
-            color: "primary",
-          }
-        })}>
-          {title}
-        </h5>
+      <div className={css({ 
+        padding: "2rem",
+        flex: 1,
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-between",
+      })}>
+        <div>
+          <span className={css({
+            color: "tertiary-fixed-dim",
+            fontWeight: "bold",
+            fontSize: "10px",
+            textTransform: "uppercase",
+            letterSpacing: "0.4em", // tracking-widest
+            display: "block",
+            marginBottom: "0.5rem",
+          })}>
+            {category}
+          </span>
+          
+          <h5 className={css({
+            fontFamily: "headline",
+            fontWeight: "bold",
+            fontSize: "xl",
+            marginBottom: "2rem", // Added more space for title
+            transition: "color 0.3s",
+            _groupHover: {
+              color: "primary",
+            }
+          })}>
+            {title}
+          </h5>
+        </div>
 
         <div className={css({
           fontSize: "xs",

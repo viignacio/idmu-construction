@@ -30,11 +30,19 @@ export default defineConfig({
       semanticTokens: {
         colors: {
           primary: { value: "{colors.steel}" },
+          "primary-container": { value: "#D1E4FF" }, 
+          "on-primary-container": { value: "#001D36" },
           secondary: { value: "{colors.slate}" },
           surface: { value: "{colors.canvas}" },
+          "surface-container-low": { value: "#F3F6F9" }, // Light technical off-white
+          "surface-container-high": { value: "#FFFFFF" }, // Pure white
+          "surface-dim": { value: "#E5EDF5" }, // Light blueprint-grey for empty states
+          "on-surface-variant": { value: "{colors.slate}" }, // Muted slate
           tertiary: { value: "{colors.draftsmansInk}" },
+          "tertiary-fixed-dim": { value: "#E09F3E" }, // Using the same as tertiary for now or a slightly different shade
           background: { value: "{colors.siteBackground}" },
           blueprint: { value: "{colors.iceBlue}" },
+          white: { value: "#FFFFFF" },
           text: {
             main: { value: "{colors.steel}" },
             muted: { value: "{colors.slate}" },

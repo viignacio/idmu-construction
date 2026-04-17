@@ -37,7 +37,7 @@ export default function UpdateCard({ news }: UpdateCardProps) {
       padding: "2rem",
       backgroundColor: "white",
       borderLeftWidth: "4px",
-      borderLeftColor: "tertiary",
+      borderLeftColor: "tertiary-fixed-dim",
       boxShadow: "sm",
     })}>
       {/* Author Header */}
@@ -56,7 +56,7 @@ export default function UpdateCard({ news }: UpdateCardProps) {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          color: "white",
+          color: "on-primary-container",
           fontWeight: "bold",
           fontSize: "xs",
         })}>
@@ -67,7 +67,6 @@ export default function UpdateCard({ news }: UpdateCardProps) {
           <div className={css({
             fontWeight: "bold",
             fontSize: "sm",
-            color: "primary",
           })}>
             {author}
           </div>
@@ -90,25 +89,6 @@ export default function UpdateCard({ news }: UpdateCardProps) {
       })}>
         "{excerpt}"
       </p>
-
-      {/* Static social footer (as per design screenshot icons) */}
-      <div className={css({
-        display: "flex",
-        alignItems: "center",
-        gap: "1rem",
-        fontSize: "xs",
-        fontWeight: "bold",
-        color: "primary",
-      })}>
-        <span className={css({ display: "flex", alignItems: "center", gap: "0.25rem" })}>
-           <span className={css({ fontFamily: "Material Symbols Outlined", fontSize: "16px" })}>thumb_up</span>
-           124
-        </span>
-        <span className={css({ display: "flex", alignItems: "center", gap: "0.25rem" })}>
-           <span className={css({ fontFamily: "Material Symbols Outlined", fontSize: "16px" })}>comment</span>
-           12
-        </span>
-      </div>
     </div>
   );
 }

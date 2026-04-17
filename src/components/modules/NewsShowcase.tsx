@@ -81,13 +81,23 @@ export default function NewsShowcase({
             fontFamily: "headline",
             fontWeight: "bold",
             fontSize: { base: "5xl", md: "5xl" }, // Specific sizing for News section
-            lineHeight: "0.9",
+            lineHeight: "1",
             color: "primary",
             letterSpacing: "tighter",
             textTransform: "uppercase",
             marginBottom: "2rem",
           })}>
-            {heading.split(".")[0]}. <br/> {heading.split(".")[1] || "JOB SITE."}
+            {(() => {
+              const parts = heading.split(" ");
+              if (parts.length >= 4) {
+                return (
+                  <>
+                    {parts.slice(0, 2).join(" ")} <br /> {parts.slice(2).join(" ")}
+                  </>
+                );
+              }
+              return heading;
+            })()}
           </h2>
           
           {subheading && (
