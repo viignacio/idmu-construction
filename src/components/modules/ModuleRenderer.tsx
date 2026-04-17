@@ -5,6 +5,7 @@ const TextWithGrid = dynamic(() => import("./TextWithGrid"));
 const StatsGrid = dynamic(() => import("./StatsGrid"));
 const ProjectShowcase = dynamic(() => import("./ProjectShowcase"));
 const NewsShowcase = dynamic(() => import("./NewsShowcase"));
+const CtaBlock = dynamic(() => import("./CtaBlock"));
 
 const components: Record<string, any> = {
   hero: Hero,
@@ -12,6 +13,7 @@ const components: Record<string, any> = {
   statsGrid: StatsGrid,
   projectShowcase: ProjectShowcase,
   newsShowcase: NewsShowcase,
+  ctaBlock: CtaBlock,
 };
 
 
