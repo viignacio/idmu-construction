@@ -94,7 +94,7 @@ export default function ProjectCard({
   // Standard Card Box
   const cardBoxClass = css({
     position: "absolute",
-    padding: "3rem",
+    padding: isImpactLayout ? "2rem" : "3rem", // Impact mode uses p-8, Standard uses p-12
     width: "fit-content",
     minWidth: "280px",
     maxWidth: "calc(100% - 6rem)",
@@ -110,9 +110,8 @@ export default function ProjectCard({
     right: position.toLowerCase().includes("right") ? (isOffset ? "3rem" : "0") : "auto",
 
     // Animation: Card Peek (vibration/slide effect)
-    // It remains visible (opacity: 1) and just shifts slightly
     transform: hoverEffect === "cardPeek" ? "translateY(1.5rem)" : "none",
-    opacity: 1, // Explicitly always visible as requested
+    opacity: 1,
 
     _groupHover: {
       transform: "translateY(0)",
@@ -136,12 +135,13 @@ export default function ProjectCard({
         <div className={immersiveOverlayClass}>
           {hasMetadata && (
             <span className={css({
-              color: "tertiary",
+              color: cardColor === "yellow" ? "primary" : "tertiary",
               fontWeight: "bold",
               fontSize: "10px",
               textTransform: "uppercase",
-              letterSpacing: "0.4em",
-              marginBottom: "0.5rem"
+              letterSpacing: "0.4em", // tracking-widest
+              marginBottom: "0.5rem",
+              display: "block",
             })}>
               {sector} / {year}
             </span>
@@ -150,7 +150,7 @@ export default function ProjectCard({
             fontFamily: "headline",
             fontWeight: "black",
             fontSize: "3xl",
-            color: "white",
+            color: cardColor === "white" ? "primary" : "white",
             textTransform: "uppercase",
             textAlign: "center"
           })}>
@@ -161,11 +161,11 @@ export default function ProjectCard({
         <div className={cardBoxClass}>
           {hasMetadata && (
             <span className={css({
-              color: cardColor === "yellow" ? "primary" : "tertiary",
+              color: cardColor === "yellow" ? "primary" : cardColor === "white" ? "primary" : "tertiary",
               fontWeight: "bold",
               fontSize: "10px",
               textTransform: "uppercase",
-              letterSpacing: "0.3em",
+              letterSpacing: "0.4em", // tracking-widest
               marginBottom: "0.5rem",
               display: "block",
             })}>
@@ -178,7 +178,7 @@ export default function ProjectCard({
             fontSize: isImpactLayout ? "3xl" : "2xl",
             textTransform: "uppercase",
             lineHeight: "none",
-            letterSpacing: isImpactLayout ? "tighter" : "normal",
+            letterSpacing: isImpactLayout ? "tighter" : "normal", // tracking-tighter for Forge Industrial style
             color: cardColor === "yellow" ? "primary" : cardColor === "white" ? "primary" : "white",
           })}>
             {title}

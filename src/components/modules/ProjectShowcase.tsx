@@ -38,7 +38,7 @@ export default function ProjectShowcase({
             <h2 className={css({
               fontFamily: "headline",
               fontWeight: "bold",
-              fontSize: { base: "4xl", md: "7xl" },
+              fontSize: { base: "5xl", md: "7xl" }, // Matched to design reference
               color: "primary",
               letterSpacing: "tighter",
               textTransform: "uppercase",
