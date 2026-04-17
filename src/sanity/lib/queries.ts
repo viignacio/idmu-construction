@@ -70,6 +70,25 @@ export const PAGE_QUERY = defineQuery(`*[_type == "page" && (slug.current == $sl
           "imageUrl": mainImage.asset->url
         }
       }
+    },
+    _type == "newsShowcase" => {
+      ...,
+      "featuredUpdate": *[_type == "news" && category == "Update"] | order(date desc)[0] {
+        title,
+        excerpt,
+        category,
+        date,
+        author,
+        "imageUrl": mainImage.asset->url
+      },
+      "recentNews": *[_type == "news" && category != "Update"] | order(date desc)[0...2] {
+        title,
+        excerpt,
+        category,
+        date,
+        author,
+        "imageUrl": mainImage.asset->url
+      }
     }
 
   }
