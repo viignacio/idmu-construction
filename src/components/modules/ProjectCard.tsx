@@ -126,7 +126,14 @@ export default function ProjectCard({
             src={imageUrl}
             alt={title}
             fill
-            className={css({ objectFit: "cover", filter: "grayscale(20%)" })}
+            draggable={false}
+            className={css({ 
+              objectFit: "cover", 
+              filter: "grayscale(20%)",
+              userSelect: "none",
+              userDrag: "none",
+              WebkitUserDrag: "none"
+            })}
           />
         </div>
       )}
