@@ -235,19 +235,26 @@ export const page = defineType({
           type: "object",
           name: "projectShowcase",
           title: "Project Showcase",
+          groups: [
+            { name: "content", title: "Content" },
+            { name: "items", title: "Projects" },
+            { name: "cta", title: "CTA" },
+          ],
           fields: [
             {
               name: "internalTitle",
               title: "Internal Title",
               type: "string",
               description: "For studio purposes only (e.g. 'Home - Featured Projects')",
+              group: "content",
             },
-            { name: "heading", type: "string", title: "Heading" },
-            { name: "subheading", type: "text", title: "Subheading" },
+            { name: "heading", type: "string", title: "Heading", group: "content" },
+            { name: "subheading", type: "text", title: "Subheading", group: "content" },
             {
               name: "cta",
               type: "object",
               title: "CTA Link",
+              group: "cta",
               fields: [
                 { name: "label", type: "string" },
                 { name: "link", type: "string" },
@@ -257,22 +264,30 @@ export const page = defineType({
               name: "projects",
               type: "array",
               title: "Projects",
+              group: "items",
               of: [
                 {
                   type: "object",
                   name: "projectItem",
                   title: "Project Item",
+                  groups: [
+                    { name: "content", title: "Content" },
+                    { name: "layout", title: "Grid & Position" },
+                    { name: "animation", title: "Animation & Style" },
+                  ],
                   fields: [
                     {
                       name: "project",
                       type: "reference",
                       to: [{ type: "project" }],
                       title: "Project Reference",
+                      group: "content",
                     },
                     {
                       name: "size",
                       type: "string",
                       title: "Size",
+                      group: "layout",
                       options: {
                         list: [
                           { title: "Landscape (2/3 Grid)", value: "landscape" },
@@ -285,6 +300,7 @@ export const page = defineType({
                       name: "hoverEffect",
                       type: "string",
                       title: "Hover Animation",
+                      group: "animation",
                       options: {
                         list: [
                           { title: "Card Peek", value: "cardPeek" },
@@ -299,6 +315,7 @@ export const page = defineType({
                       name: "cardColor",
                       type: "string",
                       title: "Card Background Color",
+                      group: "animation",
                       options: {
                         list: [
                           { title: "Navy (Primary)", value: "navy" },
@@ -312,6 +329,7 @@ export const page = defineType({
                       name: "position",
                       type: "string",
                       title: "Content Position",
+                      group: "layout",
                       description: "Ignored if 'Show Text' is selected.",
                       options: {
                         list: [
@@ -327,6 +345,7 @@ export const page = defineType({
                       name: "isOffset",
                       type: "boolean",
                       title: "Add Offset Margin",
+                      group: "layout",
                       description: "Adds padding from the edge so the card isn't flushed.",
                       initialValue: false,
                     },
