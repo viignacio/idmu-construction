@@ -234,7 +234,7 @@ export const page = defineType({
         {
           type: "object",
           name: "projectShowcase",
-          title: "Project Showcase (Monolithic Scale)",
+          title: "Project Showcase",
           fields: [
             {
               name: "internalTitle",
@@ -331,6 +331,20 @@ export const page = defineType({
                       initialValue: false,
                     },
                   ],
+                  preview: {
+                    select: {
+                      title: "project.title",
+                      subtitle: "size",
+                      media: "project.mainImage",
+                    },
+                    prepare({ title, subtitle, media }) {
+                      return {
+                        title: title || "Select a project...",
+                        subtitle: subtitle ? subtitle.toUpperCase() : "",
+                        media,
+                      };
+                    },
+                  },
                 },
               ],
             },
