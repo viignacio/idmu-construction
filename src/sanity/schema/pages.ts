@@ -378,6 +378,7 @@ export const page = defineType({
               };
             },
           },
+        },
         {
           type: "object",
           name: "newsShowcase",
