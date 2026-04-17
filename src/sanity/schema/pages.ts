@@ -378,6 +378,28 @@ export const page = defineType({
               };
             },
           },
+        {
+          type: "object",
+          name: "newsShowcase",
+          title: "News Showcase",
+          groups: [{ name: "content", title: "Content" }],
+          fields: [
+            {
+              name: "internalTitle",
+              title: "Internal Title",
+              type: "string",
+              description: "For studio purposes only (e.g. 'Home - From the Job Site')",
+              group: "content",
+            },
+            { name: "heading", type: "string", title: "Heading", group: "content" },
+            { name: "subheading", type: "text", title: "Subheading", group: "content" },
+          ],
+          preview: {
+            select: { title: "internalTitle" },
+            prepare({ title }) {
+              return { title: title || "News Showcase" };
+            },
+          },
         },
       ],
     }),

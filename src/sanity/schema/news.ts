@@ -27,7 +27,12 @@ export const news = defineType({
     defineField({
       name: "date",
       title: "Publish Date",
-      type: "date",
+      type: "datetime",
+    }),
+    defineField({
+      name: "author",
+      title: "Author",
+      type: "string",
     }),
     defineField({
       name: "mainImage",
