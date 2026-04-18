@@ -9,6 +9,7 @@ export const page = defineType({
       name: "title",
       title: "Title",
       type: "string",
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "slug",
@@ -17,6 +18,7 @@ export const page = defineType({
       options: {
         source: "title",
       },
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "modules",
@@ -57,6 +59,7 @@ export const page = defineType({
               type: "string",
               title: "Heading",
               group: "content",
+              validation: (Rule) => Rule.required(),
             },
             {
               name: "subheading",
@@ -164,7 +167,7 @@ export const page = defineType({
               initialValue: "3-grid",
             },
             { name: "preamble", type: "string", title: "Preamble", group: "content" },
-            { name: "heading", type: "string", title: "Heading", group: "content" },
+            { name: "heading", type: "string", title: "Heading", group: "content", validation: (Rule) => Rule.required() },
             { name: "subheading", type: "text", title: "Subheading", group: "content" },
             {
               name: "gridItems",
@@ -248,7 +251,7 @@ export const page = defineType({
               description: "For studio purposes only (e.g. 'Home - Featured Projects')",
               group: "content",
             },
-            { name: "heading", type: "string", title: "Heading", group: "content" },
+            { name: "heading", type: "string", title: "Heading", group: "content", validation: (Rule) => Rule.required() },
             { name: "subheading", type: "text", title: "Subheading", group: "content" },
             {
               name: "cta",
@@ -282,6 +285,7 @@ export const page = defineType({
                       to: [{ type: "project" }],
                       title: "Project Reference",
                       group: "content",
+                      validation: (Rule) => Rule.required(),
                     },
                     {
                       name: "size",
@@ -392,7 +396,7 @@ export const page = defineType({
               description: "For studio purposes only (e.g. 'Home - From the Job Site')",
               group: "content",
             },
-            { name: "heading", type: "string", title: "Heading", group: "content" },
+            { name: "heading", type: "string", title: "Heading", group: "content", validation: (Rule) => Rule.required() },
             { name: "subheading", type: "text", title: "Subheading", group: "content" },
           ],
           preview: {

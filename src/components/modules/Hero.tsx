@@ -1,5 +1,6 @@
 import { urlFor } from "@/sanity/lib/image";
 import Image from "next/image";
+import Link from "next/link";
 import { css } from "../../../styled-system/css";
 
 interface HeroProps {
@@ -159,7 +160,7 @@ export default function Hero({
           })}
         >
           {primaryCTA?.label && (
-            <a
+            <Link
               href={primaryCTA.link || "#"}
               className={css({
                 backgroundColor: "white",
@@ -177,11 +178,11 @@ export default function Hero({
               })}
             >
               {primaryCTA.label}
-            </a>
+            </Link>
           )}
 
           {secondaryCTA?.label && (
-            <a
+            <Link
               href={secondaryCTA.link || "#"}
               className={css({
                 borderBottom: "2px solid {colors.tertiary}",
@@ -199,7 +200,7 @@ export default function Hero({
               })}
             >
               {secondaryCTA.label}
-            </a>
+            </Link>
           )}
         </div>
 

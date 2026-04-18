@@ -9,6 +9,7 @@ export const news = defineType({
       name: "title",
       title: "Title",
       type: "string",
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "slug",
@@ -17,22 +18,26 @@ export const news = defineType({
       options: {
         source: "title",
       },
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "category",
       title: "Category",
       type: "string",
       description: "e.g. Innovation, Safety, Update",
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "date",
       title: "Publish Date",
       type: "datetime",
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "author",
       title: "Author",
       type: "string",
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "mainImage",
@@ -41,6 +46,7 @@ export const news = defineType({
       options: {
         hotspot: true,
       },
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "excerpt",

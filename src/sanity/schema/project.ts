@@ -9,6 +9,7 @@ export const project = defineType({
       name: "title",
       title: "Project Title",
       type: "string",
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "slug",
@@ -17,17 +18,20 @@ export const project = defineType({
       options: {
         source: "title",
       },
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "sector",
       title: "Sector",
       type: "string",
       description: "e.g. Structural, Interior, Institutional",
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "year",
       title: "Year",
       type: "string",
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "client",
@@ -41,6 +45,7 @@ export const project = defineType({
       options: {
         hotspot: true,
       },
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "description",

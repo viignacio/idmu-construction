@@ -3,6 +3,7 @@ import { client } from "@/sanity/lib/client";
 import { PAGE_QUERY } from "@/sanity/lib/queries";
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
+import { css } from "../../../../styled-system/css";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -33,7 +34,7 @@ export default async function Page({ params }: PageProps) {
     const page = await client.fetch(PAGE_QUERY, { slug: "home" });
     if (!page) notFound();
     return (
-      <div className="flex flex-col w-full">
+      <div className={css({ display: "flex", flexDirection: "column", width: "full" })}>
         <ModuleRenderer modules={page.modules} />
       </div>
     );
@@ -46,7 +47,7 @@ export default async function Page({ params }: PageProps) {
   }
 
   return (
-    <div className="flex flex-col w-full">
+    <div className={css({ display: "flex", flexDirection: "column", width: "full" })}>
       <ModuleRenderer modules={page.modules} />
     </div>
   );
