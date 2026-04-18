@@ -34,13 +34,11 @@ export const project = defineType({
           { title: "Infrastructure (Highways, Bridges)", value: "Infrastructure" },
         ],
       },
-      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "startDate",
       title: "Project Start Date",
       type: "date",
-      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "completionDate",
