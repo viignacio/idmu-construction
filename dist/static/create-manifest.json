@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "createdAt": "2026-04-18T15:34:29.563Z",
+  "createdAt": "2026-04-18T16:03:35.321Z",
   "workspaces": [
     {
       "name": "idmu-monolith",
@@ -12,7 +12,7 @@
       "mediaLibrary": {
         "enabled": false
       },
-      "schema": "1cb168ea.create-schema.json",
+      "schema": "5c00e845.create-schema.json",
       "tools": "642aa624.create-tools.json"
     }
   ]

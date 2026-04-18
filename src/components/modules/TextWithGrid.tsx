@@ -3,13 +3,14 @@ import { urlFor } from "@/sanity/lib/image";
 
 interface GridItem {
   iconUrl?: string;
+  iconName?: string;
   title?: string;
   description?: string;
   bullets?: string[];
 }
 
 interface TextWithGridProps {
-  variant?: "3-grid" | "4-grid";
+  variant?: "3-grid" | "3-grid-gradient" | "3-grid-checkered" | "4-grid";
   preamble?: string;
   heading?: string;
   subheading?: string;
@@ -17,12 +18,14 @@ interface TextWithGridProps {
 }
 
 export default function TextWithGrid({
-  variant = "3-grid",
+  variant = "3-grid-gradient",
   preamble,
   heading,
   subheading,
   gridItems = [],
 }: TextWithGridProps) {
+  const isCheckered = variant === "3-grid-checkered";
+
   return (
     <section 
       className={css({ 
@@ -35,17 +38,17 @@ export default function TextWithGrid({
       <div className={css({ 
         display: "grid",
         gridTemplateColumns: { base: "1fr", md: "repeat(12, 1fr)" },
-        gap: { base: "2rem", md: "4rem" },
-        alignItems: "end",
+        gap: { base: "2rem", md: isCheckered ? "1.5rem" : "4rem" },
+        alignItems: isCheckered ? "flex-start" : "end",
         marginBottom: "6rem" 
       })}>
-        <div className={css({ md: { gridColumn: "span 8" } })}>
+        <div className={css({ md: { gridColumn: isCheckered ? "span 12" : "span 8" } })}>
           {preamble && (
             <span className={css({
               display: "block",
               fontFamily: "body",
               fontWeight: "900",
-              fontSize: "xs", // Increased from 10px
+              fontSize: "xs",
               letterSpacing: "0.4em",
               textTransform: "uppercase",
               color: "secondary",
@@ -59,11 +62,11 @@ export default function TextWithGrid({
             <h2 className={css({
               fontFamily: "headline",
               fontWeight: "bold",
-              fontSize: { base: "4xl", md: "7xl" },
+              fontSize: { base: "4xl", md: "5xl" }, // Adjusted to match design
               color: "primary",
-              lineHeight: "0.9",
               letterSpacing: "tighter",
               textTransform: "uppercase",
+              marginBottom: isCheckered ? 0 : "1.5rem",
             })}>
               {heading}
             </h2>
@@ -72,11 +75,11 @@ export default function TextWithGrid({
 
         {subheading && (
           <div className={css({ 
-            md: { gridColumn: "span 4" },
-            color: "secondary",
+            md: { gridColumn: isCheckered ? "span 7" : "span 4" }, // Restricted to 7 columns if stacked for better readability
+            color: "on-surface-variant",
             fontSize: "lg",
             lineHeight: "relaxed",
-            fontWeight: "medium" // Reverted from semibold
+            fontWeight: "medium"
           })}>
             {subheading}
           </div>
@@ -88,39 +91,59 @@ export default function TextWithGrid({
         display: "grid",
         gridTemplateColumns: {
           base: "1fr",
-          md: variant === "3-grid" ? "repeat(3, 1fr)" : "repeat(2, 1fr)",
-          lg: variant === "3-grid" ? "repeat(3, 1fr)" : "repeat(4, 1fr)"
+          md: variant.startsWith("3-grid") ? "repeat(2, 1fr)" : "repeat(2, 1fr)",
+          lg: variant.startsWith("3-grid") ? "repeat(3, 1fr)" : "repeat(4, 1fr)"
         },
+        gridAutoRows: "1fr", // Force consistent row height
         width: "full",
+        gap: 0, // Cards sit flush
       })}>
         {gridItems.map((item, index) => {
           const opacity = (index + 1) * 0.05;
-          const bgTone = `rgba(59, 130, 246, ${opacity})`; // Using 'blueprint' token base
+          const bgTone = `rgba(59, 130, 246, ${opacity})`;
 
+          // Logic for checkered background using muted Ice Blue
+          const checkeredBg = index % 2 === 0 
+            ? "rgba(59, 130, 246, 0.04)" 
+            : "rgba(59, 130, 246, 0.09)";
+          
           return (
             <div
               key={index}
-              style={{ backgroundColor: bgTone }}
+              style={{ backgroundColor: isCheckered ? checkeredBg : bgTone }}
               className={`group ${css({
                 position: "relative",
-                padding: "3rem",
-                transition: "all 0.5s cubic-bezier(0.16, 1, 0.3, 1)",
+                padding: { base: "2.5rem", md: "3.5rem" },
+                transition: "all 0.5s ease",
                 display: "flex",
                 flexDirection: "column",
-                justifyContent: "space-between",
-                minHeight: "500px",
+                backgroundColor: "transparent",
                 _hover: {
-                  backgroundColor: "surface !important",
+                  backgroundColor: "primary-container !important",
                 }
-
               })}`}
             >
-
-
-
               <div>
-                {/* Icon */}
-                {item.iconUrl && (
+                {/* Icon (Material Symbol) */}
+                {item.iconName && (
+                  <div className={css({ marginBottom: "3rem" })}>
+                    <span 
+                      className={`material-symbols-outlined ${css({
+                        fontSize: "2.5rem !important",
+                        color: isCheckered ? "tertiary" : "primary",
+                        transition: "color 0.4s",
+                        _groupHover: {
+                          color: isCheckered ? "white" : "tertiary",
+                        }
+                      })}`}
+                    >
+                      {item.iconName}
+                    </span>
+                  </div>
+                )}
+
+                {/* Legacy Icon (SVG Filter) */}
+                {item.iconUrl && !item.iconName && (
                   <div 
                     style={{
                       WebkitMaskImage: `url("${item.iconUrl}")`,
@@ -133,32 +156,30 @@ export default function TextWithGrid({
                       maskSize: "contain",
                     }}
                     className={css({
-                      width: "3rem",
-                      height: "3rem",
-                      backgroundColor: "surface", // Using 'canvas' as requested
+                      width: "2.5rem",
+                      height: "2.5rem",
+                      backgroundColor: isCheckered ? "tertiary" : "primary",
                       transition: "all 0.4s",
                       marginBottom: "2rem",
                       _groupHover: {
-                        backgroundColor: "tertiary",
+                        backgroundColor: isCheckered ? "white" : "tertiary",
                       }
                     })}
                   />
                 )}
 
-
-
                 {/* Title */}
                 <h3 className={css({
                   fontFamily: "headline",
-                  fontSize: "3xl",
+                  fontSize: "2xl",
                   fontWeight: "bold",
                   color: "primary",
                   textTransform: "uppercase",
                   letterSpacing: "tight",
-                  marginBottom: "1.5rem",
-                  transition: "all 0.4s",
+                  marginBottom: "1rem",
+                  transition: "color 0.4s",
                   _groupHover: {
-                    color: "background",
+                    color: "white",
                   }
                 })}>
                   {item.title}
@@ -166,22 +187,20 @@ export default function TextWithGrid({
 
                 {/* Description */}
                 <p className={css({
-                  color: "secondary",
+                  color: "on-surface-variant",
                   fontSize: "md",
                   lineHeight: "relaxed",
-                  fontWeight: "medium", // Increased weight for legibility
-                  transition: "all 0.4s",
+                  fontWeight: "normal",
+                  transition: "color 0.4s",
                   _groupHover: {
-                    color: "background",
-                    opacity: 0.5, // Making it lighter/higher contrast while remaining "secondary"
+                    color: "rgba(255, 255, 255, 0.85)",
                   }
-
                 })}>
                   {item.description}
                 </p>
               </div>
 
-              {/* Bullets */}
+              {/* Bullets - Only show if they exist, often for the gradient variant */}
               {item.bullets && item.bullets.length > 0 && (
                 <ul className={css({
                   listStyle: "none",
@@ -190,10 +209,12 @@ export default function TextWithGrid({
                   display: "flex",
                   flexDirection: "column",
                   gap: "0.75rem",
-                  opacity: 0,
-                  transition: "opacity 0.4s ease-out",
+                  opacity: isCheckered ? 1 : 0, // Always visible for checkered, hover only for gradient
+                  transform: isCheckered ? "none" : "translateY(10px)",
+                  transition: "all 0.4s ease-out",
                   _groupHover: {
                     opacity: 1,
+                    transform: "none",
                   }
                 })}>
                   {item.bullets.map((bullet, bIndex) => (
@@ -203,7 +224,7 @@ export default function TextWithGrid({
                         display: "flex",
                         alignItems: "center",
                         gap: "0.75rem",
-                        color: "background", // Bullet text on hover
+                        color: "white",
                         fontSize: "sm",
                         fontWeight: "bold",
                         textTransform: "uppercase",

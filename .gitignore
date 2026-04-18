@@ -12,6 +12,7 @@ design/
 *.pdf
 *.sketch
 *.fig
+dist
 
 # dependencies
 /node_modules

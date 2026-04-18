@@ -200,11 +200,12 @@ export const page = defineType({
               type: "string",
               options: {
                 list: [
-                  { title: "3 Columns", value: "3-grid" },
+                  { title: "3 Columns (Gradient)", value: "3-grid-gradient" },
+                  { title: "3 Columns (Checkered)", value: "3-grid-checkered" },
                   { title: "4 Columns", value: "4-grid" },
                 ],
               },
-              initialValue: "3-grid",
+              initialValue: "3-grid-gradient",
             },
             { name: "preamble", type: "string", title: "Preamble", group: "content" },
             { name: "heading", type: "string", title: "Heading", group: "content", validation: (Rule) => Rule.required() },
@@ -217,7 +218,14 @@ export const page = defineType({
               of: [
                 {
                   type: "object",
+                  name: "gridItem",
                   fields: [
+                    {
+                      name: "iconName",
+                      type: "string",
+                      title: "Material Icon Name",
+                      description: "Name of the Google Material Icon (e.g. 'architecture', 'construction')",
+                    },
                     {
                       name: "icon",
                       type: "file",
