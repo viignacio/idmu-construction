@@ -107,7 +107,8 @@ export default function Hero({
                   fontFamily: "body",
                   fontSize: "lg",
                   lineHeight: "relaxed",
-                  color: "on-surface-variant",
+                  color: "primary",
+                  opacity: 0.9,
                   maxWidth: "32rem", // max-w-lg equivalent
                 })}
               >

@@ -114,7 +114,7 @@ export default function ProjectGrid({
           )}
           {subheading && (
             <p className={css({
-              color: "onSurfaceVariant",
+              color: "on-surface-variant",
               maxWidth: "2xl",
               fontSize: "lg",
               lineHeight: "relaxed",
@@ -151,9 +151,8 @@ export default function ProjectGrid({
                     paddingBottom: "0.25rem",
                     transition: "all 0.3s",
                     cursor: "pointer",
-                    color: activeFilter === sector ? "primary" : "onSurfaceVariant",
-                    borderBottom: activeFilter === sector ? "2px solid" : "none",
-                    borderColor: "tertiary",
+                    color: activeFilter === sector ? "primary" : "on-surface-variant",
+                    borderBottom: activeFilter === sector ? "2px solid {colors.tertiary}" : "none",
                     _hover: {
                       color: "primary",
                     }
@@ -252,7 +251,7 @@ export default function ProjectGrid({
               fontFamily: "headline",
               letterSpacing: "0.2em",
               textTransform: "uppercase",
-              color: "onSurfaceVariant",
+              color: "on-surface-variant",
               marginBottom: "1rem",
             })}>
               Seen {displayedProjects.length} out of {totalInFilter} projects
