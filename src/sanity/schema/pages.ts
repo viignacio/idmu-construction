@@ -68,6 +68,14 @@ export const page = defineType({
               group: "content",
             },
             {
+              name: "highlightedWord",
+              type: "string",
+              title: "Highlighted Word",
+              description: "A word or phrase from the heading to highlight. Case-insensitive.",
+              group: "content",
+              hidden: ({ parent }) => parent?.variant !== "text",
+            },
+            {
               name: "alignment",
               type: "string",
               title: "Image Alignment",
@@ -132,6 +140,7 @@ export const page = defineType({
                 { name: "label", type: "string" },
                 { name: "link", type: "string" },
               ],
+              hidden: ({ parent }) => parent?.variant === "text",
             },
             {
               name: "secondaryCTA",
