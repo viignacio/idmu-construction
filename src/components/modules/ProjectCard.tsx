@@ -9,15 +9,10 @@ interface ProjectCardProps {
     year?: string;
     imageUrl?: string;
     slug?: string;
-    location?: string;
-    status?: "COMPLETE" | "ONGOING";
-    completionPercentage?: number;
-    ctaLabel?: string;
   };
-  size?: "landscape" | "portrait" | "square";
-  variant?: "standard" | "architectural";
-  hoverEffect?: "cardPeek" | "showText" | "zoomOut" | "zoomIn" | "industrial";
-  cardColor?: "navy" | "yellow" | "white" | "transparent";
+  size?: "landscape" | "portrait";
+  hoverEffect?: "cardPeek" | "showText" | "zoomOut" | "zoomIn";
+  cardColor?: "navy" | "yellow" | "white";
   position?: "topLeft" | "topRight" | "bottomLeft" | "bottomRight";
   isOffset?: boolean;
 }
@@ -25,7 +20,6 @@ interface ProjectCardProps {
 export default function ProjectCard({
   project,
   size = "portrait",
-  variant = "standard",
   hoverEffect = "zoomOut",
   cardColor = "navy",
   position = "bottomLeft",
@@ -33,7 +27,7 @@ export default function ProjectCard({
 }: ProjectCardProps) {
   if (!project) return null;
 
-  const { title, sector, year, imageUrl, slug, location, status, completionPercentage, ctaLabel } = project;
+  const { title, sector, year, imageUrl, slug } = project;
   const hasMetadata = sector && year;
 
   // Determine styling mode
@@ -147,153 +141,7 @@ export default function ProjectCard({
         </div>
       )}
 
-      {variant === "architectural" ? (
-        <div className={css({
-          position: "absolute",
-          inset: 0,
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "space-between",
-          padding: "2rem",
-          zIndex: 20,
-        })}>
-          {/* Gradient Overlay */}
-          <div className={css({
-            position: "absolute",
-            inset: 0,
-            backgroundImage: "linear-gradient(to top, rgba(13, 27, 42, 0.9), rgba(13, 27, 42, 0.2), transparent)",
-            zIndex: -1,
-            opacity: 0.6,
-            transition: "opacity 0.5s ease",
-            _groupHover: { opacity: 0.8 }
-          })} />
-          {/* Top Badge */}
-          <div className={css({
-            alignSelf: "start",
-          })}>
-            <span className={css({
-              backgroundColor: sector === "Industrial" || sector === "Infrastructure" ? "tertiary" : "surface.highest",
-              color: sector === "Industrial" || sector === "Infrastructure" ? "primary" : "onSurfaceVariant",
-              px: "3",
-              py: "1",
-              fontSize: "10px",
-              fontWeight: "black", // font-black tracking-widest
-              letterSpacing: "0.2em",
-              textTransform: "uppercase"
-            })}>
-              {sector}
-            </span>
-          </div>
-
-          {/* Bottom Info Area */}
-          <div className={css({
-            width: "100%",
-          })}>
-            <div className={css({
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "end",
-              marginBottom: status === "ONGOING" ? "1.5rem" : "1rem",
-            })}>
-              <div>
-                <h3 className={css({
-                  fontFamily: "headline",
-                  fontSize: { base: "2xl", md: "3xl" },
-                  fontWeight: "bold",
-                  color: "white",
-                  lineHeight: "none",
-                  marginBottom: "0.5rem"
-                })}>
-                  {title}
-                </h3>
-                {location && (
-                  <p className={css({
-                    color: "white/70",
-                    fontSize: "sm",
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "2",
-                    fontFamily: "label"
-                  })}>
-                    <span className="material-symbols-outlined" style={{ fontSize: '12px' }}>location_on</span> {location}
-                  </p>
-                )}
-              </div>
-              
-              {status && (
-                <div className={css({ textAlign: "right" })}>
-                  <span className={css({
-                    color: "tertiary",
-                    fontSize: "10px",
-                    fontWeight: "black",
-                    letterSpacing: "0.2em",
-                    display: "block",
-                    marginBottom: "0.25rem"
-                  })}>STATUS</span>
-                  <span className={css({
-                    color: "white",
-                    fontSize: "10px",
-                    fontWeight: "medium"
-                  })}>{status}</span>
-                </div>
-              )}
-            </div>
-
-            {status === "ONGOING" && (
-              <div className={css({
-                width: "100%",
-                height: "1px",
-                backgroundColor: "white/10",
-                marginBottom: "1.5rem"
-              })}>
-                <div className={css({
-                  height: "100%",
-                  backgroundColor: "tertiary",
-                  width: `${completionPercentage || 0}%`
-                })} />
-              </div>
-            )}
-
-            {ctaLabel ? (
-              <button className={css({
-                width: "100%",
-                backgroundColor: "white",
-                color: "primary",
-                paddingY: "1rem",
-                fontFamily: "headline",
-                fontWeight: "bold",
-                fontSize: "sm",
-                letterSpacing: "0.1em",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                gap: "2",
-                transition: "all 0.3s",
-                _groupHover: {
-                  backgroundColor: "tertiary",
-                }
-              })}>
-                {ctaLabel}
-                <span className="material-symbols-outlined">arrow_forward</span>
-              </button>
-            ) : (
-              <button className={css({
-                color: "white",
-                fontFamily: "headline",
-                fontWeight: "bold",
-                fontSize: "xs",
-                letterSpacing: "0.1em",
-                borderBottom: "2px solid",
-                borderColor: "tertiary",
-                paddingBottom: "1",
-                width: "fit-content"
-              })}>
-                VIEW DETAILS
-              </button>
-            )}
-          </div>
-        </div>
-      ) : hoverEffect === "showText" ? (
+      {hoverEffect === "showText" ? (
         <div className={immersiveOverlayClass}>
           {hasMetadata && (
             <span className={css({
