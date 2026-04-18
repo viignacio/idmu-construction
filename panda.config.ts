@@ -32,7 +32,7 @@ export default defineConfig({
           primary: { value: "{colors.steel}" },
           "primary-container": { value: "{colors.canvas}" }, 
           "on-primary-container": { value: "#FFFFFF" },
-          "slate-theme": { value: "{colors.slate}" }, 
+          secondary: { value: "{colors.slate}" }, 
           surface: { value: "{colors.canvas}" },
           "surface-container-low": { value: "#F3F6F9" }, // Light technical off-white
           "surface-container-high": { value: "#FFFFFF" }, // Pure white
@@ -60,7 +60,7 @@ export default defineConfig({
         properties: {
           backgroundColor: [
             "primary",
-            "slate-theme",
+            "secondary",
             "tertiary",
             "surface",
             "background",

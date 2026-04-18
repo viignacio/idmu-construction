@@ -24,7 +24,7 @@ const getThemeColors = (bg: string) => {
   // Map Sanity values to their semantic counterparts in the Panda config
   const colors: Record<string, string> = {
     primary: "primary",
-    secondary: "slate-theme",
+    secondary: "secondary",
     tertiary: "tertiary",
     surface: "surface",
     background: "background",
@@ -36,7 +36,7 @@ const getThemeColors = (bg: string) => {
   // Logical color detection for contrast
   // Dark: Primary (Steel), Slate, Surface (Canvas)
   // Light: Tertiary (Yellow), Background, Blueprint (Ice Blue)
-  const isDark = ["primary", "slate-theme", "surface"].includes(activeToken);
+  const isDark = ["primary", "secondary", "surface"].includes(activeToken);
   
   // Use white text on dark backgrounds; primary text on light backgrounds
   const mainTextColor = isDark ? "white" : "text.main";

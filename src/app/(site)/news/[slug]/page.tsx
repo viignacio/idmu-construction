@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import { Metadata } from "next";
 import Image from "next/image";
 import { css } from "@/styled-system/css";
-import { PortableText } from "@portabletext/react";
+import PortableTextContent from "@/components/PortableTextContent";
 import { urlFor } from "@/sanity/lib/image";
 
 interface NewsPageProps {
@@ -95,15 +95,18 @@ export default async function NewsPage({ params }: NewsPageProps) {
         {news.mainImage && (
           <div className={css({ 
             position: "relative", 
-            height: { base: "300px", md: "600px" }, 
+            aspectRatio: "16/9", 
             width: "full", 
             marginBottom: "4rem",
-            backgroundColor: "surface-container-high"
+            backgroundColor: "surface-container-high",
+            overflow: "hidden",
+            animation: "pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite"
           })}>
             <Image 
               src={urlFor(news.mainImage).width(1600).auto("format").quality(85).url()} 
               alt={news.title} 
               fill 
+              priority
               className={css({ objectFit: "cover", filter: "grayscale(5%)" })} 
             />
           </div>
@@ -152,7 +155,7 @@ export default async function NewsPage({ params }: NewsPageProps) {
               marginBottom: "1.5rem"
           }
         })}>
-          <PortableText value={news.content} />
+          <PortableTextContent value={news.content} />
         </div>
       </div>
     </article>

@@ -232,21 +232,6 @@ export default function ProjectGrid({
         ))}
       </div>
       
-      {displayedProjects.length === 0 && (
-        <div className={css({
-          paddingY: "10rem",
-          textAlign: "center",
-          border: "1px dashed",
-          borderColor: "outline.variant",
-          color: "secondary",
-        })}>
-          <p className={css({ fontFamily: "label", textTransform: "uppercase", letterSpacing: "widest" })}>
-            No projects found in this sector.
-          </p>
-        </div>
-      )}
-
-      {/* Pagination & Counter */}
       {totalInFilter > 0 && (
         <div className={css({
           marginTop: "6rem",
@@ -287,7 +272,7 @@ export default function ProjectGrid({
                   height: "100%",
                   backgroundColor: "tertiary",
                   transition: "width 0.6s cubic-bezier(0.16, 1, 0.3, 1)",
-                })}
+                })} 
                 style={{ width: `${(displayedProjects.length / totalInFilter) * 100}%` }}
               />
             </div>

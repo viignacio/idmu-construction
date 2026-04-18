@@ -4,8 +4,9 @@ import { notFound } from "next/navigation";
 import { Metadata } from "next";
 import Image from "next/image";
 import { css } from "@/styled-system/css";
-import { PortableText } from "@portabletext/react";
+import PortableTextContent from "@/components/PortableTextContent";
 import { urlFor } from "@/sanity/lib/image";
+import GalleryCarousel from "@/components/modules/GalleryCarousel";
 
 interface ProjectPageProps {
   params: Promise<{ slug: string }>;
@@ -39,7 +40,14 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
   return (
     <article className={css({ backgroundColor: "white", minHeight: "100vh" })}>
       {/* Hero Section */}
-      <div className={css({ position: "relative", height: { base: "60vh", md: "80vh" }, width: "full", overflow: "hidden" })}>
+      <div className={css({ 
+        position: "relative", 
+        height: { base: "60vh", md: "80vh" }, 
+        width: "full", 
+        overflow: "hidden",
+        backgroundColor: "surface-container-high",
+        animation: "pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite"
+      })}>
         {project.mainImage && (
           <Image
             src={urlFor(project.mainImage).width(2000).auto("format").quality(90).url()}
@@ -229,31 +237,12 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
               letterSpacing: "tight"
           }
         })}>
-          <PortableText value={project.description} />
+          <PortableTextContent value={project.description} />
         </div>
       </div>
 
       {/* Gallery */}
-      {project.gallery && project.gallery.length > 0 && (
-        <div className={css({ 
-          paddingX: { base: "2rem", md: "6rem" },
-          paddingBottom: "8rem",
-          display: "grid",
-          gridTemplateColumns: { base: "1fr", md: "repeat(2, 1fr)" },
-          gap: "2rem"
-        })}>
-          {project.gallery.map((img: any, i: number) => (
-            <div key={i} className={css({ position: "relative", height: "500px", width: "full", overflow: "hidden" })}>
-               <Image 
-                src={urlFor(img).width(1200).auto("format").quality(85).url()} 
-                alt={`${project.title} gallery ${i}`} 
-                fill 
-                className={css({ objectFit: "cover", filter: "grayscale(10%)", transition: "transform 0.5s", _hover: { transform: "scale(1.05)" } })} 
-               />
-            </div>
-          ))}
-        </div>
-      )}
+      <GalleryCarousel images={project.gallery} title={project.title} />
     </article>
   );
 }

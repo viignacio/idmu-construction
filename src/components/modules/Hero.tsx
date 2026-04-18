@@ -30,26 +30,26 @@ export default function Hero({
   secondaryCTA,
   highlightedWord,
 }: HeroProps) {
+  const getHighlightedHeading = () => {
+    if (!heading) return null;
+    if (!highlightedWord) return heading;
+
+    // Escape special regex characters in the highlight word
+    const escapedWord = highlightedWord.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    const parts = heading.split(new RegExp(`(${escapedWord})`, "gi"));
+    
+    return parts.map((part, i) =>
+      part.toLowerCase() === highlightedWord.toLowerCase() ? (
+        <span key={i} className={css({ color: "secondary" })}>
+          {part}
+        </span>
+      ) : (
+        part
+      )
+    );
+  };
+
   if (variant === "text") {
-    const getHighlightedHeading = () => {
-      if (!heading) return null;
-      if (!highlightedWord) return heading;
-
-      // Escape special regex characters in the highlight word
-      const escapedWord = highlightedWord.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-      const parts = heading.split(new RegExp(`(${escapedWord})`, "gi"));
-      
-      return parts.map((part, i) =>
-        part.toLowerCase() === highlightedWord.toLowerCase() ? (
-          <span key={i} className={css({ color: "secondary" })}>
-            {part}
-          </span>
-        ) : (
-          part
-        )
-      );
-    };
-
     return (
       <header
         className={css({
@@ -223,7 +223,7 @@ export default function Hero({
               textTransform: "uppercase", // Forced industrial uppercase
             })}
           >
-            {heading}
+            {getHighlightedHeading()}
           </h1>
         )}
 

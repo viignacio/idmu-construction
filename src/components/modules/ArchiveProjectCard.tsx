@@ -12,7 +12,6 @@ interface ArchiveProjectCardProps {
     location?: string;
     status?: "COMPLETE" | "ONGOING";
     completionPercentage?: number;
-    ctaLabel?: string;
   };
   priority?: boolean;
 }
@@ -20,7 +19,7 @@ interface ArchiveProjectCardProps {
 export default function ArchiveProjectCard({ project, priority = false }: ArchiveProjectCardProps) {
   if (!project) return null;
 
-  const { title, sector, mainImage, slug, location, status, completionPercentage, ctaLabel } = project;
+  const { title, sector, mainImage, slug, location, status, completionPercentage } = project;
 
   return (
     <Link 
@@ -46,7 +45,9 @@ export default function ArchiveProjectCard({ project, priority = false }: Archiv
           position: "absolute",
           inset: 0,
           transition: "transform 1s cubic-bezier(0.16, 1, 0.3, 1)",
-          _groupHover: { transform: "scale(1.05)" }
+          _groupHover: { transform: "scale(1.05)" },
+          backgroundColor: "surface-container-high",
+          animation: "pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite"
         })}>
           <Image
             src={urlFor(mainImage).width(1200).auto("format").quality(85).url()}
@@ -119,7 +120,7 @@ export default function ArchiveProjectCard({ project, priority = false }: Archiv
             display: "flex",
             justifyContent: "space-between",
             alignItems: "end",
-            marginBottom: status === "ONGOING" ? "1.5rem" : "1rem",
+            marginBottom: "1rem",
           })}>
             <div>
               <h3 className={css({
@@ -129,7 +130,8 @@ export default function ArchiveProjectCard({ project, priority = false }: Archiv
                 color: "white",
                 lineHeight: "none",
                 marginBottom: "0.5rem",
-                textTransform: "uppercase"
+                textTransform: "uppercase",
+                _groupHover: { color: "tertiary" }
               })}>
                 {title}
               </h3>
@@ -200,51 +202,30 @@ export default function ArchiveProjectCard({ project, priority = false }: Archiv
             </div>
           )}
 
-          {ctaLabel ? (
-            <button className={css({
-              width: "100%",
-              backgroundColor: "white",
-              color: "primary",
-              paddingY: "4",
-              fontFamily: "headline",
-              fontWeight: "bold",
-              fontSize: "sm",
-              letterSpacing: "widest",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              gap: "2",
-              transition: "all 0.3s",
-              _hover: {
-                backgroundColor: "white",
-                "& span": { transform: "translateX(4px)" } 
-              }
+          <div className={css({
+            fontSize: "xs",
+            fontWeight: "black",
+            textTransform: "uppercase",
+            letterSpacing: "widest",
+            display: "flex",
+            alignItems: "center",
+            gap: "0.5rem",
+            transition: "gap 0.3s",
+            color: "white",
+            _groupHover: {
+              gap: "1rem",
+              color: "tertiary"
+            }
+          })}>
+            Read More 
+            <span className={css({
+              fontSize: "1rem",
+              fontWeight: "normal",
+              fontFamily: "Material Symbols Outlined"
             })}>
-              {ctaLabel.toUpperCase() || "VIEW WALKTHROUGH"}
-              <span className={cx("material-symbols-outlined", css({
-                transition: "transform 0.3s",
-              }))}>arrow_forward</span>
-            </button>
-          ) : (
-            <button className={css({
-              color: "white",
-              fontFamily: "headline",
-              fontWeight: "bold",
-              fontSize: "xs",
-              letterSpacing: "widest",
-              borderBottom: "2px solid",
-              borderColor: "tertiary",
-              paddingBottom: "1",
-              width: "fit-content",
-              display: "flex",
-              alignItems: "center",
-              gap: "2",
-              transition: "all 0.3s",
-              _hover: { color: "tertiary" }
-            })}>
-              VIEW DETAILS
-            </button>
-          )}
+              arrow_forward
+            </span>
+          </div>
         </div>
       </div>
     </Link>

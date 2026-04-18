@@ -138,7 +138,16 @@ export const PROJECT_QUERY = defineQuery(`*[_type == "project" && slug.current =
   location,
   client,
   mainImage,
-  description,
+  description[]{
+    ...,
+    markDefs[]{
+      ...,
+      _type == "internalLink" => {
+        "slug": reference->slug.current,
+        "type": reference->_type
+      }
+    }
+  },
   gallery[]{
     ...
   }
@@ -151,5 +160,14 @@ export const NEWS_QUERY = defineQuery(`*[_type == "news" && slug.current == $slu
   author,
   mainImage,
   excerpt,
-  content
+  content[]{
+    ...,
+    markDefs[]{
+      ...,
+      _type == "internalLink" => {
+        "slug": reference->slug.current,
+        "type": reference->_type
+      }
+    }
+  }
 }`);

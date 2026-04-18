@@ -128,7 +128,10 @@ export default function ProjectCard({
   return (
     <Link href={slug ? `/projects/${slug}` : "#"} className={cx("group", containerClass)}>
       {mainImage && (
-        <div className={imageWrapperClass}>
+        <div className={cx(imageWrapperClass, css({
+          backgroundColor: "surface-container-high",
+          animation: "pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite"
+        }))}>
           <Image
             src={urlFor(mainImage).width(1000).auto("format").quality(85).url()}
             alt={title}
@@ -166,10 +169,36 @@ export default function ProjectCard({
             fontSize: "3xl",
             color: cardColor === "white" ? "primary" : "white",
             textTransform: "uppercase",
-            textAlign: "center"
+            textAlign: "center",
+            marginBottom: "1rem"
           })}>
             {title}
           </h4>
+          <div className={css({
+            fontSize: "xs",
+            fontWeight: "black",
+            textTransform: "uppercase",
+            letterSpacing: "widest",
+            display: "flex",
+            alignItems: "center",
+            gap: "0.5rem",
+            transition: "all 0.3s",
+            color: cardColor === "yellow" ? "primary" : cardColor === "white" ? "primary" : "white",
+            opacity: 0.8,
+            _groupHover: {
+              gap: "1rem",
+              opacity: 1
+            }
+          })}>
+            Read More 
+            <span className={css({
+              fontSize: "1rem",
+              fontWeight: "normal",
+              fontFamily: "Material Symbols Outlined"
+            })}>
+              arrow_forward
+            </span>
+          </div>
         </div>
       ) : (
         <div className={cardBoxClass}>
@@ -194,9 +223,35 @@ export default function ProjectCard({
             lineHeight: "none",
             letterSpacing: isImpactLayout ? "tighter" : "normal", // tracking-tighter for Forge Industrial style
             color: cardColor === "yellow" ? "primary" : cardColor === "white" ? "primary" : "white",
+            marginBottom: "1rem",
           })}>
             {title}
           </h4>
+          <div className={css({
+            fontSize: "xs",
+            fontWeight: "black",
+            textTransform: "uppercase",
+            letterSpacing: "widest",
+            display: "flex",
+            alignItems: "center",
+            gap: "0.5rem",
+            transition: "all 0.3s",
+            color: cardColor === "yellow" ? "primary" : cardColor === "white" ? "primary" : "white",
+            opacity: 0.8,
+            _groupHover: {
+              gap: "1rem",
+              opacity: 1
+            }
+          })}>
+            Read More 
+            <span className={css({
+              fontSize: "1rem",
+              fontWeight: "normal",
+              fontFamily: "Material Symbols Outlined"
+            })}>
+              arrow_forward
+            </span>
+          </div>
         </div>
       )}
     </Link>
