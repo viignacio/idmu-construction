@@ -131,6 +131,7 @@ export default function ProjectCard({
             src={imageUrl}
             alt={title}
             fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 66vw, 33vw"
             draggable={false}
             className={css({ 
               objectFit: "cover", 

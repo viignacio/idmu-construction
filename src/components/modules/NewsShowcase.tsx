@@ -71,16 +71,19 @@ export default function NewsShowcase({
     })}>
       <div className={css({
         display: "grid",
-        gridTemplateColumns: "repeat(12, 1fr)",
+        // Only use 12 columns on desktop to avoid massive cumulative gap on mobile
+        gridTemplateColumns: { base: "1fr", md: "repeat(12, 1fr)" },
         gap: { base: "4rem", md: "4rem" },
       })}>
         
         {/* Sidebar Column */}
-        <div className={css({ gridColumn: { base: "span 12", md: "span 4" } })}>
+        <div className={css({ 
+          gridColumn: { base: "auto", md: "span 4" } 
+        })}>
           <h2 className={css({
             fontFamily: "headline",
             fontWeight: "bold",
-            fontSize: { base: "5xl", md: "5xl" }, // Specific sizing for News section
+            fontSize: { base: "4xl", md: "5xl" }, // Slightly smaller on mobile
             lineHeight: "1",
             color: "primary",
             letterSpacing: "tighter",
@@ -120,7 +123,9 @@ export default function NewsShowcase({
         </div>
 
         {/* Main Feed Column */}
-        <div className={css({ gridColumn: { base: "span 12", md: "span 8" } })}>
+        <div className={css({ 
+          gridColumn: { base: "auto", md: "span 8" } 
+        })}>
           <div className={css({
             display: "grid",
             gridTemplateColumns: { base: "1fr", md: "repeat(2, 1fr)" },

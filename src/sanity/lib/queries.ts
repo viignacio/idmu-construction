@@ -68,7 +68,7 @@ export const PAGE_QUERY = defineQuery(`*[_type == "page" && (slug.current == $sl
           sector,
           "year": select(
             defined(completionDate) => string::split(completionDate, "-")[0],
-            defined(startDate) => "Est. " + string::split(startDate, "-")[0],
+            defined(startDate) => string::split(startDate, "-")[0],
             year
           ),
           status,

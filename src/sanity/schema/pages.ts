@@ -36,6 +36,12 @@ export const page = defineType({
           ],
           fields: [
             {
+              name: "internalTitle",
+              title: "Internal Title",
+              type: "string",
+              description: "For studio purposes only (e.g. 'Home - Top Hero')",
+            },
+            {
               name: "variant",
               type: "string",
               options: {
@@ -154,6 +160,18 @@ export const page = defineType({
               hidden: ({ parent }) => parent?.variant === "text",
             },
           ],
+          preview: {
+            select: {
+              title: "internalTitle",
+              heading: "heading",
+            },
+            prepare({ title, heading }) {
+              return {
+                title: title || heading || "Hero",
+                subtitle: "HERO",
+              };
+            },
+          },
         },
         {
           type: "object",
@@ -164,6 +182,12 @@ export const page = defineType({
             { name: "grid", title: "Grid Items" },
           ],
           fields: [
+            {
+              name: "internalTitle",
+              title: "Internal Title",
+              type: "string",
+              description: "For studio purposes only (e.g. 'Home - About IDMU')",
+            },
             {
               name: "variant",
               type: "string",
@@ -206,6 +230,18 @@ export const page = defineType({
               ],
             },
           ],
+          preview: {
+            select: {
+              title: "internalTitle",
+              heading: "heading",
+            },
+            prepare({ title, heading }) {
+              return {
+                title: title || heading || "Text with Grid",
+                subtitle: "TEXT WITH GRID",
+              };
+            },
+          },
         },
         {
           type: "object",
@@ -238,7 +274,8 @@ export const page = defineType({
             },
             prepare({ title }) {
               return {
-                title: title || "Stats Grid",
+                title: title || "Project Stats",
+                subtitle: "STATS GRID",
               };
             },
           },
@@ -384,10 +421,12 @@ export const page = defineType({
           preview: {
             select: {
               title: "internalTitle",
+              heading: "heading",
             },
-            prepare({ title }) {
+            prepare({ title, heading }) {
               return {
-                title: title || "Project Showcase",
+                title: title || heading || "Project Showcase",
+                subtitle: "PROJECT SHOWCASE",
               };
             },
           },
@@ -397,6 +436,12 @@ export const page = defineType({
           name: "projectGrid",
           title: "Project Grid",
           fields: [
+            {
+              name: "internalTitle",
+              title: "Internal Title",
+              type: "string",
+              description: "For studio purposes only (e.g. 'Project Archive Grid')",
+            },
             {
               name: "heading",
               title: "Heading",
@@ -420,6 +465,18 @@ export const page = defineType({
               description: "Leave empty to show all projects.",
             },
           ],
+          preview: {
+            select: {
+              title: "internalTitle",
+              heading: "heading",
+            },
+            prepare({ title, heading }) {
+              return {
+                title: title || heading || "Project Grid",
+                subtitle: "PROJECT GRID",
+              };
+            },
+          },
         },
         {
           type: "object",
@@ -438,9 +495,12 @@ export const page = defineType({
             { name: "subheading", type: "text", title: "Subheading", group: "content" },
           ],
           preview: {
-            select: { title: "internalTitle" },
-            prepare({ title }) {
-              return { title: title || "News Showcase" };
+            select: { title: "internalTitle", heading: "heading" },
+            prepare({ title, heading }) {
+              return { 
+                title: title || heading || "News Showcase",
+                subtitle: "NEWS SHOWCASE",
+              };
             },
           },
         },
@@ -449,6 +509,12 @@ export const page = defineType({
           title: "CTA Block",
           type: "object",
           fields: [
+            {
+              name: "internalTitle",
+              title: "Internal Title",
+              type: "string",
+              description: "For studio purposes only (e.g. 'Home - Contact CTA')",
+            },
             {
               name: "heading",
               title: "Heading",
@@ -501,6 +567,18 @@ export const page = defineType({
               validation: (Rule) => Rule.required(),
             },
           ],
+          preview: {
+            select: {
+              title: "internalTitle",
+              heading: "heading",
+            },
+            prepare({ title, heading }) {
+              return {
+                title: title || heading || "CTA Block",
+                subtitle: "CTA BLOCK",
+              };
+            },
+          },
         },
       ],
     }),
