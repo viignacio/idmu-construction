@@ -66,11 +66,36 @@ export const PAGE_QUERY = defineQuery(`*[_type == "page" && (slug.current == $sl
         project->{
           title,
           sector,
-          year,
+          "year": select(
+            defined(completionDate) => string::split(completionDate, "-")[0],
+            defined(startDate) => "Est. " + string::split(startDate, "-")[0],
+            year
+          ),
+          status,
+          completionPercentage,
+          location,
           "imageUrl": mainImage.asset->url,
           "slug": slug.current
         }
       }
+    },
+    _type == "projectGrid" => {
+      ...,
+      "projects": *[_type == "project"] | order(startDate desc) {
+        title,
+        sector,
+        "year": select(
+          defined(completionDate) => string::split(completionDate, "-")[0],
+          defined(startDate) => "Est. " + string::split(startDate, "-")[0],
+          year
+        ),
+        status,
+        completionPercentage,
+        location,
+        ctaLabel,
+        "imageUrl": mainImage.asset->url,
+        "slug": slug.current
+      }[0...coalesce(^.limit, 100)]
     },
     _type == "newsShowcase" => {
       ...,
@@ -100,7 +125,16 @@ export const PAGE_QUERY = defineQuery(`*[_type == "page" && (slug.current == $sl
 export const PROJECT_QUERY = defineQuery(`*[_type == "project" && slug.current == $slug][0]{
   title,
   sector,
-  year,
+  "year": select(
+    defined(completionDate) => string::split(completionDate, "-")[0],
+    defined(startDate) => "Est. " + string::split(startDate, "-")[0],
+    year
+  ),
+  startDate,
+  completionDate,
+  status,
+  completionPercentage,
+  location,
   client,
   "imageUrl": mainImage.asset->url,
   description,
