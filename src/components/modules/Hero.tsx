@@ -14,6 +14,7 @@ interface HeroProps {
   backgroundType?: "image" | "video";
   primaryCTA?: { label: string; link: string };
   secondaryCTA?: { label: string; link: string };
+  highlightedWord?: string;
 }
 
 export default function Hero({
@@ -27,7 +28,95 @@ export default function Hero({
   backgroundType = "image",
   primaryCTA,
   secondaryCTA,
+  highlightedWord,
 }: HeroProps) {
+  if (variant === "text") {
+    const getHighlightedHeading = () => {
+      if (!heading) return null;
+      if (!highlightedWord) return heading;
+
+      const parts = heading.split(new RegExp(`(${highlightedWord})`, "gi"));
+      return parts.map((part, i) =>
+        part.toLowerCase() === highlightedWord.toLowerCase() ? (
+          <span key={i} className={css({ color: "secondary" })}>
+            {part}
+          </span>
+        ) : (
+          part
+        )
+      );
+    };
+
+    return (
+      <header
+        className={css({
+          paddingX: { base: "2rem", md: "8rem" },
+          marginBottom: "5rem",
+          maxWidth: "1280px", // max-w-7xl equivalent
+          marginX: "auto",
+          paddingTop: "8rem", // pt-32 equivalent
+        })}
+      >
+        <div
+          className={css({
+            display: "flex",
+            flexDirection: { base: "column", md: "row" },
+            alignItems: { base: "flex-start", md: "flex-end" },
+            justifyContent: "space-between",
+            gap: "2rem",
+          })}
+        >
+          <div className={css({ maxWidth: "42rem" })}>
+            {eyebrow && (
+              <span
+                className={css({
+                  display: "block",
+                  fontFamily: "body",
+                  fontSize: "xs",
+                  fontWeight: "900",
+                  letterSpacing: "0.2em",
+                  color: "tertiary",
+                  textTransform: "uppercase",
+                  marginBottom: "1rem",
+                })}
+              >
+                {eyebrow}
+              </span>
+            )}
+            {heading && (
+              <h1
+                className={css({
+                  fontFamily: "headline",
+                  fontWeight: "bold",
+                  fontSize: { base: "4xl", md: "8xl" },
+                  letterSpacing: "tighter",
+                  lineHeight: "none",
+                  marginBottom: "1.5rem",
+                  color: "primary", // Explicit primary color (Steel)
+                })}
+              >
+                {getHighlightedHeading()}
+              </h1>
+            )}
+            {subheading && (
+              <p
+                className={css({
+                  fontFamily: "body",
+                  fontSize: "lg",
+                  lineHeight: "relaxed",
+                  color: "on-surface-variant",
+                  maxWidth: "32rem",
+                })}
+              >
+                {subheading}
+              </p>
+            )}
+          </div>
+        </div>
+      </header>
+    );
+  }
+
   if (variant !== "full") return null;
 
   return (
