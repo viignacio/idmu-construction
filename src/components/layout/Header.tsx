@@ -3,14 +3,15 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { css, cx } from "../../../styled-system/css";
+import { css, cx } from "@/styled-system/css";
 import NavLinks from "./NavLinks";
+import { urlFor } from "@/sanity/lib/image";
 
 export default function Header({ data, business }: any) {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
   
-  const logoUrl = business?.logoUrl;
+  const logo = business?.logo;
   const brandName = data?.brandName || business?.name || "IDMU Construction";
   const links = data?.links || [];
   const cta = data?.cta;
@@ -70,9 +71,9 @@ export default function Header({ data, business }: any) {
               zIndex: 110,
             })}
           >
-            {logoUrl ? (
+            {logo ? (
               <img
-                src={logoUrl}
+                src={urlFor(logo).width(400).auto("format").url()}
                 alt={brandName}
                 className={css({
                   height: "full",

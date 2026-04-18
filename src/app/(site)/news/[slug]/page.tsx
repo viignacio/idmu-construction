@@ -3,8 +3,9 @@ import { NEWS_QUERY } from "@/sanity/lib/queries";
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
 import Image from "next/image";
-import { css } from "../../../../../styled-system/css";
+import { css } from "@/styled-system/css";
 import { PortableText } from "@portabletext/react";
+import { urlFor } from "@/sanity/lib/image";
 
 interface NewsPageProps {
   params: Promise<{ slug: string }>;
@@ -91,7 +92,7 @@ export default async function NewsPage({ params }: NewsPageProps) {
         </header>
 
         {/* Main Image */}
-        {news.imageUrl && (
+        {news.mainImage && (
           <div className={css({ 
             position: "relative", 
             height: { base: "300px", md: "600px" }, 
@@ -100,7 +101,7 @@ export default async function NewsPage({ params }: NewsPageProps) {
             backgroundColor: "surface-container-high"
           })}>
             <Image 
-              src={news.imageUrl} 
+              src={urlFor(news.mainImage).width(1600).auto("format").quality(85).url()} 
               alt={news.title} 
               fill 
               className={css({ objectFit: "cover", filter: "grayscale(5%)" })} 

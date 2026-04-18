@@ -3,8 +3,9 @@ import { PROJECT_QUERY } from "@/sanity/lib/queries";
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
 import Image from "next/image";
-import { css } from "../../../../../styled-system/css";
+import { css } from "@/styled-system/css";
 import { PortableText } from "@portabletext/react";
+import { urlFor } from "@/sanity/lib/image";
 
 interface ProjectPageProps {
   params: Promise<{ slug: string }>;
@@ -39,9 +40,9 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
     <article className={css({ backgroundColor: "white", minHeight: "100vh" })}>
       {/* Hero Section */}
       <div className={css({ position: "relative", height: { base: "60vh", md: "80vh" }, width: "full", overflow: "hidden" })}>
-        {project.imageUrl && (
+        {project.mainImage && (
           <Image
-            src={project.imageUrl}
+            src={urlFor(project.mainImage).width(2000).auto("format").quality(90).url()}
             alt={project.title}
             fill
             priority
@@ -88,20 +89,125 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           gap: "3rem"
         })}>
           <div className={css({ borderLeft: "4px solid", borderColor: "tertiary", paddingLeft: "2rem" })}>
-             <div className={css({ marginBottom: "2rem" })}>
-                <span className={css({ fontSize: "10px", fontWeight: "bold", textTransform: "uppercase", letterSpacing: "widest", color: "secondary", display: "block", marginBottom: "0.5rem" })}>Sector</span>
-                <p className={css({ fontSize: "xl", fontWeight: "bold", color: "primary", textTransform: "uppercase", fontFamily: "headline" })}>{project.sector}</p>
-             </div>
-             <div className={css({ marginBottom: "2rem" })}>
-                <span className={css({ fontSize: "10px", fontWeight: "bold", textTransform: "uppercase", letterSpacing: "widest", color: "secondary", display: "block", marginBottom: "0.5rem" })}>Year</span>
-                <p className={css({ fontSize: "xl", fontWeight: "bold", color: "primary", fontFamily: "headline" })}>{project.year}</p>
-             </div>
-             {project.client && (
-               <div>
-                  <span className={css({ fontSize: "10px", fontWeight: "bold", textTransform: "uppercase", letterSpacing: "widest", color: "secondary", display: "block", marginBottom: "0.5rem" })}>Client</span>
-                  <p className={css({ fontSize: "xl", fontWeight: "bold", color: "primary", textTransform: "uppercase", fontFamily: "headline" })}>{project.client}</p>
-               </div>
-             )}
+            {/* Metadata Grid */}
+            <div className={css({ display: "flex", flexDirection: "column", gap: "2rem" })}>
+              {project.sector && (
+                <div>
+                  <span className={css({ 
+                    fontSize: "10px", 
+                    fontWeight: "bold", 
+                    textTransform: "uppercase", 
+                    letterSpacing: "widest", 
+                    color: "tertiary", // Updated to tertiary
+                    display: "block", 
+                    marginBottom: "0.5rem" 
+                  })}>Sector</span>
+                  <p className={css({ fontSize: "xl", fontWeight: "bold", color: "primary", textTransform: "uppercase", fontFamily: "headline" })}>
+                    {project.sector}
+                  </p>
+                </div>
+              )}
+
+              {project.startDate && (
+                <div>
+                  <span className={css({ 
+                    fontSize: "10px", 
+                    fontWeight: "bold", 
+                    textTransform: "uppercase", 
+                    letterSpacing: "widest", 
+                    color: "tertiary", 
+                    display: "block", 
+                    marginBottom: "0.5rem" 
+                  })}>Project Start Date</span>
+                  <p className={css({ fontSize: "xl", fontWeight: "bold", color: "primary", fontFamily: "headline" })}>
+                    {new Date(project.startDate).toLocaleDateString("en-US", { month: "long", year: "numeric", day: "numeric" })}
+                  </p>
+                </div>
+              )}
+
+              {project.completionDate && (
+                <div>
+                  <span className={css({ 
+                    fontSize: "10px", 
+                    fontWeight: "bold", 
+                    textTransform: "uppercase", 
+                    letterSpacing: "widest", 
+                    color: "tertiary", 
+                    display: "block", 
+                    marginBottom: "0.5rem" 
+                  })}>Project Completion Date</span>
+                  <p className={css({ fontSize: "xl", fontWeight: "bold", color: "primary", fontFamily: "headline" })}>
+                    {new Date(project.completionDate).toLocaleDateString("en-US", { month: "long", year: "numeric", day: "numeric" })}
+                  </p>
+                </div>
+              )}
+
+              {project.status && (
+                <div>
+                  <span className={css({ 
+                    fontSize: "10px", 
+                    fontWeight: "bold", 
+                    textTransform: "uppercase", 
+                    letterSpacing: "widest", 
+                    color: "tertiary", 
+                    display: "block", 
+                    marginBottom: "0.5rem" 
+                  })}>Project Status</span>
+                  <div className={css({ display: "flex", alignItems: "center", gap: "1rem" })}>
+                    <p className={css({ fontSize: "xl", fontWeight: "bold", color: "primary", textTransform: "uppercase", fontFamily: "headline" })}>
+                      {project.status}
+                    </p>
+                    {project.status === "ONGOING" && project.completionPercentage !== undefined && (
+                      <span className={css({
+                        backgroundColor: "primary",
+                        color: "white",
+                        paddingX: "0.5rem",
+                        paddingY: "0.25rem",
+                        fontSize: "xs",
+                        fontWeight: "black",
+                        borderRadius: "none"
+                      })}>
+                        {project.completionPercentage}%
+                      </span>
+                    )}
+                  </div>
+                </div>
+              )}
+
+              {project.location && (
+                <div>
+                  <span className={css({ 
+                    fontSize: "10px", 
+                    fontWeight: "bold", 
+                    textTransform: "uppercase", 
+                    letterSpacing: "widest", 
+                    color: "tertiary", 
+                    display: "block", 
+                    marginBottom: "0.5rem" 
+                  })}>Location</span>
+                  <p className={css({ fontSize: "xl", fontWeight: "bold", color: "primary", textTransform: "uppercase", fontFamily: "headline" })}>
+                    {project.location}
+                  </p>
+                </div>
+              )}
+
+              {project.client && (
+                <div>
+                  <span className={css({ 
+                    fontSize: "10px", 
+                    fontWeight: "bold", 
+                    textTransform: "uppercase", 
+                    letterSpacing: "widest", 
+                    color: "tertiary", 
+                    display: "block", 
+                    marginBottom: "0.5rem" 
+                  })}>Client</span>
+                  <p className={css({ fontSize: "xl", fontWeight: "bold", color: "primary", textTransform: "uppercase", fontFamily: "headline" })}>
+                    {project.client}
+                  </p>
+                </div>
+              )}
+            </div>
           </div>
         </aside>
 
@@ -139,7 +245,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           {project.gallery.map((img: any, i: number) => (
             <div key={i} className={css({ position: "relative", height: "500px", width: "full", overflow: "hidden" })}>
                <Image 
-                src={img.url} 
+                src={urlFor(img).width(1200).auto("format").quality(85).url()} 
                 alt={`${project.title} gallery ${i}`} 
                 fill 
                 className={css({ objectFit: "cover", filter: "grayscale(10%)", transition: "transform 0.5s", _hover: { transform: "scale(1.05)" } })} 

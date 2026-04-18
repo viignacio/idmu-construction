@@ -1,8 +1,9 @@
 "use client";
 
 import { PortableText } from "@portabletext/react";
-import { css } from "../../../styled-system/css";
+import { css } from "@/styled-system/css";
 import Link from "next/link";
+import { urlFor } from "@/sanity/lib/image";
 
 export default function Footer({ data, business }: any) {
   if (!data) return null;
@@ -41,9 +42,9 @@ export default function Footer({ data, business }: any) {
             textDecoration: "none",
           })}
         >
-          {business?.logoUrl ? (
+          {business?.logo ? (
             <img
-              src={business.logoUrl}
+              src={urlFor(business.logo).width(400).auto("format").url()}
               alt={data?.brandName || business?.name}
               className={css({
                 height: "full",

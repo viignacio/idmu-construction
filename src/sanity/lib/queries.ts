@@ -56,7 +56,7 @@ export const PAGE_QUERY = defineQuery(`*[_type == "page" && (slug.current == $sl
       ...,
       gridItems[]{
         ...,
-        icon
+        "iconUrl": icon.asset->url
       }
     },
     _type == "projectShowcase" => {
@@ -124,6 +124,7 @@ export const PAGE_QUERY = defineQuery(`*[_type == "page" && (slug.current == $sl
 
 export const PROJECT_QUERY = defineQuery(`*[_type == "project" && slug.current == $slug][0]{
   title,
+  "slug": slug.current,
   sector,
   "year": select(
     defined(completionDate) => string::split(completionDate, "-")[0],

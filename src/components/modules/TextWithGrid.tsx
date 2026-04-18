@@ -1,4 +1,5 @@
 import { css } from "@/styled-system/css";
+import { urlFor } from "@/sanity/lib/image";
 
 interface GridItem {
   iconUrl?: string;

@@ -1,4 +1,5 @@
 import { css, cx } from "@/styled-system/css";
+import { urlFor } from "@/sanity/lib/image";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -7,7 +8,7 @@ interface ProjectCardProps {
     title: string;
     sector?: string;
     year?: string;
-    imageUrl?: string;
+    mainImage?: any;
     slug?: string;
   };
   size?: "landscape" | "portrait";
@@ -24,10 +25,11 @@ export default function ProjectCard({
   cardColor = "navy",
   position = "bottomLeft",
   isOffset = false,
-}: ProjectCardProps) {
+  priority = false,
+}: ProjectCardProps & { priority?: boolean }) {
   if (!project) return null;
 
-  const { title, sector, year, imageUrl, slug } = project;
+  const { title, sector, year, mainImage, slug } = project;
   const hasMetadata = sector && year;
 
   // Determine styling mode
@@ -125,13 +127,14 @@ export default function ProjectCard({
 
   return (
     <Link href={slug ? `/projects/${slug}` : "#"} className={cx("group", containerClass)}>
-      {imageUrl && (
+      {mainImage && (
         <div className={imageWrapperClass}>
           <Image
-            src={imageUrl}
+            src={urlFor(mainImage).width(1000).auto("format").quality(85).url()}
             alt={title}
             fill
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 66vw, 33vw"
+            priority={priority}
             draggable={false}
             className={css({ 
               objectFit: "cover", 

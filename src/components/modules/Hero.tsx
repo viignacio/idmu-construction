@@ -143,7 +143,7 @@ export default function Hero({
             loop
             muted
             playsInline
-            poster={videoPlaceholder ? urlFor(videoPlaceholder).url() : undefined}
+            poster={videoPlaceholder ? urlFor(videoPlaceholder).width(2000).auto("format").quality(85).url() : undefined}
             className={css({
               width: "full",
               height: "full",

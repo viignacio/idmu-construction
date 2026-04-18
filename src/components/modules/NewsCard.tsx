@@ -1,4 +1,5 @@
 import { css } from "@/styled-system/css";
+import { urlFor } from "@/sanity/lib/image";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -6,7 +7,7 @@ interface NewsCardProps {
   news: {
     title: string;
     category: string;
-    imageUrl?: string;
+    mainImage?: any;
     slug?: string;
   };
 }
@@ -14,7 +15,7 @@ interface NewsCardProps {
 export default function NewsCard({ news }: NewsCardProps) {
   if (!news) return null;
 
-  const { title, category, imageUrl, slug } = news;
+  const { title, category, mainImage, slug } = news;
 
   return (
     <Link 
@@ -36,9 +37,9 @@ export default function NewsCard({ news }: NewsCardProps) {
         overflow: "hidden",
         position: "relative",
       })}>
-        {imageUrl && (
+        {mainImage && (
           <Image
-            src={imageUrl}
+            src={urlFor(mainImage).width(800).auto("format").quality(85).url()}
             alt={title}
             fill
             className={css({
