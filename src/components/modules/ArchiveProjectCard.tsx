@@ -1,24 +1,26 @@
-import { css, cx } from "../../../styled-system/css";
+import { css, cx } from "@/styled-system/css";
 import Image from "next/image";
 import Link from "next/link";
+import { urlFor } from "@/sanity/lib/image";
 
 interface ArchiveProjectCardProps {
   project: {
     title: string;
     sector?: string;
-    imageUrl?: string;
+    mainImage?: any;
     slug?: string;
     location?: string;
     status?: "COMPLETE" | "ONGOING";
     completionPercentage?: number;
     ctaLabel?: string;
   };
+  priority?: boolean;
 }
 
-export default function ArchiveProjectCard({ project }: ArchiveProjectCardProps) {
+export default function ArchiveProjectCard({ project, priority = false }: ArchiveProjectCardProps) {
   if (!project) return null;
 
-  const { title, sector, imageUrl, slug, location, status, completionPercentage, ctaLabel } = project;
+  const { title, sector, mainImage, slug, location, status, completionPercentage, ctaLabel } = project;
 
   return (
     <Link 
@@ -39,7 +41,7 @@ export default function ArchiveProjectCard({ project }: ArchiveProjectCardProps)
         })
       )}
     >
-      {imageUrl && (
+      {mainImage && (
         <div className={css({
           position: "absolute",
           inset: 0,
@@ -47,10 +49,11 @@ export default function ArchiveProjectCard({ project }: ArchiveProjectCardProps)
           _groupHover: { transform: "scale(1.05)" }
         })}>
           <Image
-            src={imageUrl}
+            src={urlFor(mainImage).width(1200).auto("format").quality(85).url()}
             alt={title}
             fill
-            sizes="(max-width: 768px) 100vw, 50vw" // Optimized for 2-column architectural grid
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 800px" 
+            priority={priority}
             draggable={false}
             className={css({ 
               objectFit: "cover", 

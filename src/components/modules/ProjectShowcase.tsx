@@ -1,4 +1,4 @@
-import { css } from "../../../styled-system/css";
+import { css } from "@/styled-system/css";
 import ProjectCard from "./ProjectCard";
 import Link from "next/link";
 

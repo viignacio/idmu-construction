@@ -1,4 +1,4 @@
-import { css } from "../../../styled-system/css";
+import { css } from "@/styled-system/css";
 import Link from "next/link";
 
 interface CTA {

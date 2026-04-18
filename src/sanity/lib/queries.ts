@@ -38,7 +38,7 @@ export const FOOTER_QUERY = defineQuery(`*[_type == "footer"][0]{
 
 export const BUSINESS_INFO_QUERY = defineQuery(`*[_type == "business"][0]{
   name,
-  "logoUrl": logo.asset->url,
+  logo,
   email,
   phone,
   address
@@ -50,13 +50,13 @@ export const PAGE_QUERY = defineQuery(`*[_type == "page" && (slug.current == $sl
     ...,
     _type == "hero" => {
       ...,
-      "backgroundVideo": backgroundVideo.asset->url
+      "backgroundVideoUrl": backgroundVideo.asset->url
     },
     _type == "textWithGrid" => {
       ...,
       gridItems[]{
         ...,
-        "iconUrl": icon.asset->url
+        icon
       }
     },
     _type == "projectShowcase" => {
@@ -74,7 +74,7 @@ export const PAGE_QUERY = defineQuery(`*[_type == "page" && (slug.current == $sl
           status,
           completionPercentage,
           location,
-          "imageUrl": mainImage.asset->url,
+          mainImage,
           "slug": slug.current
         }
       }
@@ -93,7 +93,7 @@ export const PAGE_QUERY = defineQuery(`*[_type == "page" && (slug.current == $sl
         completionPercentage,
         location,
         ctaLabel,
-        "imageUrl": mainImage.asset->url,
+        mainImage,
         "slug": slug.current
       }
     },
@@ -105,7 +105,7 @@ export const PAGE_QUERY = defineQuery(`*[_type == "page" && (slug.current == $sl
         category,
         date,
         author,
-        "imageUrl": mainImage.asset->url,
+        mainImage,
         "slug": slug.current
       },
       "recentNews": *[_type == "news" && category != "Update"] | order(date desc)[0...2] {
@@ -114,7 +114,7 @@ export const PAGE_QUERY = defineQuery(`*[_type == "page" && (slug.current == $sl
         category,
         date,
         author,
-        "imageUrl": mainImage.asset->url,
+        mainImage,
         "slug": slug.current
       }
     }
@@ -136,11 +136,10 @@ export const PROJECT_QUERY = defineQuery(`*[_type == "project" && slug.current =
   completionPercentage,
   location,
   client,
-  "imageUrl": mainImage.asset->url,
+  mainImage,
   description,
   gallery[]{
-    ...,
-    "url": asset->url
+    ...
   }
 }`);
 
@@ -149,11 +148,7 @@ export const NEWS_QUERY = defineQuery(`*[_type == "news" && slug.current == $slu
   category,
   date,
   author,
-  "imageUrl": mainImage.asset->url,
+  mainImage,
   excerpt,
   content
 }`);
-
-
-
-

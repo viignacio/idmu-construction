@@ -53,14 +53,27 @@ export default defineConfig({
     },
   },
 
-  // Force-generate utility classes for all runtime theme values used in CtaBlock
+  // Force-generate utility classes for all runtime theme values used in CtaBlock and Hero
   staticCss: {
     css: [
       {
         properties: {
           backgroundColor: [
+            "primary",
             "slate-theme",
+            "tertiary",
+            "surface",
+            "background",
             "blueprint",
+            "white",
+          ],
+          color: [
+            "primary",
+            "white",
+            "secondary",
+            "tertiary",
+            "text.main",
+            "on-surface-variant",
           ],
         },
       },

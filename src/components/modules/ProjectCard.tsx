@@ -1,4 +1,4 @@
-import { css, cx } from "../../../styled-system/css";
+import { css, cx } from "@/styled-system/css";
 import Image from "next/image";
 import Link from "next/link";
 

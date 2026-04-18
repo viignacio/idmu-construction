@@ -1,7 +1,7 @@
 import { urlFor } from "@/sanity/lib/image";
 import Image from "next/image";
 import Link from "next/link";
-import { css } from "../../../styled-system/css";
+import { css, cx } from "@/styled-system/css";
 
 interface HeroProps {
   variant?: "full" | "compact" | "text" | "image-text";
@@ -157,7 +157,7 @@ export default function Hero({
 
           backgroundImage && (
             <Image
-              src={urlFor(backgroundImage).url()}
+              src={urlFor(backgroundImage).width(2000).auto("format").quality(85).url()}
               alt={heading || "Hero background"}
               fill
               className={css({

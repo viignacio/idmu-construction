@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useMemo, useEffect } from "react";
-import { css } from "../../../styled-system/css";
+import { css } from "@/styled-system/css";
 import ArchiveProjectCard from "./ArchiveProjectCard";
 
 interface ProjectGridProps {
@@ -226,6 +226,7 @@ export default function ProjectGrid({
           <div key={project._id || index} id={`project-${index}`}>
             <ArchiveProjectCard
               project={project}
+              priority={index < 2}
             />
           </div>
         ))}
