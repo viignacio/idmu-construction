@@ -35,10 +35,13 @@ export default function Hero({
       if (!heading) return null;
       if (!highlightedWord) return heading;
 
-      const parts = heading.split(new RegExp(`(${highlightedWord})`, "gi"));
+      // Escape special regex characters in the highlight word
+      const escapedWord = highlightedWord.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+      const parts = heading.split(new RegExp(`(${escapedWord})`, "gi"));
+      
       return parts.map((part, i) =>
         part.toLowerCase() === highlightedWord.toLowerCase() ? (
-          <span key={i} className={css({ color: "on-primary-container" })}>
+          <span key={i} className={css({ color: "secondary" })}>
             {part}
           </span>
         ) : (
