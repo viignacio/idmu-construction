@@ -158,8 +158,6 @@ export default function GalleryCarousel({ images, title }: GalleryCarouselProps)
               width: "full", 
               overflow: "hidden",
               backgroundColor: "surface-container-high",
-              // Subtle pulse for loading feedback
-              animation: "pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite"
             })}
           >
              <Image 
