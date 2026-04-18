@@ -50,36 +50,34 @@ export default function Hero({
     return (
       <header
         className={css({
-          paddingX: "2rem", 
-          marginBottom: "5rem", 
-          maxWidth: "1280px", 
+          paddingX: "2rem", // px-8 equivalent
+          marginBottom: "5rem", // mb-20 equivalent
+          maxWidth: "1440px", // Standard monolith container width
           marginX: "auto",
-          paddingTop: "12rem", // Increased padding for a more dramatic centered arrival
-          textAlign: "center", // Horizontal text centering
+          paddingTop: "8rem", // pt-32 equivalent
         })}
       >
         <div
           className={css({
             display: "flex",
-            flexDirection: "column",
-            alignItems: "center", // Flex-centering for the inner block
-            justifyContent: "center",
+            flexDirection: { base: "column", md: "row" },
+            alignItems: { base: "flex-start", md: "flex-end" },
+            justifyContent: "space-between",
             gap: "2rem",
           })}
         >
-          <div className={css({ maxWidth: "48rem" })}> // Slightly wider for centered impact
+          <div className={css({ maxWidth: "42rem" })}>
             {eyebrow && (
               <span
                 className={css({
-                  display: "inline-block", // inline-block for centered block
+                  display: "block",
                   fontFamily: "body",
                   fontSize: "xs",
                   fontWeight: "900",
                   letterSpacing: "0.2em",
                   color: "tertiary",
                   textTransform: "uppercase",
-                  marginBottom: "1.5rem",
-                  paddingX: "1rem", // Added slight padding to mimicking a horizontal stamp
+                  marginBottom: "1rem", // mb-4 equivalent
                 })}
               >
                 {eyebrow}
@@ -90,10 +88,10 @@ export default function Hero({
                 className={css({
                   fontFamily: "headline",
                   fontWeight: "bold",
-                  fontSize: { base: "4rem", md: "8xl" }, 
+                  fontSize: { base: "4rem", md: "8xl" }, // base text-6xl (approx 4rem)
                   letterSpacing: "tighter",
-                  lineHeight: "0.9", // Tighter for high-impact centered headings
-                  marginBottom: "2rem",
+                  lineHeight: "none",
+                  marginBottom: "1.5rem", // mb-6 equivalent
                   color: "primary",
                 })}
               >
@@ -107,8 +105,7 @@ export default function Hero({
                   fontSize: "lg",
                   lineHeight: "relaxed",
                   color: "on-surface-variant",
-                  maxWidth: "36rem",
-                  marginX: "auto", // Ensure the paragraph itself is centered
+                  maxWidth: "32rem", // max-w-lg equivalent
                 })}
               >
                 {subheading}
