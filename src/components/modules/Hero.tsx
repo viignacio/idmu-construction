@@ -50,10 +50,9 @@ export default function Hero({
     return (
       <header
         className={css({
-          paddingX: "2rem", // px-8 equivalent
-          marginBottom: "5rem", // mb-20 equivalent
-          maxWidth: "1440px", // Standard monolith container width
-          marginX: "auto",
+          paddingX: "2rem", // Aligns with Header's 2rem padding
+          marginBottom: "5rem",
+          width: "full",
           paddingTop: "8rem", // pt-32 equivalent
         })}
       >
