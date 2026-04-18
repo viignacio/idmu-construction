@@ -8,6 +8,8 @@ const NewsShowcase = dynamic(() => import("./NewsShowcase"));
 const CtaBlock = dynamic(() => import("./CtaBlock"));
 const ProjectGrid = dynamic(() => import("./ProjectGrid"));
 const PersonnelGrid = dynamic(() => import("./PersonnelGrid"));
+const SplitTextContent = dynamic(() => import("./SplitTextContent"));
+const HighlightsGrid = dynamic(() => import("./HighlightsGrid"));
 
 const components: Record<string, any> = {
   hero: Hero,
@@ -18,6 +20,8 @@ const components: Record<string, any> = {
   ctaBlock: CtaBlock,
   projectGrid: ProjectGrid,
   personnelGrid: PersonnelGrid,
+  splitTextContent: SplitTextContent,
+  highlightsGrid: HighlightsGrid,
 };
 
 
