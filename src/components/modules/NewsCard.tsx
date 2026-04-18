@@ -65,7 +65,7 @@ export default function NewsCard({ news }: NewsCardProps) {
       })}>
         <div>
           <span className={css({
-            color: "tertiary-fixed-dim",
+            color: "tertiary",
             fontWeight: "bold",
             fontSize: "10px",
             textTransform: "uppercase",

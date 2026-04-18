@@ -55,6 +55,7 @@ export default defineConfig({
             // Reference Documents
             S.documentTypeListItem("project").title("Projects"),
             S.documentTypeListItem("news").title("News"),
+            S.documentTypeListItem("personnel").title("Personnel"),
           ]),
     }),
   ],

@@ -47,7 +47,7 @@ export default function TextWithGrid({
         alignItems: (isCheckered || isMethod) ? "flex-start" : "end",
         marginBottom: "6rem" 
       })}>
-        <div className={css({ md: { gridColumn: (isCheckered || isMethod) ? "span 12" : "span 8" } })}>
+        <div className={css({ md: { gridColumn: isMethod ? "span 8" : (isCheckered ? "span 12" : "span 8") } })}>
           {preamble && !isMethod && (
             <span className={css({
               display: "block",
@@ -90,13 +90,21 @@ export default function TextWithGrid({
           )}
         </div>
 
-        {subheading && !isMethod && (
+        {subheading && (
           <div className={css({ 
-            md: { gridColumn: isCheckered ? "span 7" : "span 4" }, // Restricted to 7 columns if stacked for better readability
+            md: { 
+              gridColumn: isMethod ? "span 4" : (isCheckered ? "span 12" : "span 4"),
+              textAlign: isMethod ? "right" : "left",
+              alignSelf: isMethod ? "flex-end" : "flex-start"
+            },
             color: isDarkSection ? "rgba(255, 255, 255, 0.7)" : "on-surface-variant",
-            fontSize: "lg",
+            fontSize: isMethod ? "12px" : "lg",
             lineHeight: "relaxed",
-            fontWeight: "medium"
+            fontWeight: isMethod ? "semibold" : "medium",
+            textTransform: "none",
+            letterSpacing: isMethod ? "widest" : "normal",
+            maxWidth: isMethod ? "240px" : "xl",
+            marginLeft: isMethod ? "auto" : "0"
           })}>
             {subheading}
           </div>

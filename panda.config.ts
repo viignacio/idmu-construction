@@ -39,7 +39,6 @@ export default defineConfig({
           "surface-dim": { value: "#E5EDF5" }, // Light blueprint-grey for empty states
           "on-surface-variant": { value: "{colors.slate}" }, // Muted slate
           tertiary: { value: "{colors.draftsmansInk}" },
-          "tertiary-fixed-dim": { value: "#E09F3E" }, 
           background: { value: "{colors.siteBackground}" },
           blueprint: { value: "{colors.iceBlue}" },
           white: { value: "#FFFFFF" },

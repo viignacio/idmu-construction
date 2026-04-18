@@ -44,7 +44,7 @@ export default function UpdateCard({ news }: UpdateCardProps) {
         padding: "2rem",
         backgroundColor: "white",
         borderLeftWidth: "4px",
-        borderLeftColor: "tertiary-fixed-dim",
+        borderLeftColor: "tertiary",
         boxShadow: "sm",
         transition: "all 0.3s",
         cursor: "pointer",

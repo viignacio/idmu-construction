@@ -117,8 +117,17 @@ export const PAGE_QUERY = defineQuery(`*[_type == "page" && (slug.current == $sl
         mainImage,
         "slug": slug.current
       }
+    },
+    _type == "personnelGrid" => {
+      ...,
+      members[]->{
+        name,
+        position,
+        profileImage,
+        bio,
+        socialLinks
+      }
     }
-
   }
 }`);
 
