@@ -154,8 +154,9 @@ const ButtonRenderer = ({ cta, theme, isTwoLayout }: { cta: CTA, theme: any, isT
           display: "inline-block",
           textAlign: "center",
           _hover: {
-            backgroundColor: theme.text,
-            color: isDarkBackground ? "primary" : "white",
+            backgroundColor: "transparent",
+            color: isDarkBackground ? "tertiary" : "primary",
+            borderColor: isDarkBackground ? "tertiary" : "primary",
           },
           _active: {
             transform: "scale(0.95)",
