@@ -9,7 +9,8 @@ interface HeroProps {
   heading?: string;
   subheading?: string;
   backgroundImage?: any;
-  backgroundVideo?: string;
+  backgroundVideo?: string | any;
+  backgroundVideoUrl?: string;
   videoPlaceholder?: any;
   backgroundType?: "image" | "video";
   primaryCTA?: { label: string; link: string };
@@ -24,6 +25,7 @@ export default function Hero({
   subheading,
   backgroundImage,
   backgroundVideo,
+  backgroundVideoUrl,
   videoPlaceholder,
   backgroundType = "image",
   primaryCTA,
@@ -161,7 +163,7 @@ export default function Hero({
     >
       {/* Background Layer */}
       <div className={css({ position: "absolute", inset: 0, zIndex: 0 })}>
-        {backgroundType === "video" && backgroundVideo ? (
+        {(backgroundType === "video" && (backgroundVideoUrl || (typeof backgroundVideo === 'string' && backgroundVideo))) ? (
           <video
             autoPlay
             muted
@@ -175,7 +177,7 @@ export default function Hero({
               filter: "grayscale(1) brightness(0.5)",
             })}
           >
-            <source src={backgroundVideo} type="video/mp4" />
+            <source src={backgroundVideoUrl || backgroundVideo} type="video/mp4" />
           </video>
         ) : (
           backgroundImage && (
