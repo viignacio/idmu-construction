@@ -8,6 +8,7 @@ interface ProjectGridProps {
   heading?: string;
   subheading?: string;
   showFilters?: boolean;
+  limit?: number;
   projects?: any[];
 }
 
@@ -25,13 +26,15 @@ export default function ProjectGrid({
   heading,
   subheading,
   showFilters = true,
+  limit,
   projects = [],
 }: ProjectGridProps) {
   const [activeFilter, setActiveFilter] = useState("All");
 
-  const filteredProjects = activeFilter === "All" 
+  const filteredProjects = (activeFilter === "All" 
     ? projects 
-    : projects.filter(p => p.sector === activeFilter);
+    : projects.filter(p => p.sector === activeFilter)
+  ).slice(0, limit || projects.length);
 
   return (
     <section className={css({

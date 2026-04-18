@@ -95,7 +95,7 @@ export const PAGE_QUERY = defineQuery(`*[_type == "page" && (slug.current == $sl
         ctaLabel,
         "imageUrl": mainImage.asset->url,
         "slug": slug.current
-      }[0...coalesce(^.limit, 100)]
+      }
     },
     _type == "newsShowcase" => {
       ...,
