@@ -53,6 +53,7 @@ export const page = defineType({
                 ],
               },
               initialValue: "full",
+              group: "background",
             },
             {
               name: "eyebrow",
@@ -216,6 +217,7 @@ export const page = defineType({
                       type: "file",
                       title: "Icon (SVG)",
                       options: { accept: ".svg" },
+                      iconColor: { value: "{colors.slate}" },
                     },
                     { name: "title", type: "string", title: "Title" },
                     { name: "description", type: "text", title: "Description" },
@@ -247,6 +249,9 @@ export const page = defineType({
           type: "object",
           name: "statsGrid",
           title: "Stats Grid",
+          groups: [
+            { name: "content", title: "Content" },
+          ],
           fields: [
             {
               name: "internalTitle",
@@ -257,6 +262,7 @@ export const page = defineType({
             {
               name: "stats",
               type: "array",
+              group: "content",
               of: [
                 {
                   type: "object",
@@ -435,6 +441,10 @@ export const page = defineType({
           type: "object",
           name: "projectGrid",
           title: "Project Grid",
+          groups: [
+            { name: "content", title: "Content" },
+            { name: "settings", title: "Display Settings" },
+          ],
           fields: [
             {
               name: "internalTitle",
@@ -446,22 +456,26 @@ export const page = defineType({
               name: "heading",
               title: "Heading",
               type: "string",
+              group: "content",
             },
             {
               name: "subheading",
               title: "Subheading",
               type: "text",
+              group: "content",
             },
             {
               name: "showFilters",
               title: "Show Category Filters",
               type: "boolean",
+              group: "settings",
               initialValue: true,
             },
             {
               name: "limit",
               title: "Limit Projects",
               type: "number",
+              group: "settings",
               description: "Leave empty to show all projects.",
             },
           ],
@@ -508,6 +522,11 @@ export const page = defineType({
           name: "ctaBlock",
           title: "CTA Block",
           type: "object",
+          groups: [
+            { name: "content", title: "Content" },
+            { name: "background", title: "Appearance" },
+            { name: "cta", title: "CTAs" },
+          ],
           fields: [
             {
               name: "internalTitle",
@@ -516,16 +535,31 @@ export const page = defineType({
               description: "For studio purposes only (e.g. 'Home - Contact CTA')",
             },
             {
+              name: "layout",
+              title: "Block Variant",
+              type: "string",
+              group: "background",
+              options: {
+                list: [
+                  { title: "1 CTA (Centered)", value: "one" },
+                  { title: "2 CTAs (Split Horizontal)", value: "two" },
+                ],
+              },
+              initialValue: "one",
+            },
+            {
               name: "heading",
               title: "Heading",
               type: "string",
+              group: "content",
               validation: (Rule) => Rule.required(),
             },
-            { name: "subheading", title: "Subheading", type: "text" },
+            { name: "subheading", title: "Subheading", type: "text", group: "content" },
             {
               name: "backgroundColor",
               title: "Background Color",
               type: "string",
+              group: "background",
               options: {
                 list: [
                   { title: "Primary (Steel)", value: "primary" },
@@ -534,37 +568,55 @@ export const page = defineType({
                   { title: "Surface (Canvas)", value: "surface" },
                   { title: "Background (Site Background)", value: "background" },
                   { title: "Blueprint (Ice Blue)", value: "blueprint" },
-                  { title: "White", value: "white" },
                 ],
               },
               initialValue: "primary",
               validation: (Rule) => Rule.required(),
             },
             {
-              name: "ctaText",
-              title: "CTA Text",
-              type: "string",
-              validation: (Rule) => Rule.required(),
+              name: "primaryCta",
+              title: "Primary CTA",
+              type: "object",
+              group: "cta",
+              fields: [
+                { name: "text", type: "string" },
+                { name: "link", type: "string" },
+                {
+                  name: "variant",
+                  type: "string",
+                  options: {
+                    list: [
+                      { title: "Solid (Primary)", value: "primary" },
+                      { title: "Underlined (Secondary)", value: "secondary" },
+                      { title: "Arrow (Tertiary)", value: "tertiary" },
+                      { title: "Ghost (White Border)", value: "ghost" },
+                    ],
+                  },
+                },
+              ],
             },
             {
-              name: "ctaLink",
-              title: "CTA Link",
-              type: "string",
-              validation: (Rule) => Rule.required(),
-            },
-            {
-              name: "ctaVariant",
-              title: "CTA Variant",
-              type: "string",
-              options: {
-                list: [
-                  { title: "Solid (Primary)", value: "primary" },
-                  { title: "Underlined (Secondary)", value: "secondary" },
-                  { title: "Arrow (Tertiary)", value: "tertiary" },
-                ],
-              },
-              initialValue: "primary",
-              validation: (Rule) => Rule.required(),
+              name: "secondaryCta",
+              title: "Secondary CTA (Only for 2 CTAs layout)",
+              type: "object",
+              group: "cta",
+              hidden: ({ parent }) => parent?.layout !== "two",
+              fields: [
+                { name: "text", type: "string" },
+                { name: "link", type: "string" },
+                {
+                  name: "variant",
+                  type: "string",
+                  options: {
+                    list: [
+                      { title: "Solid (Primary)", value: "primary" },
+                      { title: "Underlined (Secondary)", value: "secondary" },
+                      { title: "Arrow (Tertiary)", value: "tertiary" },
+                      { title: "Ghost (White Border)", value: "ghost" },
+                    ],
+                  },
+                },
+              ],
             },
           ],
           preview: {

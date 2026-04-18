@@ -30,16 +30,16 @@ export default defineConfig({
       semanticTokens: {
         colors: {
           primary: { value: "{colors.steel}" },
-          "primary-container": { value: "#D1E4FF" }, 
-          "on-primary-container": { value: "#001D36" },
-          secondary: { value: "{colors.slate}" },
+          "primary-container": { value: "{colors.canvas}" }, 
+          "on-primary-container": { value: "#FFFFFF" },
+          "slate-theme": { value: "{colors.slate}" }, 
           surface: { value: "{colors.canvas}" },
           "surface-container-low": { value: "#F3F6F9" }, // Light technical off-white
           "surface-container-high": { value: "#FFFFFF" }, // Pure white
           "surface-dim": { value: "#E5EDF5" }, // Light blueprint-grey for empty states
           "on-surface-variant": { value: "{colors.slate}" }, // Muted slate
           tertiary: { value: "{colors.draftsmansInk}" },
-          "tertiary-fixed-dim": { value: "#E09F3E" }, // Using the same as tertiary for now or a slightly different shade
+          "tertiary-fixed-dim": { value: "#E09F3E" }, 
           background: { value: "{colors.siteBackground}" },
           blueprint: { value: "{colors.iceBlue}" },
           white: { value: "#FFFFFF" },
@@ -51,6 +51,20 @@ export default defineConfig({
         },
       },
     },
+  },
+
+  // Force-generate utility classes for all runtime theme values used in CtaBlock
+  staticCss: {
+    css: [
+      {
+        properties: {
+          backgroundColor: [
+            "slate-theme",
+            "blueprint",
+          ],
+        },
+      },
+    ],
   },
 
   // The output directory for your css system

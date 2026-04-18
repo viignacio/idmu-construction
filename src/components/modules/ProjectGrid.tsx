@@ -84,9 +84,8 @@ export default function ProjectGrid({
     <section className={css({
       paddingY: { base: "6rem", md: "8rem" },
       width: "100%",
-      maxWidth: "1800px", // Increased from 1600px for more horizontal scale
       marginX: "auto",
-      paddingX: { base: "2rem", md: "4rem" },
+      paddingX: { base: "2rem", md: "6rem" },
       backgroundColor: "background",
     })}>
       {/* Header & Filters */}
