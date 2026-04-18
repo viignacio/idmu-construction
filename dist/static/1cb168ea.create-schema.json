@@ -1,0 +1,1550 @@
+[
+  {
+    "fields": [
+      {
+        "name": "name",
+        "type": "string",
+        "title": "Company Name"
+      },
+      {
+        "name": "slogan",
+        "type": "string"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "name": "logo",
+        "type": "image"
+      },
+      {
+        "name": "email",
+        "type": "string"
+      },
+      {
+        "name": "phone",
+        "type": "string",
+        "title": "Phone Number"
+      },
+      {
+        "name": "address",
+        "type": "text"
+      },
+      {
+        "of": [
+          {
+            "fields": [
+              {
+                "name": "platform",
+                "type": "string"
+              },
+              {
+                "validation": [
+                  {
+                    "rules": [
+                      {
+                        "flag": "uri",
+                        "constraint": {
+                          "options": {
+                            "scheme": [
+                              "/^http$/",
+                              "/^https$/"
+                            ],
+                            "allowRelative": false,
+                            "relativeOnly": false,
+                            "allowCredentials": false
+                          }
+                        }
+                      }
+                    ],
+                    "level": "error"
+                  }
+                ],
+                "name": "url",
+                "type": "url"
+              }
+            ],
+            "type": "object"
+          }
+        ],
+        "name": "socials",
+        "type": "array",
+        "title": "Social Media"
+      }
+    ],
+    "name": "business",
+    "type": "document",
+    "title": "Business Info"
+  },
+  {
+    "fields": [
+      {
+        "initialValue": "IDMU Construction",
+        "description": "Fallback text used if the Logo in Business Info is not set.",
+        "name": "brandName",
+        "type": "string"
+      },
+      {
+        "of": [
+          {
+            "marks": {
+              "annotations": [
+                {
+                  "i18nTitleKey": "inputs.portable-text.annotation.link",
+                  "options": {
+                    "modal": {
+                      "type": "popover"
+                    }
+                  },
+                  "fields": [
+                    {
+                      "validation": [
+                        {
+                          "rules": [
+                            {
+                              "flag": "uri",
+                              "constraint": {
+                                "options": {
+                                  "scheme": [
+                                    "/^http$/",
+                                    "/^https$/",
+                                    "/^tel$/",
+                                    "/^mailto$/"
+                                  ],
+                                  "allowRelative": true,
+                                  "relativeOnly": false,
+                                  "allowCredentials": false
+                                }
+                              }
+                            }
+                          ],
+                          "level": "error"
+                        }
+                      ],
+                      "description": "A valid web, email, phone, or relative link.",
+                      "name": "href",
+                      "type": "url",
+                      "title": "Link"
+                    }
+                  ],
+                  "name": "link",
+                  "type": "object"
+                }
+              ],
+              "decorators": [
+                {
+                  "value": "strong",
+                  "title": "Strong"
+                },
+                {
+                  "value": "em",
+                  "title": "Emphasis"
+                }
+              ]
+            },
+            "styles": [
+              {
+                "value": "normal",
+                "title": "Normal"
+              }
+            ],
+            "of": [],
+            "type": "block"
+          }
+        ],
+        "name": "description",
+        "type": "array"
+      },
+      {
+        "fields": [
+          {
+            "initialValue": "Navigation",
+            "name": "title",
+            "type": "string"
+          },
+          {
+            "of": [
+              {
+                "fields": [
+                  {
+                    "name": "text",
+                    "type": "string"
+                  },
+                  {
+                    "name": "url",
+                    "type": "string"
+                  }
+                ],
+                "type": "object"
+              }
+            ],
+            "name": "links",
+            "type": "array"
+          }
+        ],
+        "name": "column1",
+        "type": "object"
+      },
+      {
+        "fields": [
+          {
+            "initialValue": "Insights",
+            "name": "title",
+            "type": "string"
+          },
+          {
+            "of": [
+              {
+                "fields": [
+                  {
+                    "name": "text",
+                    "type": "string"
+                  },
+                  {
+                    "name": "url",
+                    "type": "string"
+                  }
+                ],
+                "type": "object"
+              }
+            ],
+            "name": "links",
+            "type": "array"
+          }
+        ],
+        "name": "column2",
+        "type": "object"
+      },
+      {
+        "fields": [
+          {
+            "initialValue": "Connect",
+            "name": "title",
+            "type": "string"
+          }
+        ],
+        "name": "connect",
+        "type": "object",
+        "title": "Connect Section"
+      },
+      {
+        "initialValue": "© 2024 IDMU Construction. All Rights Reserved.",
+        "name": "copyright",
+        "type": "string",
+        "title": "Copyright Text"
+      },
+      {
+        "initialValue": "Built with Structural Integrity",
+        "name": "attribution",
+        "type": "string",
+        "title": "Attribution Text"
+      }
+    ],
+    "name": "footer",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "initialValue": "IDMU Construction",
+        "description": "Fallback text used if the Logo in Business Info is not set.",
+        "name": "brandName",
+        "type": "string"
+      },
+      {
+        "of": [
+          {
+            "fields": [
+              {
+                "name": "text",
+                "type": "string"
+              },
+              {
+                "name": "url",
+                "type": "string"
+              }
+            ],
+            "type": "object",
+            "name": "link"
+          }
+        ],
+        "name": "links",
+        "type": "array",
+        "title": "Navigation Links"
+      },
+      {
+        "fields": [
+          {
+            "initialValue": "Get a Quote",
+            "name": "text",
+            "type": "string"
+          },
+          {
+            "initialValue": "#",
+            "name": "url",
+            "type": "string"
+          }
+        ],
+        "name": "cta",
+        "type": "object",
+        "title": "CTA Button"
+      }
+    ],
+    "name": "header",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "title",
+        "type": "string"
+      },
+      {
+        "options": {
+          "source": "title"
+        },
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "custom"
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "slug",
+        "type": "slug"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "e.g. Innovation, Safety, Update",
+        "name": "category",
+        "type": "string"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "date",
+        "type": "datetime",
+        "title": "Publish Date"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "author",
+        "type": "string"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "mainImage",
+        "type": "image"
+      },
+      {
+        "name": "excerpt",
+        "type": "text"
+      },
+      {
+        "of": [
+          {
+            "marks": {
+              "annotations": [
+                {
+                  "fields": [
+                    {
+                      "to": [
+                        {
+                          "type": "project"
+                        },
+                        {
+                          "type": "news"
+                        },
+                        {
+                          "type": "page"
+                        }
+                      ],
+                      "name": "reference",
+                      "type": "reference"
+                    }
+                  ],
+                  "name": "internalLink",
+                  "type": "object"
+                },
+                {
+                  "fields": [
+                    {
+                      "validation": [
+                        {
+                          "rules": [
+                            {
+                              "flag": "uri",
+                              "constraint": {
+                                "options": {
+                                  "scheme": [
+                                    "/^http$/",
+                                    "/^https$/"
+                                  ],
+                                  "allowRelative": false,
+                                  "relativeOnly": false,
+                                  "allowCredentials": false
+                                }
+                              }
+                            }
+                          ],
+                          "level": "error"
+                        }
+                      ],
+                      "name": "href",
+                      "type": "url",
+                      "title": "URL"
+                    }
+                  ],
+                  "name": "link",
+                  "type": "object",
+                  "title": "External Link"
+                }
+              ],
+              "decorators": [
+                {
+                  "value": "strong",
+                  "title": "Strong"
+                },
+                {
+                  "value": "em",
+                  "title": "Emphasis"
+                },
+                {
+                  "value": "code",
+                  "title": "Code"
+                }
+              ]
+            },
+            "lists": [
+              {
+                "value": "bullet",
+                "title": "Bullet"
+              },
+              {
+                "value": "number",
+                "title": "Number"
+              }
+            ],
+            "styles": [
+              {
+                "value": "normal",
+                "title": "Normal"
+              },
+              {
+                "value": "h2",
+                "title": "H2"
+              },
+              {
+                "value": "h3",
+                "title": "H3"
+              },
+              {
+                "value": "h4",
+                "title": "H4"
+              },
+              {
+                "value": "blockquote",
+                "title": "Quote"
+              }
+            ],
+            "of": [],
+            "type": "block"
+          }
+        ],
+        "name": "content",
+        "type": "array"
+      }
+    ],
+    "name": "news",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "title",
+        "type": "string"
+      },
+      {
+        "options": {
+          "source": "title"
+        },
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "custom"
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "slug",
+        "type": "slug"
+      },
+      {
+        "of": [
+          {
+            "fields": [
+              {
+                "description": "For studio purposes only (e.g. 'Home - Top Hero')",
+                "name": "internalTitle",
+                "type": "string"
+              },
+              {
+                "options": {
+                  "list": [
+                    {
+                      "title": "Full (Viewport)",
+                      "value": "full"
+                    },
+                    {
+                      "title": "Compact",
+                      "value": "compact"
+                    },
+                    {
+                      "title": "Text Only",
+                      "value": "text"
+                    },
+                    {
+                      "title": "Image and Text",
+                      "value": "image-text"
+                    }
+                  ]
+                },
+                "initialValue": "full",
+                "name": "variant",
+                "type": "string"
+              },
+              {
+                "name": "eyebrow",
+                "type": "string"
+              },
+              {
+                "validation": [
+                  {
+                    "rules": [
+                      {
+                        "flag": "presence",
+                        "constraint": "required"
+                      }
+                    ],
+                    "level": "error"
+                  }
+                ],
+                "name": "heading",
+                "type": "string"
+              },
+              {
+                "name": "subheading",
+                "type": "text"
+              },
+              {
+                "description": "A word or phrase from the heading to highlight. Case-insensitive.",
+                "hidden": "conditional",
+                "name": "highlightedWord",
+                "type": "string"
+              },
+              {
+                "options": {
+                  "list": [
+                    {
+                      "title": "Image Left",
+                      "value": "left"
+                    },
+                    {
+                      "title": "Image Right",
+                      "value": "right"
+                    }
+                  ]
+                },
+                "initialValue": "left",
+                "hidden": "conditional",
+                "name": "alignment",
+                "type": "string",
+                "title": "Image Alignment"
+              },
+              {
+                "options": {
+                  "list": [
+                    {
+                      "title": "Image",
+                      "value": "image"
+                    },
+                    {
+                      "title": "Video",
+                      "value": "video"
+                    }
+                  ]
+                },
+                "initialValue": "image",
+                "hidden": "conditional",
+                "name": "backgroundType",
+                "type": "string"
+              },
+              {
+                "options": {
+                  "hotspot": true
+                },
+                "hidden": "conditional",
+                "name": "backgroundImage",
+                "type": "image"
+              },
+              {
+                "options": {
+                  "accept": "video/*"
+                },
+                "hidden": "conditional",
+                "name": "backgroundVideo",
+                "type": "file"
+              },
+              {
+                "options": {
+                  "hotspot": true
+                },
+                "description": "Optional image to show while video loads",
+                "hidden": "conditional",
+                "name": "videoPlaceholder",
+                "type": "image"
+              },
+              {
+                "fields": [
+                  {
+                    "name": "label",
+                    "type": "string"
+                  },
+                  {
+                    "name": "link",
+                    "type": "string"
+                  }
+                ],
+                "hidden": "conditional",
+                "name": "primaryCTA",
+                "type": "object"
+              },
+              {
+                "fields": [
+                  {
+                    "name": "label",
+                    "type": "string"
+                  },
+                  {
+                    "name": "link",
+                    "type": "string"
+                  }
+                ],
+                "hidden": "conditional",
+                "name": "secondaryCTA",
+                "type": "object"
+              }
+            ],
+            "type": "object",
+            "name": "hero"
+          },
+          {
+            "fields": [
+              {
+                "description": "For studio purposes only (e.g. 'Home - About IDMU')",
+                "name": "internalTitle",
+                "type": "string"
+              },
+              {
+                "options": {
+                  "list": [
+                    {
+                      "title": "3 Columns",
+                      "value": "3-grid"
+                    },
+                    {
+                      "title": "4 Columns",
+                      "value": "4-grid"
+                    }
+                  ]
+                },
+                "initialValue": "3-grid",
+                "name": "variant",
+                "type": "string"
+              },
+              {
+                "name": "preamble",
+                "type": "string"
+              },
+              {
+                "validation": [
+                  {
+                    "rules": [
+                      {
+                        "flag": "presence",
+                        "constraint": "required"
+                      }
+                    ],
+                    "level": "error"
+                  }
+                ],
+                "name": "heading",
+                "type": "string"
+              },
+              {
+                "name": "subheading",
+                "type": "text"
+              },
+              {
+                "of": [
+                  {
+                    "fields": [
+                      {
+                        "options": {
+                          "accept": ".svg"
+                        },
+                        "iconColor": {
+                          "value": "{colors.slate}"
+                        },
+                        "name": "icon",
+                        "type": "file",
+                        "title": "Icon (SVG)"
+                      },
+                      {
+                        "name": "title",
+                        "type": "string"
+                      },
+                      {
+                        "name": "description",
+                        "type": "text"
+                      },
+                      {
+                        "of": [
+                          {
+                            "type": "string"
+                          }
+                        ],
+                        "name": "bullets",
+                        "type": "array",
+                        "title": "Features / Bullets"
+                      }
+                    ],
+                    "type": "object"
+                  }
+                ],
+                "name": "gridItems",
+                "type": "array"
+              }
+            ],
+            "type": "object",
+            "name": "textWithGrid",
+            "title": "Text with Grid"
+          },
+          {
+            "fields": [
+              {
+                "description": "For studio purposes only (e.g. 'Project Stats')",
+                "name": "internalTitle",
+                "type": "string"
+              },
+              {
+                "of": [
+                  {
+                    "fields": [
+                      {
+                        "name": "value",
+                        "type": "string"
+                      },
+                      {
+                        "name": "label",
+                        "type": "string"
+                      }
+                    ],
+                    "type": "object"
+                  }
+                ],
+                "name": "stats",
+                "type": "array"
+              }
+            ],
+            "type": "object",
+            "name": "statsGrid"
+          },
+          {
+            "fields": [
+              {
+                "description": "For studio purposes only (e.g. 'Home - Featured Projects')",
+                "name": "internalTitle",
+                "type": "string"
+              },
+              {
+                "validation": [
+                  {
+                    "rules": [
+                      {
+                        "flag": "presence",
+                        "constraint": "required"
+                      }
+                    ],
+                    "level": "error"
+                  }
+                ],
+                "name": "heading",
+                "type": "string"
+              },
+              {
+                "name": "subheading",
+                "type": "text"
+              },
+              {
+                "fields": [
+                  {
+                    "name": "label",
+                    "type": "string"
+                  },
+                  {
+                    "name": "link",
+                    "type": "string"
+                  }
+                ],
+                "name": "cta",
+                "type": "object",
+                "title": "CTA Link"
+              },
+              {
+                "of": [
+                  {
+                    "fields": [
+                      {
+                        "validation": [
+                          {
+                            "rules": [
+                              {
+                                "flag": "presence",
+                                "constraint": "required"
+                              }
+                            ],
+                            "level": "error"
+                          }
+                        ],
+                        "to": [
+                          {
+                            "type": "project"
+                          }
+                        ],
+                        "name": "project",
+                        "type": "reference",
+                        "title": "Project Reference"
+                      },
+                      {
+                        "options": {
+                          "list": [
+                            {
+                              "title": "Landscape (2/3 Grid)",
+                              "value": "landscape"
+                            },
+                            {
+                              "title": "Portrait (1/3 Grid)",
+                              "value": "portrait"
+                            }
+                          ]
+                        },
+                        "initialValue": "portrait",
+                        "name": "size",
+                        "type": "string"
+                      },
+                      {
+                        "options": {
+                          "list": [
+                            {
+                              "title": "Card Peek",
+                              "value": "cardPeek"
+                            },
+                            {
+                              "title": "Show Text (Immersive Overlay)",
+                              "value": "showText"
+                            },
+                            {
+                              "title": "Zoom Out Only",
+                              "value": "zoomOut"
+                            },
+                            {
+                              "title": "Zoom In Only",
+                              "value": "zoomIn"
+                            }
+                          ]
+                        },
+                        "initialValue": "zoomOut",
+                        "name": "hoverEffect",
+                        "type": "string",
+                        "title": "Hover Animation"
+                      },
+                      {
+                        "options": {
+                          "list": [
+                            {
+                              "title": "Navy (Primary)",
+                              "value": "navy"
+                            },
+                            {
+                              "title": "Yellow (Tertiary)",
+                              "value": "yellow"
+                            },
+                            {
+                              "title": "White (Surface)",
+                              "value": "white"
+                            }
+                          ]
+                        },
+                        "initialValue": "navy",
+                        "name": "cardColor",
+                        "type": "string",
+                        "title": "Card Background Color"
+                      },
+                      {
+                        "options": {
+                          "list": [
+                            {
+                              "title": "Top Left",
+                              "value": "topLeft"
+                            },
+                            {
+                              "title": "Top Right",
+                              "value": "topRight"
+                            },
+                            {
+                              "title": "Bottom Left",
+                              "value": "bottomLeft"
+                            },
+                            {
+                              "title": "Bottom Right",
+                              "value": "bottomRight"
+                            }
+                          ]
+                        },
+                        "initialValue": "bottomLeft",
+                        "description": "Ignored if 'Show Text' is selected.",
+                        "name": "position",
+                        "type": "string",
+                        "title": "Content Position"
+                      },
+                      {
+                        "initialValue": false,
+                        "description": "Adds padding from the edge so the card isn't flushed.",
+                        "name": "isOffset",
+                        "type": "boolean",
+                        "title": "Add Offset Margin"
+                      }
+                    ],
+                    "type": "object",
+                    "name": "projectItem"
+                  }
+                ],
+                "name": "projects",
+                "type": "array"
+              }
+            ],
+            "type": "object",
+            "name": "projectShowcase"
+          },
+          {
+            "fields": [
+              {
+                "description": "For studio purposes only (e.g. 'Project Archive Grid')",
+                "name": "internalTitle",
+                "type": "string"
+              },
+              {
+                "name": "heading",
+                "type": "string"
+              },
+              {
+                "name": "subheading",
+                "type": "text"
+              },
+              {
+                "initialValue": true,
+                "name": "showFilters",
+                "type": "boolean",
+                "title": "Show Category Filters"
+              },
+              {
+                "description": "Leave empty to show all projects.",
+                "name": "limit",
+                "type": "number",
+                "title": "Limit Projects"
+              }
+            ],
+            "type": "object",
+            "name": "projectGrid"
+          },
+          {
+            "fields": [
+              {
+                "description": "For studio purposes only (e.g. 'Home - From the Job Site')",
+                "name": "internalTitle",
+                "type": "string"
+              },
+              {
+                "validation": [
+                  {
+                    "rules": [
+                      {
+                        "flag": "presence",
+                        "constraint": "required"
+                      }
+                    ],
+                    "level": "error"
+                  }
+                ],
+                "name": "heading",
+                "type": "string"
+              },
+              {
+                "name": "subheading",
+                "type": "text"
+              }
+            ],
+            "type": "object",
+            "name": "newsShowcase"
+          },
+          {
+            "fields": [
+              {
+                "description": "For studio purposes only (e.g. 'Home - Contact CTA')",
+                "name": "internalTitle",
+                "type": "string"
+              },
+              {
+                "options": {
+                  "list": [
+                    {
+                      "title": "1 CTA (Centered)",
+                      "value": "one"
+                    },
+                    {
+                      "title": "2 CTAs (Split Horizontal)",
+                      "value": "two"
+                    }
+                  ]
+                },
+                "initialValue": "one",
+                "name": "layout",
+                "type": "string",
+                "title": "Block Variant"
+              },
+              {
+                "validation": [
+                  {
+                    "rules": [
+                      {
+                        "flag": "presence",
+                        "constraint": "required"
+                      }
+                    ],
+                    "level": "error"
+                  }
+                ],
+                "name": "heading",
+                "type": "string"
+              },
+              {
+                "name": "subheading",
+                "type": "text"
+              },
+              {
+                "options": {
+                  "list": [
+                    {
+                      "title": "Primary (Steel)",
+                      "value": "primary"
+                    },
+                    {
+                      "title": "Secondary (Slate)",
+                      "value": "secondary"
+                    },
+                    {
+                      "title": "Tertiary (Draftsman's Ink)",
+                      "value": "tertiary"
+                    },
+                    {
+                      "title": "Surface (Canvas)",
+                      "value": "surface"
+                    },
+                    {
+                      "title": "Background (Site Background)",
+                      "value": "background"
+                    },
+                    {
+                      "title": "Blueprint (Ice Blue)",
+                      "value": "blueprint"
+                    }
+                  ]
+                },
+                "initialValue": "primary",
+                "validation": [
+                  {
+                    "rules": [
+                      {
+                        "flag": "valid",
+                        "constraint": [
+                          "primary",
+                          "secondary",
+                          "tertiary",
+                          "surface",
+                          "background",
+                          "blueprint"
+                        ]
+                      },
+                      {
+                        "flag": "presence",
+                        "constraint": "required"
+                      }
+                    ],
+                    "level": "error"
+                  }
+                ],
+                "name": "backgroundColor",
+                "type": "string"
+              },
+              {
+                "fields": [
+                  {
+                    "name": "text",
+                    "type": "string"
+                  },
+                  {
+                    "name": "link",
+                    "type": "string"
+                  },
+                  {
+                    "options": {
+                      "list": [
+                        {
+                          "title": "Solid (Primary)",
+                          "value": "primary"
+                        },
+                        {
+                          "title": "Underlined (Secondary)",
+                          "value": "secondary"
+                        },
+                        {
+                          "title": "Arrow (Tertiary)",
+                          "value": "tertiary"
+                        },
+                        {
+                          "title": "Ghost (White Border)",
+                          "value": "ghost"
+                        }
+                      ]
+                    },
+                    "name": "variant",
+                    "type": "string"
+                  }
+                ],
+                "name": "primaryCta",
+                "type": "object",
+                "title": "Primary CTA"
+              },
+              {
+                "fields": [
+                  {
+                    "name": "text",
+                    "type": "string"
+                  },
+                  {
+                    "name": "link",
+                    "type": "string"
+                  },
+                  {
+                    "options": {
+                      "list": [
+                        {
+                          "title": "Solid (Primary)",
+                          "value": "primary"
+                        },
+                        {
+                          "title": "Underlined (Secondary)",
+                          "value": "secondary"
+                        },
+                        {
+                          "title": "Arrow (Tertiary)",
+                          "value": "tertiary"
+                        },
+                        {
+                          "title": "Ghost (White Border)",
+                          "value": "ghost"
+                        }
+                      ]
+                    },
+                    "name": "variant",
+                    "type": "string"
+                  }
+                ],
+                "hidden": "conditional",
+                "name": "secondaryCta",
+                "type": "object",
+                "title": "Secondary CTA (Only for 2 CTAs layout)"
+              }
+            ],
+            "type": "object",
+            "name": "ctaBlock",
+            "title": "CTA Block"
+          }
+        ],
+        "name": "modules",
+        "type": "array",
+        "title": "Page Builder"
+      }
+    ],
+    "name": "page",
+    "type": "document",
+    "title": "Pages"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "title",
+        "type": "string",
+        "title": "Project Title"
+      },
+      {
+        "options": {
+          "source": "title"
+        },
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "custom"
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "slug",
+        "type": "slug"
+      },
+      {
+        "options": {
+          "list": [
+            {
+              "title": "Residential (Homes, Villas)",
+              "value": "Residential"
+            },
+            {
+              "title": "Commercial (Offices, Retail)",
+              "value": "Commercial"
+            },
+            {
+              "title": "Industrial (Plants, Warehousing)",
+              "value": "Industrial"
+            },
+            {
+              "title": "Interior (Fit-outs, Renovations)",
+              "value": "Interior"
+            },
+            {
+              "title": "Institutional (Schools, Hospitals)",
+              "value": "Institutional"
+            },
+            {
+              "title": "Infrastructure (Highways, Bridges)",
+              "value": "Infrastructure"
+            }
+          ]
+        },
+        "name": "sector",
+        "type": "string"
+      },
+      {
+        "name": "startDate",
+        "type": "date",
+        "title": "Project Start Date"
+      },
+      {
+        "name": "completionDate",
+        "type": "date",
+        "title": "Project Completion Date"
+      },
+      {
+        "options": {
+          "list": [
+            {
+              "title": "Complete",
+              "value": "COMPLETE"
+            },
+            {
+              "title": "Ongoing",
+              "value": "ONGOING"
+            }
+          ],
+          "layout": "radio"
+        },
+        "name": "status",
+        "type": "string",
+        "title": "Project Status"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "min",
+                "constraint": 0
+              },
+              {
+                "flag": "max",
+                "constraint": 100
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "0-100%",
+        "hidden": "conditional",
+        "name": "completionPercentage",
+        "type": "number"
+      },
+      {
+        "placeholder": "e.g. Rotterdam, NL",
+        "name": "location",
+        "type": "string"
+      },
+      {
+        "name": "client",
+        "type": "string"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "mainImage",
+        "type": "image"
+      },
+      {
+        "of": [
+          {
+            "marks": {
+              "annotations": [
+                {
+                  "fields": [
+                    {
+                      "to": [
+                        {
+                          "type": "project"
+                        },
+                        {
+                          "type": "news"
+                        },
+                        {
+                          "type": "page"
+                        }
+                      ],
+                      "name": "reference",
+                      "type": "reference"
+                    }
+                  ],
+                  "name": "internalLink",
+                  "type": "object"
+                },
+                {
+                  "fields": [
+                    {
+                      "validation": [
+                        {
+                          "rules": [
+                            {
+                              "flag": "uri",
+                              "constraint": {
+                                "options": {
+                                  "scheme": [
+                                    "/^http$/",
+                                    "/^https$/"
+                                  ],
+                                  "allowRelative": false,
+                                  "relativeOnly": false,
+                                  "allowCredentials": false
+                                }
+                              }
+                            }
+                          ],
+                          "level": "error"
+                        }
+                      ],
+                      "name": "href",
+                      "type": "url",
+                      "title": "URL"
+                    }
+                  ],
+                  "name": "link",
+                  "type": "object",
+                  "title": "External Link"
+                }
+              ],
+              "decorators": [
+                {
+                  "value": "strong",
+                  "title": "Strong"
+                },
+                {
+                  "value": "em",
+                  "title": "Emphasis"
+                },
+                {
+                  "value": "code",
+                  "title": "Code"
+                }
+              ]
+            },
+            "lists": [
+              {
+                "value": "bullet",
+                "title": "Bullet"
+              },
+              {
+                "value": "number",
+                "title": "Number"
+              }
+            ],
+            "styles": [
+              {
+                "value": "normal",
+                "title": "Normal"
+              },
+              {
+                "value": "h2",
+                "title": "H2"
+              },
+              {
+                "value": "h3",
+                "title": "H3"
+              },
+              {
+                "value": "h4",
+                "title": "H4"
+              },
+              {
+                "value": "blockquote",
+                "title": "Quote"
+              }
+            ],
+            "of": [],
+            "type": "block"
+          }
+        ],
+        "name": "description",
+        "type": "array",
+        "title": "Project Description"
+      },
+      {
+        "of": [
+          {
+            "options": {
+              "hotspot": true
+            },
+            "type": "image"
+          }
+        ],
+        "name": "gallery",
+        "type": "array"
+      }
+    ],
+    "name": "project",
+    "type": "document",
+    "title": "Projects"
+  }
+]

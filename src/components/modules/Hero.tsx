@@ -130,6 +130,7 @@ export default function Hero({
         height: variant === "full" ? "100vh" : "70vh",
         width: "full", // Fixed from 100vw to prevent horizontal overflow
         marginTop: "-5rem", // Pull up behind the header to fill main's padding gap
+        paddingTop: "5rem", // Offset the pull-up for balanced vertical centering
         display: "flex",
         alignItems: "center",
         justifyContent: "flex-start",

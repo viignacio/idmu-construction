@@ -4,7 +4,14 @@
 .worktrees
 .env
 .env.local
-docs
+docs/
+documentation/
+Documentation/
+designs/
+design/
+*.pdf
+*.sketch
+*.fig
 
 # dependencies
 /node_modules
