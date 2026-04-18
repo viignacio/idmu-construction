@@ -121,13 +121,13 @@ export default function Hero({
     );
   }
 
-  if (variant !== "full") return null;
+  if (variant !== "full" && variant !== "compact") return null;
 
   return (
     <section
       className={css({
         position: "relative",
-        height: "100vh", // Full viewport height
+        height: variant === "full" ? "100vh" : "70vh",
         width: "full", // Fixed from 100vw to prevent horizontal overflow
         marginTop: "-5rem", // Pull up behind the header to fill main's padding gap
         display: "flex",
@@ -138,7 +138,7 @@ export default function Hero({
     >
       {/* Background Media */}
       <div className={css({ position: "absolute", inset: 0, zIndex: 0 })}>
-        {backgroundType === "video" && backgroundVideo ? (
+        {backgroundType === "video" && backgroundVideo && variant === "full" ? (
           <video
             autoPlay
             loop
@@ -194,8 +194,8 @@ export default function Hero({
           <span
             className={css({
               display: "inline-block",
-              backgroundColor: "tertiary",
-              color: "primary",
+              backgroundColor: variant === "full" ? "tertiary" : "transparent",
+              color: variant === "full" ? "primary" : "tertiary",
               fontFamily: "body", // Match DESIGN.md (Inter for labels)
               fontWeight: "800",
               fontSize: "10px",
