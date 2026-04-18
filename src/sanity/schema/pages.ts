@@ -394,6 +394,35 @@ export const page = defineType({
         },
         {
           type: "object",
+          name: "projectGrid",
+          title: "Project Grid",
+          fields: [
+            {
+              name: "heading",
+              title: "Heading",
+              type: "string",
+            },
+            {
+              name: "subheading",
+              title: "Subheading",
+              type: "text",
+            },
+            {
+              name: "showFilters",
+              title: "Show Category Filters",
+              type: "boolean",
+              initialValue: true,
+            },
+            {
+              name: "limit",
+              title: "Limit Projects",
+              type: "number",
+              description: "Leave empty to show all projects.",
+            },
+          ],
+        },
+        {
+          type: "object",
           name: "newsShowcase",
           title: "News Showcase",
           groups: [{ name: "content", title: "Content" }],
