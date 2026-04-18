@@ -38,7 +38,7 @@ export default function Hero({
       const parts = heading.split(new RegExp(`(${highlightedWord})`, "gi"));
       return parts.map((part, i) =>
         part.toLowerCase() === highlightedWord.toLowerCase() ? (
-          <span key={i} className={css({ color: "secondary" })}>
+          <span key={i} className={css({ color: "on-primary-container" })}>
             {part}
           </span>
         ) : (
@@ -50,11 +50,11 @@ export default function Hero({
     return (
       <header
         className={css({
-          paddingX: { base: "2rem", md: "8rem" },
-          marginBottom: "5rem",
+          paddingX: "2rem", // px-8 equivalent
+          marginBottom: "5rem", // mb-20 equivalent
           maxWidth: "1280px", // max-w-7xl equivalent
           marginX: "auto",
-          paddingTop: "8rem", // pt-32 equivalent
+          paddingTop: "8rem", // Necessary to clear the fixed navigation
         })}
       >
         <div
@@ -77,7 +77,7 @@ export default function Hero({
                   letterSpacing: "0.2em",
                   color: "tertiary",
                   textTransform: "uppercase",
-                  marginBottom: "1rem",
+                  marginBottom: "1rem", // mb-4 equivalent
                 })}
               >
                 {eyebrow}
@@ -88,11 +88,11 @@ export default function Hero({
                 className={css({
                   fontFamily: "headline",
                   fontWeight: "bold",
-                  fontSize: { base: "4xl", md: "8xl" },
+                  fontSize: { base: "4rem", md: "8xl" }, // base text-6xl (approx 4rem)
                   letterSpacing: "tighter",
                   lineHeight: "none",
-                  marginBottom: "1.5rem",
-                  color: "primary", // Explicit primary color (Steel)
+                  marginBottom: "1.5rem", // mb-6 equivalent
+                  color: "primary",
                 })}
               >
                 {getHighlightedHeading()}
@@ -105,7 +105,7 @@ export default function Hero({
                   fontSize: "lg",
                   lineHeight: "relaxed",
                   color: "on-surface-variant",
-                  maxWidth: "32rem",
+                  maxWidth: "32rem", // max-w-lg equivalent
                 })}
               >
                 {subheading}
