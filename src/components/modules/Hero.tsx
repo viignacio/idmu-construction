@@ -50,9 +50,10 @@ export default function Hero({
     return (
       <header
         className={css({
-          paddingX: "2rem", // Aligns with Header's 2rem padding
+          paddingX: { base: "2rem", md: "6rem" }, // Synchronized with full variant
           marginBottom: "5rem",
           width: "full",
+          maxWidth: "72rem", // Synchronized with full variant
           paddingTop: "8rem", // pt-32 equivalent
         })}
       >
