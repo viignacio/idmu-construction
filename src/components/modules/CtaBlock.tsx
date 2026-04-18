@@ -1,5 +1,5 @@
 import { css } from "@/styled-system/css";
-import Link from "next/link";
+import { CtaButton } from "@/components/common/CtaButton";
 
 interface CTA {
   text?: string;
@@ -34,8 +34,6 @@ const getThemeColors = (bg: string) => {
   const activeToken = colors[bg] || "primary";
 
   // Logical color detection for contrast
-  // Dark: Primary (Steel), Slate, Surface (Canvas)
-  // Light: Tertiary (Yellow), Background, Blueprint (Ice Blue)
   const isDark = ["primary", "secondary", "surface"].includes(activeToken);
   
   // Use white text on dark backgrounds; primary text on light backgrounds
@@ -45,159 +43,8 @@ const getThemeColors = (bg: string) => {
     bg: activeToken,
     text: mainTextColor,
     subtext: mainTextColor,
-    // Dark BG -> Tertiary (Yellow) button
-    // Light BG -> Primary (Steel) button
-    button: isDark ? "tertiary" : "primary",
-    buttonText: isDark ? "primary" : "white",
+    isDark,
   };
-};
-
-const ButtonRenderer = ({ cta, theme, isTwoLayout }: { cta: CTA, theme: any, isTwoLayout: boolean }) => {
-  const { text, link, variant = "primary" } = cta;
-  if (!text || !link) return null;
-
-  // Solid Variant
-  if (variant === "primary") {
-    return (
-      <Link
-        href={link}
-        className={css({
-          backgroundColor: theme.button,
-          color: theme.buttonText,
-          paddingX: isTwoLayout ? "3rem" : "4rem",
-          paddingY: "1.25rem",
-          fontSize: isTwoLayout ? "sm" : "xl",
-          fontWeight: "bold",
-          fontFamily: "headline",
-          textTransform: "uppercase",
-          letterSpacing: "widest",
-          transition: "all 0.2s ease-out",
-          boxShadow: isTwoLayout ? "none" : "xl",
-          cursor: "pointer",
-          display: "inline-block",
-          textAlign: "center",
-          _hover: {
-            transform: isTwoLayout ? "none" : "scale(1.05)",
-            filter: "brightness(1.1)",
-          },
-          _active: {
-            transform: "scale(0.95)",
-          },
-        })}
-      >
-        {text}
-      </Link>
-    );
-  }
-
-  // Underlined Variant
-  if (variant === "secondary") {
-    return (
-      <Link
-        href={link}
-        className={"group " + css({
-          color: theme.text,
-          fontSize: isTwoLayout ? "sm" : "xl",
-          fontWeight: "bold",
-          fontFamily: "headline",
-          textTransform: "uppercase",
-          letterSpacing: "widest",
-          display: "inline-flex",
-          alignItems: "center",
-          position: "relative",
-          paddingBottom: "0.5rem",
-          transition: "all 0.2s",
-          _after: {
-            content: '""',
-            position: "absolute",
-            bottom: 0,
-            left: 0,
-            width: "100%",
-            height: "2px",
-            backgroundColor: "tertiary",
-            transform: "scaleX(0.7)",
-            transformOrigin: "left",
-            transition: "transform 0.3s ease-out",
-          },
-          _hover: {
-            _after: {
-              transform: "scaleX(1)",
-            }
-          }
-        })}
-      >
-        {text}
-      </Link>
-    );
-  }
-
-  // Ghost Variant (Used in two-layout)
-  if (variant === "ghost") {
-    const isDarkBackground = theme.text === "white";
-    return (
-      <Link
-        href={link}
-        className={css({
-          backgroundColor: "transparent",
-          color: theme.text,
-          border: "2px solid",
-          borderColor: isDarkBackground ? "rgba(255,255,255,0.2)" : "rgba(13,27,42,0.2)",
-          paddingX: "3rem",
-          paddingY: "1.25rem",
-          fontSize: "sm",
-          fontWeight: "bold",
-          fontFamily: "headline",
-          textTransform: "uppercase",
-          letterSpacing: "widest",
-          transition: "all 0.2s ease-out",
-          cursor: "pointer",
-          display: "inline-block",
-          textAlign: "center",
-          _hover: {
-            backgroundColor: "transparent",
-            color: isDarkBackground ? "tertiary" : "primary",
-            borderColor: isDarkBackground ? "tertiary" : "primary",
-          },
-          _active: {
-            transform: "scale(0.95)",
-          },
-        })}
-      >
-        {text}
-      </Link>
-    );
-  }
-
-  // Arrow Variant
-  return (
-    <Link
-      href={link}
-      className={css({
-        fontSize: "sm",
-        fontWeight: "black",
-        fontFamily: "headline",
-        textTransform: "uppercase",
-        letterSpacing: "widest",
-        display: "flex",
-        alignItems: "center",
-        gap: "0.5rem",
-        transition: "gap 0.3s",
-        color: theme.text,
-        _hover: {
-          gap: "1rem",
-        }
-      })}
-    >
-      {text}
-      <span className={css({
-        fontSize: "1.25rem",
-        fontWeight: "normal",
-        fontFamily: "Material Symbols Outlined"
-      })}>
-        arrow_forward
-      </span>
-    </Link>
-  );
 };
 
 export default function CtaBlock({
@@ -266,9 +113,23 @@ export default function CtaBlock({
             flexDirection: "column",
             gap: "1rem",
             width: { base: "100%", md: "auto" },
+            minWidth: { md: "240px" },
+            alignItems: "stretch",
           })}>
-            {pCta && <ButtonRenderer cta={pCta} theme={theme} isTwoLayout={true} />}
-            {secondaryCta && <ButtonRenderer cta={secondaryCta} theme={theme} isTwoLayout={true} />}
+            {pCta && (
+              <CtaButton 
+                {...pCta} 
+                theme={theme.isDark ? "dark" : "light"} 
+                className={css({ width: "100% !important", display: "flex !important", justifyContent: "center" })}
+              />
+            )}
+            {secondaryCta && (
+              <CtaButton 
+                {...secondaryCta} 
+                theme={theme.isDark ? "dark" : "light"} 
+                className={css({ width: "100% !important", display: "flex !important", justifyContent: "center" })}
+              />
+            )}
           </div>
         </div>
       </section>
@@ -320,7 +181,17 @@ export default function CtaBlock({
         </p>
       )}
 
-      {pCta && <ButtonRenderer cta={pCta} theme={theme} isTwoLayout={false} />}
+      <div className={css({
+        display: "flex",
+        flexDirection: { base: "column", md: "row" },
+        alignItems: "center",
+        justifyContent: "center",
+        gap: "2.5rem",
+        marginTop: "1rem",
+      })}>
+        {pCta && <CtaButton {...pCta} theme={theme.isDark ? "dark" : "light"} />}
+        {secondaryCta && <CtaButton {...secondaryCta} theme={theme.isDark ? "dark" : "light"} />}
+      </div>
     </section>
   );
 }

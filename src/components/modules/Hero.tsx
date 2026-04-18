@@ -1,7 +1,7 @@
 import { urlFor } from "@/sanity/lib/image";
 import Image from "next/image";
-import Link from "next/link";
 import { css, cx } from "@/styled-system/css";
+import { CtaButton } from "@/components/common/CtaButton";
 
 interface HeroProps {
   variant?: "full" | "compact" | "text" | "image-text";
@@ -30,6 +30,8 @@ export default function Hero({
   secondaryCTA,
   highlightedWord,
 }: HeroProps) {
+  const isDarkTheme = variant !== "text";
+
   const getHighlightedHeading = () => {
     if (!heading) return null;
     if (!highlightedWord) return heading;
@@ -54,8 +56,8 @@ export default function Hero({
       <header
         className={css({
           paddingX: { base: "2rem", md: "6rem" },
-          paddingTop: "5rem", // Balanced with bottom
-          paddingBottom: "5rem", // Balanced with top
+          paddingTop: "5rem",
+          paddingBottom: "5rem",
           width: "full",
           maxWidth: "72rem",
         })}
@@ -75,12 +77,12 @@ export default function Hero({
                 className={css({
                   display: "block",
                   fontFamily: "body",
-                  fontSize: "xs",
+                  fontSize: "10px",
                   fontWeight: "900",
                   letterSpacing: "0.2em",
                   color: "tertiary",
                   textTransform: "uppercase",
-                  marginBottom: "1rem", // mb-4 equivalent
+                  marginBottom: "1rem",
                 })}
               >
                 {eyebrow}
@@ -91,10 +93,10 @@ export default function Hero({
                 className={css({
                   fontFamily: "headline",
                   fontWeight: "bold",
-                  fontSize: { base: "4rem", md: "8xl" }, // base text-6xl (approx 4rem)
+                  fontSize: { base: "4rem", md: "8rem" },
                   letterSpacing: "tighter",
                   lineHeight: "none",
-                  marginBottom: "1.5rem", // mb-6 equivalent
+                  marginBottom: "1.5rem",
                   color: "primary",
                 })}
               >
@@ -105,15 +107,40 @@ export default function Hero({
               <p
                 className={css({
                   fontFamily: "body",
-                  fontSize: "lg",
+                  fontSize: "1.25rem", // 20px
                   lineHeight: "relaxed",
                   color: "primary",
                   opacity: 0.9,
-                  maxWidth: "32rem", // max-w-lg equivalent
+                  maxWidth: "32rem",
                 })}
               >
                 {subheading}
               </p>
+            )}
+          </div>
+          <div
+            className={css({
+              display: "flex",
+              gap: "1.5rem",
+              marginBottom: { base: "0", md: "1rem" },
+              alignItems: "center",
+            })}
+          >
+            {primaryCTA?.label && (
+              <CtaButton
+                text={primaryCTA.label}
+                link={primaryCTA.link}
+                variant="primary"
+                theme="light"
+              />
+            )}
+            {secondaryCTA?.label && (
+              <CtaButton
+                text={secondaryCTA.label}
+                link={secondaryCTA.link}
+                variant="secondary"
+                theme="light"
+              />
             )}
           </div>
         </div>
@@ -121,31 +148,26 @@ export default function Hero({
     );
   }
 
-  if (variant !== "full" && variant !== "compact") return null;
-
   return (
-    <section
+    <header
       className={css({
         position: "relative",
-        height: variant === "full" ? "100vh" : "70vh",
-        width: "full", // Fixed from 100vw to prevent horizontal overflow
-        marginTop: "-5rem", // Pull up behind the header to fill main's padding gap
-        paddingTop: "5rem", // Offset the pull-up for balanced vertical centering
+        height: variant === "full" ? "100vh" : "60vh",
         display: "flex",
         alignItems: "center",
-        justifyContent: "flex-start",
         overflow: "hidden",
+        backgroundColor: "primary",
       })}
     >
-      {/* Background Media */}
+      {/* Background Layer */}
       <div className={css({ position: "absolute", inset: 0, zIndex: 0 })}>
-        {backgroundType === "video" && backgroundVideo && variant === "full" ? (
+        {backgroundType === "video" && backgroundVideo ? (
           <video
             autoPlay
-            loop
             muted
+            loop
             playsInline
-            poster={videoPlaceholder ? urlFor(videoPlaceholder).width(2000).auto("format").quality(85).url() : undefined}
+            poster={videoPlaceholder ? urlFor(videoPlaceholder).url() : ""}
             className={css({
               width: "full",
               height: "full",
@@ -156,10 +178,9 @@ export default function Hero({
             <source src={backgroundVideo} type="video/mp4" />
           </video>
         ) : (
-
           backgroundImage && (
             <Image
-              src={urlFor(backgroundImage).width(2000).auto("format").quality(85).url()}
+              src={urlFor(backgroundImage).url()}
               alt={heading || "Hero background"}
               fill
               className={css({
@@ -174,12 +195,10 @@ export default function Hero({
           className={css({
             position: "absolute",
             inset: 0,
-            background:
-              "linear-gradient(to right, rgba(13, 27, 42, 0.9), transparent)",
+            background: "linear-gradient(to right, rgba(13, 27, 42, 0.9), transparent)",
           })}
-        ></div>
+        />
       </div>
-
 
       {/* Content */}
       <div
@@ -190,14 +209,13 @@ export default function Hero({
           maxWidth: "72rem",
         })}
       >
-
         {eyebrow && (
           <span
             className={css({
               display: "inline-block",
-              backgroundColor: variant === "full" ? "tertiary" : "transparent",
-              color: variant === "full" ? "primary" : "tertiary",
-              fontFamily: "body", // Match DESIGN.md (Inter for labels)
+              backgroundColor: "tertiary",
+              color: "primary",
+              fontFamily: "body",
               fontWeight: "800",
               fontSize: "10px",
               letterSpacing: "0.3em",
@@ -216,13 +234,13 @@ export default function Hero({
             className={css({
               fontFamily: "headline",
               fontWeight: "bold",
-              fontSize: { base: "4xl", lg: "9xl" }, // Upgraded to 9xl scale
+              fontSize: { base: "4xl", lg: "9xl" },
               color: "white",
-              lineHeight: "0.9", // Tighter line height for large scales
+              lineHeight: "0.9",
               letterSpacing: "tighter",
               marginBottom: "2rem",
               whiteSpace: "pre-line",
-              textTransform: "uppercase", // Forced industrial uppercase
+              textTransform: "uppercase",
             })}
           >
             {getHighlightedHeading()}
@@ -249,57 +267,29 @@ export default function Hero({
           className={css({
             display: "flex",
             flexDirection: { base: "column", md: "row" },
-            gap: "1rem",
+            gap: "2rem",
             alignItems: { base: "stretch", md: "center" },
           })}
         >
           {primaryCTA?.label && (
-            <Link
-              href={primaryCTA.link || "#"}
-              className={css({
-                backgroundColor: "white",
-                color: "primary",
-                paddingX: "2.5rem",
-                paddingY: "1.25rem",
-                fontWeight: "bold",
-                textTransform: "uppercase",
-                letterSpacing: "widest",
-                textDecoration: "none",
-                textAlign: "center",
-                transition: "all 0.2s",
-                fontSize: "sm",
-                _hover: { backgroundColor: "tertiary" },
-              })}
-            >
-              {primaryCTA.label}
-            </Link>
+            <CtaButton
+              text={primaryCTA.label}
+              link={primaryCTA.link}
+              variant="primary"
+              theme="dark"
+            />
           )}
 
           {secondaryCTA?.label && (
-            <Link
-              href={secondaryCTA.link || "#"}
-              className={css({
-                borderBottom: "2px solid {colors.tertiary}",
-                color: "white",
-                paddingX: "2.5rem",
-                paddingY: "1.25rem",
-                fontWeight: "bold",
-                textTransform: "uppercase",
-                letterSpacing: "widest",
-                textDecoration: "none",
-                textAlign: "center",
-                transition: "all 0.2s",
-                fontSize: "sm",
-                _hover: { color: "tertiary" },
-              })}
-            >
-              {secondaryCTA.label}
-            </Link>
+            <CtaButton
+              text={secondaryCTA.label}
+              link={secondaryCTA.link}
+              variant="secondary"
+              theme="dark"
+            />
           )}
         </div>
-
       </div>
-    </section>
+    </header>
   );
 }
-

@@ -170,35 +170,10 @@ export default function ProjectCard({
             color: cardColor === "white" ? "primary" : "white",
             textTransform: "uppercase",
             textAlign: "center",
-            marginBottom: "1rem"
+            marginBottom: "0"
           })}>
             {title}
           </h4>
-          <div className={css({
-            fontSize: "xs",
-            fontWeight: "black",
-            textTransform: "uppercase",
-            letterSpacing: "widest",
-            display: "flex",
-            alignItems: "center",
-            gap: "0.5rem",
-            transition: "all 0.3s",
-            color: cardColor === "yellow" ? "primary" : cardColor === "white" ? "primary" : "white",
-            opacity: 0.8,
-            _groupHover: {
-              gap: "1rem",
-              opacity: 1
-            }
-          })}>
-            Read More 
-            <span className={css({
-              fontSize: "1rem",
-              fontWeight: "normal",
-              fontFamily: "Material Symbols Outlined"
-            })}>
-              arrow_forward
-            </span>
-          </div>
         </div>
       ) : (
         <div className={cardBoxClass}>
@@ -223,35 +198,10 @@ export default function ProjectCard({
             lineHeight: "none",
             letterSpacing: isImpactLayout ? "tighter" : "normal", // tracking-tighter for Forge Industrial style
             color: cardColor === "yellow" ? "primary" : cardColor === "white" ? "primary" : "white",
-            marginBottom: "1rem",
+            marginBottom: "0",
           })}>
             {title}
           </h4>
-          <div className={css({
-            fontSize: "xs",
-            fontWeight: "black",
-            textTransform: "uppercase",
-            letterSpacing: "widest",
-            display: "flex",
-            alignItems: "center",
-            gap: "0.5rem",
-            transition: "all 0.3s",
-            color: cardColor === "yellow" ? "primary" : cardColor === "white" ? "primary" : "white",
-            opacity: 0.8,
-            _groupHover: {
-              gap: "1rem",
-              opacity: 1
-            }
-          })}>
-            Read More 
-            <span className={css({
-              fontSize: "1rem",
-              fontWeight: "normal",
-              fontFamily: "Material Symbols Outlined"
-            })}>
-              arrow_forward
-            </span>
-          </div>
         </div>
       )}
     </Link>

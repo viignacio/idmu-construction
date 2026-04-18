@@ -1,4 +1,5 @@
 import { defineField, defineType } from "sanity";
+import { backgroundColorField } from "./common";
 
 export const page = defineType({
   name: "page",
@@ -202,11 +203,12 @@ export const page = defineType({
                 list: [
                   { title: "3 Columns (Gradient)", value: "3-grid-gradient" },
                   { title: "3 Columns (Checkered)", value: "3-grid-checkered" },
-                  { title: "4 Columns", value: "4-grid" },
+                  { title: "4 Columns (Method)", value: "4-grid-method" },
                 ],
               },
               initialValue: "3-grid-gradient",
             },
+            backgroundColorField("content"),
             { name: "preamble", type: "string", title: "Preamble", group: "content" },
             { name: "heading", type: "string", title: "Heading", group: "content", validation: (Rule) => Rule.required() },
             { name: "subheading", type: "text", title: "Subheading", group: "content" },
@@ -220,6 +222,7 @@ export const page = defineType({
                   type: "object",
                   name: "gridItem",
                   fields: [
+                    { name: "label", type: "string", title: "Label (Optional prefix)" },
                     {
                       name: "iconName",
                       type: "string",
@@ -555,8 +558,8 @@ export const page = defineType({
               group: "background",
               options: {
                 list: [
-                  { title: "1 CTA (Centered)", value: "one" },
-                  { title: "2 CTAs (Split Horizontal)", value: "two" },
+                  { title: "Centered", value: "one" },
+                  { title: "Split Horizontal", value: "two" },
                 ],
               },
               initialValue: "one",
@@ -569,24 +572,7 @@ export const page = defineType({
               validation: (Rule) => Rule.required(),
             },
             { name: "subheading", title: "Subheading", type: "text", group: "content" },
-            {
-              name: "backgroundColor",
-              title: "Background Color",
-              type: "string",
-              group: "background",
-              options: {
-                list: [
-                  { title: "Primary (Steel)", value: "primary" },
-                  { title: "Secondary (Slate)", value: "secondary" },
-                  { title: "Tertiary (Draftsman's Ink)", value: "tertiary" },
-                  { title: "Surface (Canvas)", value: "surface" },
-                  { title: "Background (Site Background)", value: "background" },
-                  { title: "Blueprint (Ice Blue)", value: "blueprint" },
-                ],
-              },
-              initialValue: "primary",
-              validation: (Rule) => Rule.required(),
-            },
+            backgroundColorField("background", "primary"),
             {
               name: "primaryCta",
               title: "Primary CTA",
@@ -611,10 +597,9 @@ export const page = defineType({
             },
             {
               name: "secondaryCta",
-              title: "Secondary CTA (Only for 2 CTAs layout)",
+              title: "Secondary CTA",
               type: "object",
               group: "cta",
-              hidden: ({ parent }) => parent?.layout !== "two",
               fields: [
                 { name: "text", type: "string" },
                 { name: "link", type: "string" },

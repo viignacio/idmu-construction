@@ -2,6 +2,7 @@ import { css } from "@/styled-system/css";
 import { urlFor } from "@/sanity/lib/image";
 
 interface GridItem {
+  label?: string;
   iconUrl?: string;
   iconName?: string;
   title?: string;
@@ -15,35 +16,39 @@ interface TextWithGridProps {
   heading?: string;
   subheading?: string;
   gridItems?: GridItem[];
+  backgroundColor?: string;
 }
 
 export default function TextWithGrid({
   variant = "3-grid-gradient",
+  backgroundColor = "background",
   preamble,
   heading,
   subheading,
   gridItems = [],
 }: TextWithGridProps) {
   const isCheckered = variant === "3-grid-checkered";
+  const isMethod = variant === "4-grid-method";
+  const isDarkSection = ["primary", "secondary", "surface", "blueprint", "primary-container"].includes(backgroundColor);
 
   return (
     <section 
       className={css({ 
         paddingY: { base: "6rem", md: "8rem" }, 
         paddingX: { base: "2rem", md: "6rem" },
-        backgroundColor: "background" 
+        backgroundColor: backgroundColor || "background" 
       })}
     >
       {/* Intro Header - Asymmetrical 12-column Grid */}
       <div className={css({ 
         display: "grid",
         gridTemplateColumns: { base: "1fr", md: "repeat(12, 1fr)" },
-        gap: { base: "2rem", md: isCheckered ? "1.5rem" : "4rem" },
-        alignItems: isCheckered ? "flex-start" : "end",
+        gap: { base: "2rem", md: (isCheckered || isMethod) ? "1.5rem" : "4rem" },
+        alignItems: (isCheckered || isMethod) ? "flex-start" : "end",
         marginBottom: "6rem" 
       })}>
-        <div className={css({ md: { gridColumn: isCheckered ? "span 12" : "span 8" } })}>
-          {preamble && (
+        <div className={css({ md: { gridColumn: (isCheckered || isMethod) ? "span 12" : "span 8" } })}>
+          {preamble && !isMethod && (
             <span className={css({
               display: "block",
               fontFamily: "body",
@@ -51,7 +56,7 @@ export default function TextWithGrid({
               fontSize: "xs",
               letterSpacing: "0.4em",
               textTransform: "uppercase",
-              color: "secondary",
+              color: isDarkSection ? "rgba(255, 255, 255, 0.6)" : "secondary",
               marginBottom: "1rem",
             })}>
               {preamble}
@@ -63,20 +68,32 @@ export default function TextWithGrid({
               fontFamily: "headline",
               fontWeight: "bold",
               fontSize: { base: "4xl", md: "5xl" }, // Adjusted to match design
-              color: "primary",
+              color: isDarkSection ? "white" : "primary",
               letterSpacing: "tighter",
               textTransform: "uppercase",
-              marginBottom: isCheckered ? 0 : "1.5rem",
+              marginBottom: (isCheckered || isMethod) ? 0 : "1.5rem",
             })}>
               {heading}
             </h2>
           )}
+
+          {preamble && isMethod && (
+            <p className={css({
+              color: backgroundColor === "tertiary" ? "primary" : "tertiary",
+              fontWeight: "bold",
+              fontSize: "xs",
+              letterSpacing: "widest",
+              textTransform: "uppercase",
+            })}>
+              {preamble}
+            </p>
+          )}
         </div>
 
-        {subheading && (
+        {subheading && !isMethod && (
           <div className={css({ 
             md: { gridColumn: isCheckered ? "span 7" : "span 4" }, // Restricted to 7 columns if stacked for better readability
-            color: "on-surface-variant",
+            color: isDarkSection ? "rgba(255, 255, 255, 0.7)" : "on-surface-variant",
             fontSize: "lg",
             lineHeight: "relaxed",
             fontWeight: "medium"
@@ -91,8 +108,8 @@ export default function TextWithGrid({
         display: "grid",
         gridTemplateColumns: {
           base: "1fr",
-          md: variant.startsWith("3-grid") ? "repeat(2, 1fr)" : "repeat(2, 1fr)",
-          lg: variant.startsWith("3-grid") ? "repeat(3, 1fr)" : "repeat(4, 1fr)"
+          md: "repeat(2, 1fr)",
+          lg: isMethod ? "repeat(4, 1fr)" : (variant.startsWith("3-grid") ? "repeat(3, 1fr)" : "repeat(4, 1fr)")
         },
         gridAutoRows: "1fr", // Force consistent row height
         width: "full",
@@ -102,38 +119,54 @@ export default function TextWithGrid({
           const opacity = (index + 1) * 0.05;
           const bgTone = `rgba(59, 130, 246, ${opacity})`;
 
-          // Logic for checkered background using muted Ice Blue
-          const checkeredBg = index % 2 === 0 
-            ? "rgba(59, 130, 246, 0.04)" 
-            : "rgba(59, 130, 246, 0.09)";
+          // Adaptive checkered background
+          const checkeredBg = isDarkSection
+            ? (index % 2 === 0 ? "rgba(255, 255, 255, 0.03)" : "rgba(255, 255, 255, 0.07)")
+            : (index % 2 === 0 ? "rgba(59, 130, 246, 0.04)" : "rgba(59, 130, 246, 0.09)");
           
           return (
             <div
               key={index}
-              style={{ backgroundColor: isCheckered ? checkeredBg : bgTone }}
+              style={{ backgroundColor: (isCheckered || isMethod) ? checkeredBg : bgTone }}
               className={`group ${css({
                 position: "relative",
-                padding: { base: "2.5rem", md: "3.5rem" },
+                padding: { base: "2.5rem", md: "3rem" },
                 transition: "all 0.5s ease",
                 display: "flex",
                 flexDirection: "column",
                 backgroundColor: "transparent",
                 _hover: {
-                  backgroundColor: "primary-container !important",
+                  backgroundColor: isDarkSection ? "rgba(255, 255, 255, 0.05) !important" : "primary !important",
                 }
               })}`}
             >
               <div>
+                {/* Label (Step Number / Prefix) */}
+                {item.label && (
+                  <span className={css({
+                    color: backgroundColor === "tertiary" ? "primary" : "tertiary",
+                    fontWeight: "bold",
+                    fontSize: "lg",
+                    marginBottom: "1.5rem",
+                    display: "block",
+                    _groupHover: {
+                      color: isDarkSection ? "tertiary" : "white",
+                    }
+                  })}>
+                    {item.label}
+                  </span>
+                )}
+
                 {/* Icon (Material Symbol) */}
-                {item.iconName && (
+                {item.iconName && !isMethod && (
                   <div className={css({ marginBottom: "3rem" })}>
                     <span 
                       className={`material-symbols-outlined ${css({
                         fontSize: "2.5rem !important",
-                        color: isCheckered ? "tertiary" : "primary",
+                        color: isDarkSection ? "white" : "primary",
                         transition: "color 0.4s",
                         _groupHover: {
-                          color: isCheckered ? "white" : "tertiary",
+                          color: "tertiary",
                         }
                       })}`}
                     >
@@ -171,9 +204,9 @@ export default function TextWithGrid({
                 {/* Title */}
                 <h3 className={css({
                   fontFamily: "headline",
-                  fontSize: "2xl",
+                  fontSize: "xl",
                   fontWeight: "bold",
-                  color: "primary",
+                  color: isDarkSection ? "white" : "primary",
                   textTransform: "uppercase",
                   letterSpacing: "tight",
                   marginBottom: "1rem",
@@ -187,20 +220,20 @@ export default function TextWithGrid({
 
                 {/* Description */}
                 <p className={css({
-                  color: "on-surface-variant",
-                  fontSize: "md",
+                  color: isDarkSection ? "rgba(255, 255, 255, 0.6)" : "on-surface-variant",
+                  fontSize: "sm",
                   lineHeight: "relaxed",
                   fontWeight: "normal",
                   transition: "color 0.4s",
                   _groupHover: {
-                    color: "rgba(255, 255, 255, 0.85)",
+                    color: "rgba(255, 255, 255, 0.9)",
                   }
                 })}>
                   {item.description}
                 </p>
               </div>
 
-              {/* Bullets - Only show if they exist, often for the gradient variant */}
+              {/* Bullets - Only show if they exist */}
               {item.bullets && item.bullets.length > 0 && (
                 <ul className={css({
                   listStyle: "none",
@@ -209,7 +242,7 @@ export default function TextWithGrid({
                   display: "flex",
                   flexDirection: "column",
                   gap: "0.75rem",
-                  opacity: isCheckered ? 1 : 0, // Always visible for checkered, hover only for gradient
+                  opacity: isCheckered ? 1 : 0, 
                   transform: isCheckered ? "none" : "translateY(10px)",
                   transition: "all 0.4s ease-out",
                   _groupHover: {
@@ -224,17 +257,26 @@ export default function TextWithGrid({
                         display: "flex",
                         alignItems: "center",
                         gap: "0.75rem",
-                        color: "white",
-                        fontSize: "sm",
+                        color: isDarkSection ? "white" : "primary",
+                        fontSize: "xs",
                         fontWeight: "bold",
                         textTransform: "uppercase",
-                        letterSpacing: "wide"
+                        letterSpacing: "wide",
+                        transition: "color 0.4s",
+                        _groupHover: {
+                          color: "tertiary",
+                        }
                       })}
                     >
                       <span className={css({
                         width: "6px",
                         height: "6px",
-                        backgroundColor: "tertiary"
+                        borderRadius: "full",
+                        backgroundColor: isDarkSection ? "tertiary" : (backgroundColor === "tertiary" ? "primary" : "tertiary"),
+                        transition: "background-color 0.4s",
+                        _groupHover: {
+                          backgroundColor: "tertiary",
+                        }
                       })} />
                       {bullet}
                     </li>
