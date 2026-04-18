@@ -108,7 +108,7 @@ export const page = defineType({
               },
               initialValue: "image",
               group: "background",
-              hidden: ({ parent }) => parent?.variant === "text",
+              hidden: ({ parent }) => parent?.variant === "text" || parent?.variant === "compact",
             },
             {
               name: "backgroundImage",
@@ -117,7 +117,9 @@ export const page = defineType({
               title: "Background Image",
               group: "background",
               hidden: ({ parent }) =>
-                parent?.variant === "text" || parent?.backgroundType === "video",
+                parent?.variant === "text" ||
+                parent?.backgroundType === "video" ||
+                (parent?.variant === "compact" && parent?.backgroundType === "video"),
             },
             {
               name: "backgroundVideo",
@@ -126,7 +128,9 @@ export const page = defineType({
               options: { accept: "video/*" },
               group: "background",
               hidden: ({ parent }) =>
-                parent?.variant === "text" || parent?.backgroundType !== "video",
+                parent?.variant === "text" ||
+                parent?.variant === "compact" ||
+                parent?.backgroundType !== "video",
             },
             {
               name: "videoPlaceholder",
@@ -136,7 +140,9 @@ export const page = defineType({
               options: { hotspot: true },
               group: "background",
               hidden: ({ parent }) =>
-                parent?.variant === "text" || parent?.backgroundType !== "video",
+                parent?.variant === "text" ||
+                parent?.variant === "compact" ||
+                parent?.backgroundType !== "video",
             },
             {
               name: "primaryCTA",
