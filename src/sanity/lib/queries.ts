@@ -99,7 +99,7 @@ export const PAGE_QUERY = defineQuery(`*[_type == "page" && (slug.current == $sl
     },
     _type == "newsShowcase" => {
       ...,
-      "featuredUpdate": *[_type == "news" && category == "Update"] | order(date desc)[0] {
+      "featuredUpdate": *[_type == "news" && category == "Technical Update"] | order(date desc)[0] {
         title,
         excerpt,
         category,
@@ -108,7 +108,7 @@ export const PAGE_QUERY = defineQuery(`*[_type == "page" && (slug.current == $sl
         mainImage,
         "slug": slug.current
       },
-      "recentNews": *[_type == "news" && category != "Update"] | order(date desc)[0...2] {
+      "recentNews": *[_type == "news" && category != "Technical Update"] | order(date desc)[0...2] {
         title,
         excerpt,
         category,
