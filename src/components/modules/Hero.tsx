@@ -16,6 +16,7 @@ interface HeroProps {
   primaryCTA?: { label: string; link: string };
   secondaryCTA?: { label: string; link: string };
   highlightedWord?: string;
+  preamble?: string;
 }
 
 export default function Hero({
@@ -31,6 +32,7 @@ export default function Hero({
   primaryCTA,
   secondaryCTA,
   highlightedWord,
+  preamble,
 }: HeroProps) {
   const isDarkTheme = variant !== "text";
 
@@ -147,6 +149,142 @@ export default function Hero({
           </div>
         </div>
       </header>
+    );
+  }
+
+  if (variant === "image-text") {
+    return (
+      <section
+        className={css({
+          paddingX: { base: "2rem", md: "6rem" },
+          paddingY: "5rem",
+          maxWidth: "100%",
+          marginX: "auto",
+          marginBottom: "8rem",
+        })}
+      >
+        <div
+          className={css({
+            display: "flex",
+            flexDirection: { base: "column", md: "row" },
+            gap: "0",
+            maxWidth: "72rem",
+            marginX: "auto",
+          })}
+        >
+          {/* Image Part (2/3) */}
+          <div
+            className={css({
+              width: { base: "full", md: "66.666667%" },
+              position: "relative",
+              height: { base: "400px", md: "600px" },
+              overflow: "hidden",
+            })}
+          >
+            {backgroundImage && (
+              <Image
+                src={urlFor(backgroundImage).url()}
+                alt={heading || "Hero background"}
+                fill
+                className={css({
+                  objectFit: "cover",
+                })}
+                priority
+              />
+            )}
+            {eyebrow && (
+              <div
+                className={css({
+                  position: "absolute",
+                  top: "2rem",
+                  left: "2rem",
+                  backgroundColor: "tertiary",
+                  color: "primary",
+                  paddingX: "1rem",
+                  paddingY: "0.25rem",
+                  fontSize: "xs",
+                  fontWeight: "bold",
+                  tracking: "widest",
+                  textTransform: "uppercase",
+                  fontFamily: "body",
+                  zIndex: 20,
+                })}
+              >
+                {eyebrow}
+              </div>
+            )}
+          </div>
+
+          {/* Text Part (1/3) */}
+          <div
+            className={css({
+              width: { base: "full", md: "41.666667%" }, // Slightly wider than 1/3 to allow for overlap without squeeze
+              backgroundColor: "surface-container-high",
+              padding: { base: "2rem", md: "4rem" },
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              marginLeft: { base: "0", md: "-8%" },
+              zIndex: 10,
+              alignSelf: "center",
+            })}
+          >
+            {preamble && (
+              <span
+                className={css({
+                  color: "on-primary-container",
+                  fontSize: "sm",
+                  fontWeight: "bold",
+                  tracking: "widest",
+                  textTransform: "uppercase",
+                  marginBottom: "1rem",
+                  fontFamily: "body",
+                })}
+              >
+                {preamble}
+              </span>
+            )}
+            {heading && (
+              <h1
+                className={css({
+                  fontSize: { base: "2.5rem", md: "3.5rem" },
+                  fontFamily: "headline",
+                  fontWeight: "bold",
+                  lineHeight: "0.95",
+                  marginBottom: "1.5rem",
+                  tracking: "tighter",
+                  color: "primary",
+                })}
+              >
+                {getHighlightedHeading()}
+              </h1>
+            )}
+            {subheading && (
+              <p
+                className={css({
+                  color: "on-surface-variant",
+                  lineHeight: "relaxed",
+                  marginBottom: "2.5rem",
+                  fontFamily: "body",
+                  fontSize: "1rem",
+                })}
+              >
+                {subheading}
+              </p>
+            )}
+            <div className={css({ width: "fit-content" })}>
+              {primaryCTA?.label && (
+                <CtaButton
+                  text={primaryCTA.label}
+                  link={primaryCTA.link}
+                  variant="tertiary"
+                  theme="light"
+                />
+              )}
+            </div>
+          </div>
+        </div>
+      </section>
     );
   }
 
