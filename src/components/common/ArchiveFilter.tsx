@@ -24,21 +24,25 @@ export default function ArchiveFilter({
   const checkScroll = () => {
     if (containerRef.current) {
       const { scrollLeft, scrollWidth, clientWidth } = containerRef.current;
-      setCanScrollLeft(scrollLeft > 2); // Small threshold
-      setCanScrollRight(scrollLeft + clientWidth < scrollWidth - 2);
+      // We use a small buffer for decimals/zoom levels
+      setCanScrollLeft(scrollLeft > 1);
+      setCanScrollRight(scrollLeft + clientWidth < scrollWidth - 1);
     }
   };
 
   useEffect(() => {
     const checkOverflow = () => {
       if (containerRef.current && itemsRef.current) {
-        setIsOverflowing(itemsRef.current.scrollWidth > containerRef.current.clientWidth);
+        // Use a 1px buffer for scrollWidth vs clientWidth
+        const overflowing = itemsRef.current.offsetWidth > containerRef.current.clientWidth;
+        setIsOverflowing(overflowing);
         checkScroll();
       }
     };
 
     const observer = new ResizeObserver(checkOverflow);
     if (containerRef.current) observer.observe(containerRef.current);
+    if (itemsRef.current) observer.observe(itemsRef.current); // Observe content too
     
     checkOverflow();
     window.addEventListener('resize', checkOverflow);
@@ -51,7 +55,7 @@ export default function ArchiveFilter({
 
   const handleScroll = (direction: "left" | "right") => {
     if (containerRef.current) {
-      const scrollAmount = 200;
+      const scrollAmount = Math.min(containerRef.current.clientWidth * 0.8, 300);
       containerRef.current.scrollBy({
         left: direction === "left" ? -scrollAmount : scrollAmount,
         behavior: "smooth"
@@ -67,13 +71,14 @@ export default function ArchiveFilter({
       <div className={css({
         display: { base: "none", md: "flex" },
         alignItems: "center",
-        gap: "1rem",
+        gap: "0.5rem",
         width: "100%",
         maxWidth: "100%",
         position: "relative",
       })}>
         {isOverflowing && canScrollLeft && (
           <button 
+            type="button"
             onClick={() => handleScroll("left")}
             className={css({
               display: "flex",
@@ -81,8 +86,11 @@ export default function ArchiveFilter({
               justifyContent: "center",
               cursor: "pointer",
               color: "primary",
-              transition: "opacity 0.3s",
-              _hover: { color: "tertiary" }
+              transition: "all 0.3s",
+              flexShrink: 0,
+              width: "24px",
+              height: "24px",
+              _hover: { color: "tertiary", transform: "scale(1.1)" }
             })}
           >
             <span className="material-symbols-outlined" style={{ fontSize: '20px' }}>chevron_left</span>
@@ -98,10 +106,11 @@ export default function ArchiveFilter({
             borderBottom: "2px solid",
             borderColor: "rgba(196, 198, 204, 0.2)",
             paddingBottom: "1.25rem",
-            overflowX: isOverflowing ? "auto" : "visible",
+            overflowX: "auto", // Always auto to allow detection and manual scroll
             scrollbarWidth: "none",
             "&::-webkit-scrollbar": { display: "none" },
             WebkitOverflowScrolling: "touch",
+            minWidth: 0,
           })}
         >
           <div 
@@ -112,6 +121,7 @@ export default function ArchiveFilter({
               width: "max-content",
               marginLeft: isOverflowing ? "0" : "auto",
               flexWrap: "nowrap",
+              paddingX: isOverflowing ? "0.5rem" : "0", // Add little padding if scrolling
             })}
           >
             {filters.map((filter) => (
@@ -143,6 +153,7 @@ export default function ArchiveFilter({
 
         {isOverflowing && canScrollRight && (
           <button 
+            type="button"
             onClick={() => handleScroll("right")}
             className={css({
               display: "flex",
@@ -150,8 +161,11 @@ export default function ArchiveFilter({
               justifyContent: "center",
               cursor: "pointer",
               color: "primary",
-              transition: "opacity 0.3s",
-              _hover: { color: "tertiary" }
+              transition: "all 0.3s",
+              flexShrink: 0,
+              width: "24px",
+              height: "24px",
+              _hover: { color: "tertiary", transform: "scale(1.1)" }
             })}
           >
             <span className="material-symbols-outlined" style={{ fontSize: '20px' }}>chevron_right</span>
