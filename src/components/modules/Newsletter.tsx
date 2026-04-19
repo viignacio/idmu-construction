@@ -22,20 +22,25 @@ export default function Newsletter({
   const theme = getThemeColors(backgroundColor);
 
   return (
-    <SectionContainer backgroundColor={backgroundColor}>
+    <section className={css({
+      paddingY: { base: "6rem", md: "8rem" },
+      paddingX: { base: "2rem", md: "6rem" },
+      maxWidth: "7xl",
+      marginX: "auto",
+    })}>
       <div className={css({
+        backgroundColor: theme.bg,
+        padding: { base: "3rem", md: "6rem" },
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
         textAlign: "center",
-        maxWidth: "3xl",
-        marginX: "auto",
       })}>
         <h2 className={css({
           fontFamily: "headline",
           fontWeight: "bold",
-          fontSize: { base: "3.5rem", md: "5rem" },
-          tracking: "tighter",
+          fontSize: { base: "3rem", md: "4.5rem" },
+          letterSpacing: "tighter",
           lineHeight: "0.85",
           marginBottom: "1.5rem",
           textTransform: "uppercase",
@@ -59,7 +64,7 @@ export default function Newsletter({
           display: "flex",
           flexDirection: { base: "column", md: "row" },
           width: "100%",
-          maxWidth: "2xl",
+          maxWidth: "lg",
           gap: "0",
         })} onSubmit={(e) => e.preventDefault()}>
           <input
@@ -67,33 +72,32 @@ export default function Newsletter({
             placeholder={placeholder}
             className={css({
               flex: 1,
-              backgroundColor: "rgba(255, 255, 255, 0.05)", // Subtle backdrop if on dark
+              backgroundColor: "white",
               _placeholder: {
-                color: theme.isDark ? "rgba(255, 255, 255, 0.5)" : "rgba(13, 27, 42, 0.5)",
+                color: "rgba(13, 27, 42, 0.5)",
               },
               border: "none",
               borderBottom: "2px solid",
-              borderColor: theme.isDark ? "rgba(255, 255, 255, 0.2)" : "rgba(13, 27, 42, 0.2)",
-              padding: "1.25rem",
+              borderColor: "rgba(13, 27, 42, 0.2)",
+              padding: "1rem",
               fontFamily: "body",
-              fontSize: "lg",
+              fontSize: "sm",
               outline: "none",
               borderRadius: "0",
-              color: theme.text,
+              color: "primary",
               transition: "all 0.3s",
               _focus: {
                 borderColor: "tertiary",
-                backgroundColor: theme.isDark ? "rgba(255, 255, 255, 0.1)" : "rgba(13, 27, 42, 0.05)",
               },
             })}
           />
           <button
             type="submit"
             className={css({
-              backgroundColor: theme.isDark ? "tertiary" : "primary",
-              color: theme.isDark ? "primary" : "white",
-              paddingX: "3rem",
-              paddingY: "1.25rem",
+              backgroundColor: "primary",
+              color: "white",
+              paddingX: "2.5rem",
+              paddingY: "1rem",
               fontFamily: "headline",
               fontWeight: "bold",
               textTransform: "uppercase",
@@ -103,8 +107,7 @@ export default function Newsletter({
               borderRadius: "0",
               transition: "all 0.3s",
               _hover: {
-                backgroundColor: theme.isDark ? "white" : "secondary",
-                color: theme.isDark ? "primary" : "white",
+                backgroundColor: "secondary",
               },
             })}
           >
@@ -112,6 +115,7 @@ export default function Newsletter({
           </button>
         </form>
       </div>
-    </SectionContainer>
+    </section>
   );
 }
+
