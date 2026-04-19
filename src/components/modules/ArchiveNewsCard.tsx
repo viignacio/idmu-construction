@@ -7,7 +7,7 @@ interface ArchiveNewsCardProps {
   news: {
     _id: string;
     title: string;
-    slug: { current: string };
+    slug: string;
     category: string;
     date: string;
     excerpt?: string;
@@ -29,7 +29,7 @@ export default function ArchiveNewsCard({ news, priority = false }: ArchiveNewsC
       flexDirection: "column",
       height: "100%",
     })}>
-      <Link href={`/news/${news.slug.current}`} className={css({
+      <Link href={`/news/${news.slug}`} className={css({
         display: "flex",
         flexDirection: "column",
         height: "100%",

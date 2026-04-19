@@ -100,7 +100,6 @@ export default async function NewsPage({ params }: NewsPageProps) {
             marginBottom: "4rem",
             backgroundColor: "surface-container-high",
             overflow: "hidden",
-            animation: "pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite"
           })}>
             <Image 
               src={urlFor(news.mainImage).width(1600).auto("format").quality(85).url()} 

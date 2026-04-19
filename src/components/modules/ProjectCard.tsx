@@ -130,7 +130,6 @@ export default function ProjectCard({
       {mainImage && (
         <div className={cx(imageWrapperClass, css({
           backgroundColor: "surface-container-high",
-          animation: "pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite"
         }))}>
           <Image
             src={urlFor(mainImage).width(1000).auto("format").quality(85).url()}

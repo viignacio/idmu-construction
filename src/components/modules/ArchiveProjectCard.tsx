@@ -47,7 +47,6 @@ export default function ArchiveProjectCard({ project, priority = false }: Archiv
           transition: "transform 1s cubic-bezier(0.16, 1, 0.3, 1)",
           _groupHover: { transform: "scale(1.05)" },
           backgroundColor: "surface-container-high",
-          animation: "pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite"
         })}>
           <Image
             src={urlFor(mainImage).width(1200).auto("format").quality(85).url()}

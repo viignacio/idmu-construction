@@ -37,7 +37,6 @@ export default function NewsCard({ news }: NewsCardProps) {
         overflow: "hidden",
         position: "relative",
         backgroundColor: "surface-container-high",
-        animation: "pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite"
       })}>
         {mainImage && (
           <Image
