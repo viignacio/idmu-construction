@@ -22,15 +22,8 @@ export default function Newsletter({
   const theme = getThemeColors(backgroundColor);
 
   return (
-    <section className={css({
-      paddingY: { base: "6rem", md: "8rem" },
-      paddingX: { base: "2rem", md: "6rem" },
-      maxWidth: "7xl",
-      marginX: "auto",
-    })}>
+    <SectionContainer backgroundColor={backgroundColor}>
       <div className={css({
-        backgroundColor: theme.bg,
-        padding: { base: "3rem", md: "6rem" },
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
@@ -115,7 +108,6 @@ export default function Newsletter({
           </button>
         </form>
       </div>
-    </section>
+    </SectionContainer>
   );
 }
-
