@@ -18,11 +18,22 @@ export default function ArchiveFilter({
   const containerRef = useRef<HTMLDivElement>(null);
   const itemsRef = useRef<HTMLDivElement>(null);
   const [isOverflowing, setIsOverflowing] = useState(false);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(false);
+
+  const checkScroll = () => {
+    if (containerRef.current) {
+      const { scrollLeft, scrollWidth, clientWidth } = containerRef.current;
+      setCanScrollLeft(scrollLeft > 2); // Small threshold
+      setCanScrollRight(scrollLeft + clientWidth < scrollWidth - 2);
+    }
+  };
 
   useEffect(() => {
     const checkOverflow = () => {
       if (containerRef.current && itemsRef.current) {
         setIsOverflowing(itemsRef.current.scrollWidth > containerRef.current.clientWidth);
+        checkScroll();
       }
     };
 
@@ -38,61 +49,114 @@ export default function ArchiveFilter({
     };
   }, [filters]);
 
+  const handleScroll = (direction: "left" | "right") => {
+    if (containerRef.current) {
+      const scrollAmount = 200;
+      containerRef.current.scrollBy({
+        left: direction === "left" ? -scrollAmount : scrollAmount,
+        behavior: "smooth"
+      });
+    }
+  };
+
   if (filters.length <= 1) return null;
 
   return (
     <>
       {/* Scrollable / Row Filters */}
-      <div 
-        ref={containerRef}
-        className={css({
-          display: { base: "none", md: "flex" },
-          width: "100%",
-          maxWidth: "100%",
-          borderBottom: "2px solid",
-          borderColor: "rgba(196, 198, 204, 0.2)",
-          paddingBottom: "1.25rem",
-          overflowX: isOverflowing ? "auto" : "visible",
-          scrollbarWidth: "none",
-          "&::-webkit-scrollbar": { display: "none" },
-          WebkitOverflowScrolling: "touch",
-        })}
-      >
+      <div className={css({
+        display: { base: "none", md: "flex" },
+        alignItems: "center",
+        gap: "1rem",
+        width: "100%",
+        maxWidth: "100%",
+        position: "relative",
+      })}>
+        {isOverflowing && canScrollLeft && (
+          <button 
+            onClick={() => handleScroll("left")}
+            className={css({
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              cursor: "pointer",
+              color: "primary",
+              transition: "opacity 0.3s",
+              _hover: { color: "tertiary" }
+            })}
+          >
+            <span className="material-symbols-outlined" style={{ fontSize: '20px' }}>chevron_left</span>
+          </button>
+        )}
+
         <div 
-          ref={itemsRef}
+          ref={containerRef}
+          onScroll={checkScroll}
           className={css({
+            flex: 1,
             display: "flex",
-            gap: "2.5rem",
-            width: "max-content", // Ensure it doesn't wrap inside the measurement ref
-            marginLeft: isOverflowing ? "0" : "auto", // Align to right if it fits
-            flexWrap: "nowrap",
+            borderBottom: "2px solid",
+            borderColor: "rgba(196, 198, 204, 0.2)",
+            paddingBottom: "1.25rem",
+            overflowX: isOverflowing ? "auto" : "visible",
+            scrollbarWidth: "none",
+            "&::-webkit-scrollbar": { display: "none" },
+            WebkitOverflowScrolling: "touch",
           })}
         >
-          {filters.map((filter) => (
-            <button
-              key={filter}
-              onClick={() => onFilterChange(filter)}
-              className={css({
-                fontSize: "xs",
-                fontWeight: "900",
-                fontFamily: "headline",
-                letterSpacing: "0.2em",
-                textTransform: "uppercase",
-                paddingBottom: "0.25rem",
-                transition: "all 0.3s",
-                cursor: "pointer",
-                whiteSpace: "nowrap",
-                color: activeFilter === filter ? "primary" : "on-surface-variant",
-                borderBottom: activeFilter === filter ? "2px solid {colors.tertiary}" : "none",
-                _hover: {
-                  color: "primary",
-                }
-              })}
-            >
-              {filter === "All" ? allLabel : filter}
-            </button>
-          ))}
+          <div 
+            ref={itemsRef}
+            className={css({
+              display: "flex",
+              gap: "2.5rem",
+              width: "max-content",
+              marginLeft: isOverflowing ? "0" : "auto",
+              flexWrap: "nowrap",
+            })}
+          >
+            {filters.map((filter) => (
+              <button
+                key={filter}
+                onClick={() => onFilterChange(filter)}
+                className={css({
+                  fontSize: "xs",
+                  fontWeight: "900",
+                  fontFamily: "headline",
+                  letterSpacing: "0.2em",
+                  textTransform: "uppercase",
+                  paddingBottom: "0.25rem",
+                  transition: "all 0.3s",
+                  cursor: "pointer",
+                  whiteSpace: "nowrap",
+                  color: activeFilter === filter ? "primary" : "on-surface-variant",
+                  borderBottom: activeFilter === filter ? "2px solid {colors.tertiary}" : "none",
+                  _hover: {
+                    color: "primary",
+                  }
+                })}
+              >
+                {filter === "All" ? allLabel : filter}
+              </button>
+            ))}
+          </div>
         </div>
+
+        {isOverflowing && canScrollRight && (
+          <button 
+            onClick={() => handleScroll("right")}
+            className={css({
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              cursor: "pointer",
+              color: "primary",
+              transition: "opacity 0.3s",
+              _hover: { color: "tertiary" }
+            })}
+          >
+            <span className="material-symbols-outlined" style={{ fontSize: '20px' }}>chevron_right</span>
+          </button>
+        )}
       </div>
 
       {/* Mobile Dropdown */}
