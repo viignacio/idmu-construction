@@ -7,6 +7,7 @@ import { css } from "@/styled-system/css";
 import PortableTextContent from "@/components/PortableTextContent";
 import { urlFor } from "@/sanity/lib/image";
 import GalleryCarousel from "@/components/modules/GalleryCarousel";
+import ArchiveNavigation from "@/components/common/ArchiveNavigation";
 
 interface ProjectPageProps {
   params: Promise<{ slug: string }>;
@@ -242,6 +243,9 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 
       {/* Gallery */}
       <GalleryCarousel images={project.gallery} title={project.title} />
+
+      {/* Navigation */}
+      <ArchiveNavigation next={project.next} prev={project.prev} type="projects" />
     </article>
   );
 }

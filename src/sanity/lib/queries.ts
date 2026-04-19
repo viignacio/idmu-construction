@@ -172,7 +172,15 @@ export const PROJECT_QUERY = defineQuery(`*[_type == "project" && slug.current =
   },
   gallery[]{
     ...
-  }
+  },
+  "next": coalesce(
+    *[_type == "project" && _id != ^._id && (startDate < ^.startDate || (startDate == ^.startDate && _id < ^._id))] | order(startDate desc, _id desc)[0],
+    *[_type == "project" && _id != ^._id] | order(startDate desc, _id desc)[0]
+  ){ title, "slug": slug.current },
+  "prev": coalesce(
+    *[_type == "project" && _id != ^._id && (startDate > ^.startDate || (startDate == ^.startDate && _id > ^._id))] | order(startDate asc, _id asc)[0],
+    *[_type == "project" && _id != ^._id] | order(startDate asc, _id asc)[0]
+  ){ title, "slug": slug.current }
 }`);
 
 export const NEWS_QUERY = defineQuery(`*[_type == "news" && slug.current == $slug][0]{
@@ -191,5 +199,13 @@ export const NEWS_QUERY = defineQuery(`*[_type == "news" && slug.current == $slu
         "type": reference->_type
       }
     }
-  }
+  },
+  "next": coalesce(
+    *[_type == "news" && _id != ^._id && (date < ^.date || (date == ^.date && _id < ^._id))] | order(date desc, _id desc)[0],
+    *[_type == "news" && _id != ^._id] | order(date desc, _id desc)[0]
+  ){ title, "slug": slug.current },
+  "prev": coalesce(
+    *[_type == "news" && _id != ^._id && (date > ^.date || (date == ^.date && _id > ^._id))] | order(date asc, _id asc)[0],
+    *[_type == "news" && _id != ^._id] | order(date asc, _id asc)[0]
+  ){ title, "slug": slug.current }
 }`);

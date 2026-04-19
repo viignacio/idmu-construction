@@ -6,6 +6,7 @@ import Image from "next/image";
 import { css } from "@/styled-system/css";
 import PortableTextContent from "@/components/PortableTextContent";
 import { urlFor } from "@/sanity/lib/image";
+import ArchiveNavigation from "@/components/common/ArchiveNavigation";
 
 interface NewsPageProps {
   params: Promise<{ slug: string }>;
@@ -157,6 +158,9 @@ export default async function NewsPage({ params }: NewsPageProps) {
           <PortableTextContent value={news.content} />
         </div>
       </div>
+
+      {/* Navigation */}
+      <ArchiveNavigation next={news.next} prev={news.prev} type="news" />
     </article>
   );
 }
