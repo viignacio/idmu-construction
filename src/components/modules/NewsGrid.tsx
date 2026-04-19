@@ -124,7 +124,7 @@ export default function NewsGrid({
               activeFilter={activeFilter}
               filters={activeCategories}
               onFilterChange={handleFilterChange}
-              allLabel="ALL UPDATES"
+              allLabel="ALL TECHNICAL UPDATES"
             />
           )}
         </div>
@@ -155,7 +155,7 @@ export default function NewsGrid({
         displayedCount={displayedNews.length}
         totalCount={totalInFilter}
         onSeeMore={handleSeeMore}
-        itemType="updates"
+        itemType="technical updates"
       />
     </section>
   );
