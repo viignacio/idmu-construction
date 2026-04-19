@@ -4,7 +4,8 @@ import { PAGE_QUERY } from "@/sanity/lib/queries";
 import { notFound } from "next/navigation";
 
 export default async function Home() {
-  const page = await client.fetch(PAGE_QUERY, { slug: "home" });
+  const data = await client.fetch(PAGE_QUERY, { slug: "home" });
+  const page = data?.page;
 
   if (!page) {
     // If no home page is found, we can show a prompt or notFound
@@ -22,7 +23,7 @@ export default async function Home() {
 
   return (
     <div className="flex flex-col w-full">
-      <ModuleRenderer modules={page.modules} />
+      <ModuleRenderer modules={page.modules} business={data?.business} />
     </div>
   );
 }
