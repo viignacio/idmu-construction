@@ -95,8 +95,8 @@ export default function Newsletter({
           <button
             type="submit"
             className={css({
-              backgroundColor: "primary",
-              color: "white",
+              backgroundColor: theme.isDark ? "tertiary" : "primary",
+              color: theme.isDark ? "primary" : "white",
               paddingX: "3rem",
               paddingY: "1.25rem",
               fontFamily: "headline",
@@ -108,7 +108,8 @@ export default function Newsletter({
               borderRadius: "0",
               transition: "all 0.3s",
               _hover: {
-                backgroundColor: "secondary",
+                backgroundColor: theme.isDark ? "white" : "secondary",
+                color: theme.isDark ? "primary" : "white",
               },
             })}
           >
