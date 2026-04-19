@@ -173,6 +173,7 @@ export default function Hero({
               base: "column",
               md: alignment === "left" ? "row" : "row-reverse",
             },
+            alignItems: { base: "stretch", md: "center" },
             gap: "0",
             position: "relative",
           })}
@@ -223,9 +224,10 @@ export default function Hero({
           {/* Text Part (1/3) */}
           <div
             className={css({
-              width: { base: "full", md: "33.333333%" },
+              width: { base: "full", md: "calc(33.333333% + 3rem)" },
+              height: "fit-content",
               backgroundColor: backgroundColor || "surface-container-high",
-              padding: { base: "2rem", md: "3rem" },
+              padding: { base: "2rem", md: "4rem" },
               display: "flex",
               flexDirection: "column",
               justifyContent: "center",
@@ -238,7 +240,6 @@ export default function Hero({
                 md: alignment === "right" ? "-3rem" : "0",
               },
               zIndex: 10,
-              alignSelf: "center",
             })}
           >
             {preamble && (
