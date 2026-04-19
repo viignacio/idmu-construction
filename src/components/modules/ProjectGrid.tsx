@@ -89,8 +89,8 @@ export default function ProjectGrid({
         flexDirection: { base: "column", md: "row" },
         justifyContent: "space-between",
         alignItems: { base: "start", md: "end" },
-        gap: "4rem",
-        marginBottom: "6rem",
+        gap: { base: "2.5rem", md: "4rem" },
+        marginBottom: { base: "4rem", md: "6rem" },
       })}>
         <div>
           {heading && (
@@ -101,7 +101,7 @@ export default function ProjectGrid({
               color: "primary",
               letterSpacing: "tighter",
               lineHeight: "0.85",
-              marginBottom: "1.5rem",
+              marginBottom: subheading ? "1.5rem" : "0",
               textTransform: "uppercase"
             })}>
               {heading}
