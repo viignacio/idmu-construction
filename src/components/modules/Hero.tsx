@@ -268,7 +268,7 @@ export default function Hero({
             {heading && (
               <h1
                 className={css({
-                  fontSize: { base: "2.25rem", md: "3.25rem" },
+                  fontSize: { base: "2.25rem", md: "3rem" },
                   fontFamily: "headline",
                   fontWeight: "bold",
                   lineHeight: "1",
