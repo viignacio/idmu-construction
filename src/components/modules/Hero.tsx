@@ -17,6 +17,7 @@ interface HeroProps {
   secondaryCTA?: { label: string; link: string };
   highlightedWord?: string;
   preamble?: string;
+  alignment?: "left" | "right";
 }
 
 export default function Hero({
@@ -33,6 +34,7 @@ export default function Hero({
   secondaryCTA,
   highlightedWord,
   preamble,
+  alignment = "left",
 }: HeroProps) {
   const isDarkTheme = variant !== "text";
 
@@ -166,7 +168,10 @@ export default function Hero({
         <div
           className={css({
             display: "flex",
-            flexDirection: { base: "column", md: "row" },
+            flexDirection: {
+              base: "column",
+              md: alignment === "left" ? "row" : "row-reverse",
+            },
             gap: "0",
             maxWidth: "72rem",
             marginX: "auto",
@@ -224,7 +229,14 @@ export default function Hero({
               display: "flex",
               flexDirection: "column",
               justifyContent: "center",
-              marginLeft: { base: "0", md: "-8%" },
+              marginLeft: {
+                base: "0",
+                md: alignment === "left" ? "-8%" : "0",
+              },
+              marginRight: {
+                base: "0",
+                md: alignment === "right" ? "-8%" : "0",
+              },
               zIndex: 10,
               alignSelf: "center",
             })}
