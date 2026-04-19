@@ -4,6 +4,7 @@ import { PortableText } from "@portabletext/react";
 import { css } from "@/styled-system/css";
 import Link from "next/link";
 import { urlFor } from "@/sanity/lib/image";
+import { getSocialIcon } from "@/lib/icons";
 
 export default function Footer({ data, business }: any) {
   if (!data) return null;
@@ -233,6 +234,40 @@ export default function Footer({ data, business }: any) {
               <p className={css({ whiteSpace: "pre-line" })}>
                 {business.address}
               </p>
+            </div>
+          )}
+
+          {/* Social Media Grid */}
+          {business?.socials && business.socials.length > 0 && (
+            <div className={css({ display: "flex", gap: "0.75rem", paddingTop: "0.5rem" })}>
+              {business.socials.map((social: any) => (
+                <a
+                  key={social.url}
+                  href={social.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  title={social.platform}
+                  className={css({
+                    width: "2.25rem",
+                    height: "2.25rem",
+                    backgroundColor: "rgba(255, 255, 255, 0.05)",
+                    color: "#CBD5E1",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    transition: "all 0.3s",
+                    _hover: { 
+                      backgroundColor: "tertiary", 
+                      color: "primary",
+                      transform: "translateY(-4px)" 
+                    }
+                  })}
+                >
+                  <span className={css({ width: "18px", height: "18px" })}>
+                    {getSocialIcon(social.url)}
+                  </span>
+                </a>
+              ))}
             </div>
           )}
         </div>
