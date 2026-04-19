@@ -160,11 +160,10 @@ export default function Hero({
     return (
       <section
         className={css({
-          paddingX: { base: "2rem", md: "8rem" },
-          paddingTop: { base: "4rem", md: "6rem" },
-          paddingBottom: { base: "6rem", md: "10rem" },
-          maxWidth: "1440px",
+          paddingX: { base: "2rem", md: "2rem" },
+          maxWidth: "80rem", // max-w-7xl
           marginX: "auto",
+          marginBottom: "8rem", // mb-32
         })}
       >
         <div
@@ -174,7 +173,6 @@ export default function Hero({
               base: "column",
               md: alignment === "left" ? "row" : "row-reverse",
             },
-            alignItems: "stretch",
             gap: "0",
             position: "relative",
           })}
@@ -182,11 +180,10 @@ export default function Hero({
           {/* Image Part (2/3) */}
           <div
             className={css({
-              width: { base: "full", md: "70%" },
+              width: { base: "full", md: "66.666667%" },
               position: "relative",
-              height: { base: "400px", md: "650px" },
+              height: { base: "400px", md: "600px" },
               overflow: "hidden",
-              zIndex: 1,
             })}
           >
             {backgroundImage && (
@@ -204,15 +201,15 @@ export default function Hero({
               <div
                 className={css({
                   position: "absolute",
-                  top: "2.5rem",
-                  left: "2.5rem",
+                  top: "2rem",
+                  left: "2rem",
                   backgroundColor: "tertiary",
                   color: "white",
-                  paddingX: "1.25rem",
-                  paddingY: "0.5rem",
-                  fontSize: "10px",
+                  paddingX: "1rem",
+                  paddingY: "0.25rem",
+                  fontSize: "12px",
                   fontWeight: "bold",
-                  tracking: "0.2em",
+                  tracking: "widest",
                   textTransform: "uppercase",
                   fontFamily: "body",
                   zIndex: 20,
@@ -226,23 +223,22 @@ export default function Hero({
           {/* Text Part (1/3) */}
           <div
             className={css({
-              width: { base: "full", md: "38%" },
+              width: { base: "full", md: "33.333333%" },
               backgroundColor: backgroundColor || "surface-container-high",
-              padding: { base: "3rem", md: "4.5rem" },
+              padding: { base: "2rem", md: "3rem" },
               display: "flex",
               flexDirection: "column",
               justifyContent: "center",
-              marginTop: { base: "-2rem", md: "4rem" }, // Vertical shift
               marginLeft: {
                 base: "0",
-                md: alignment === "left" ? "-8rem" : "0",
+                md: alignment === "left" ? "-3rem" : "0",
               },
               marginRight: {
                 base: "0",
-                md: alignment === "right" ? "-8rem" : "0",
+                md: alignment === "right" ? "-3rem" : "0",
               },
               zIndex: 10,
-              boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.15)",
+              alignSelf: "center",
             })}
           >
             {preamble && (
@@ -273,7 +269,7 @@ export default function Hero({
                   fontWeight: "bold",
                   lineHeight: "1",
                   marginBottom: "1.5rem",
-                  tracking: "tightest",
+                  tracking: "tighter",
                   color:
                     backgroundColor === "primary" ||
                     backgroundColor === "secondary" ||
