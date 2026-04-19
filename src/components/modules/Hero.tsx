@@ -161,6 +161,7 @@ export default function Hero({
       <section
         className={css({
           paddingX: { base: "2rem", md: "2rem" },
+          paddingTop: { base: "4rem", md: "6rem" },
           maxWidth: "80rem", // max-w-7xl
           marginX: "auto",
           marginBottom: "8rem", // mb-32
