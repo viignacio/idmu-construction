@@ -26,6 +26,15 @@ export const news = defineType({
       title: "Category",
       type: "string",
       description: "e.g. Innovation, Safety, Update",
+      options: {
+        list: [
+          { title: "Technical Update", value: "Technical Update" },
+          { title: "Project Milestone", value: "Project Milestone" },
+          { title: "Safety Standards", value: "Safety Standards" },
+          { title: "Innovation", value: "Innovation" },
+          { title: "Community", value: "Community" },
+        ],
+      },
       validation: (Rule) => Rule.required(),
     }),
     defineField({
