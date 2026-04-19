@@ -52,15 +52,16 @@ export default function ArchiveNavigation({ next, prev, type }: ArchiveNavigatio
           color: "tertiary",
         })}>
           <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>arrow_back</span>
-          <span className={css({
-            fontSize: "10px",
-            fontWeight: "900",
-            fontFamily: "headline",
-            letterSpacing: "0.2em",
-            textTransform: "uppercase",
-          })}>
-            Previous {typeLabel}
-          </span>
+            <span className={css({
+              fontSize: "10px",
+              fontWeight: "900",
+              fontFamily: "headline",
+              letterSpacing: "0.2em",
+              textTransform: "uppercase",
+            })}>
+              <span className={css({ display: { base: "inline", md: "none" } })}>Previous</span>
+              <span className={css({ display: { base: "none", md: "inline" } })}>Previous {typeLabel}</span>
+            </span>
         </div>
         {prev && (
           <h4 className={css({
@@ -107,15 +108,16 @@ export default function ArchiveNavigation({ next, prev, type }: ArchiveNavigatio
           flexDirection: "row-reverse",
         })}>
           <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>arrow_forward</span>
-          <span className={css({
-            fontSize: "10px",
-            fontWeight: "900",
-            fontFamily: "headline",
-            letterSpacing: "0.2em",
-            textTransform: "uppercase",
-          })}>
-            Next {typeLabel}
-          </span>
+            <span className={css({
+              fontSize: "10px",
+              fontWeight: "900",
+              fontFamily: "headline",
+              letterSpacing: "0.2em",
+              textTransform: "uppercase",
+            })}>
+              <span className={css({ display: { base: "inline", md: "none" } })}>Next</span>
+              <span className={css({ display: { base: "none", md: "inline" } })}>Next {typeLabel}</span>
+            </span>
         </div>
         {next && (
           <h4 className={css({
