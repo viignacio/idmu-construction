@@ -2,6 +2,7 @@ import { urlFor } from "@/sanity/lib/image";
 import Image from "next/image";
 import { css, cx } from "@/styled-system/css";
 import { CtaButton } from "@/components/common/CtaButton";
+import { getOnSurfaceColor, getThemeForBackground } from "@/lib/theme";
 
 interface HeroProps {
   variant?: "full" | "compact" | "text" | "image-text";
@@ -246,12 +247,7 @@ export default function Hero({
             {preamble && (
               <span
                 className={css({
-                  color:
-                    backgroundColor === "primary" ||
-                    backgroundColor === "secondary" ||
-                    backgroundColor === "surface"
-                      ? "rgba(255,255,255,0.7)"
-                      : "on-primary-container",
+                  color: getOnSurfaceColor(backgroundColor, "muted"),
                   fontSize: "sm",
                   fontWeight: "bold",
                   tracking: "widest",
@@ -272,12 +268,7 @@ export default function Hero({
                   lineHeight: "1",
                   marginBottom: "1.5rem",
                   tracking: "tighter",
-                  color:
-                    backgroundColor === "primary" ||
-                    backgroundColor === "secondary" ||
-                    backgroundColor === "surface"
-                      ? "white"
-                      : "primary",
+                  color: getOnSurfaceColor(backgroundColor, "primary"),
                 })}
               >
                 {getHighlightedHeading()}
@@ -286,12 +277,7 @@ export default function Hero({
             {subheading && (
               <p
                 className={css({
-                  color:
-                    backgroundColor === "primary" ||
-                    backgroundColor === "secondary" ||
-                    backgroundColor === "surface"
-                      ? "rgba(255,255,255,0.9)"
-                      : "on-surface-variant",
+                  color: getOnSurfaceColor(backgroundColor, "secondary"),
                   lineHeight: "relaxed",
                   marginBottom: "2.5rem",
                   fontFamily: "body",
@@ -307,13 +293,7 @@ export default function Hero({
                   text={primaryCTA.label}
                   link={primaryCTA.link}
                   variant="tertiary"
-                  theme={
-                    backgroundColor === "primary" ||
-                    backgroundColor === "secondary" ||
-                    backgroundColor === "surface"
-                      ? "dark"
-                      : "light"
-                  }
+                  theme={getThemeForBackground(backgroundColor)}
                 />
               )}
             </div>
