@@ -1,6 +1,8 @@
-import { css } from "@/styled-system/css";
+import { css, cx } from "@/styled-system/css";
 import { CtaButton } from "@/components/common/CtaButton";
 import { getThemeColors } from "@/lib/theme";
+import SectionContainer from "../common/SectionContainer";
+
 
 
 interface CTA {
@@ -43,10 +45,7 @@ export default function CtaBlock({
 
   if (isTwoLayout) {
     return (
-      <section className={css({
-        paddingY: { base: "6rem", md: "8rem" },
-        paddingX: { base: "2rem", md: "6rem" },
-      })}>
+      <SectionContainer backgroundColor={backgroundColor}>
         <div className={css({
           backgroundColor: theme.bg,
           padding: { base: "3rem", md: "6rem" },
@@ -108,18 +107,16 @@ export default function CtaBlock({
             )}
           </div>
         </div>
-      </section>
+      </SectionContainer>
     );
   }
 
-  // One Layout (Centered - Original)
+
+  // Layout One (Centered - Original)
   return (
-    <section
-      className={css({
-        paddingY: { base: "6rem", md: "8rem" },
-        paddingX: { base: "2rem", md: "6rem" },
-        backgroundColor: theme.bg as any,
-        color: theme.text as any,
+    <SectionContainer
+      backgroundColor={backgroundColor}
+      contentClassName={css({
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
@@ -168,6 +165,7 @@ export default function CtaBlock({
         {pCta && <CtaButton {...pCta} theme={theme.isDark ? "dark" : "light"} />}
         {secondaryCta && <CtaButton {...secondaryCta} theme={theme.isDark ? "dark" : "light"} />}
       </div>
-    </section>
+    </SectionContainer>
   );
 }
+

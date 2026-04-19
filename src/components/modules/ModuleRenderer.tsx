@@ -11,6 +11,8 @@ const PersonnelGrid = dynamic(() => import("./PersonnelGrid"));
 const SplitTextContent = dynamic(() => import("./SplitTextContent"));
 const HighlightsGrid = dynamic(() => import("./HighlightsGrid"));
 const NewsGrid = dynamic(() => import("./NewsGrid"));
+const Newsletter = dynamic(() => import("./Newsletter"));
+
 
 const components: Record<string, any> = {
   hero: Hero,
@@ -24,7 +26,9 @@ const components: Record<string, any> = {
   splitTextContent: SplitTextContent,
   highlightsGrid: HighlightsGrid,
   newsGrid: NewsGrid,
+  newsletter: Newsletter,
 };
+
 
 
 
