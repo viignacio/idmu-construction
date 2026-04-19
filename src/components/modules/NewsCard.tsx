@@ -2,6 +2,7 @@ import { css } from "@/styled-system/css";
 import { urlFor } from "@/sanity/lib/image";
 import Image from "next/image";
 import Link from "next/link";
+import ReadMoreLink from "../common/ReadMoreLink";
 
 interface NewsCardProps {
   news: {
@@ -89,28 +90,7 @@ export default function NewsCard({ news }: NewsCardProps) {
           </h5>
         </div>
 
-        <div className={css({
-          fontSize: "xs",
-          fontWeight: "black",
-          textTransform: "uppercase",
-          letterSpacing: "widest",
-          display: "flex",
-          alignItems: "center",
-          gap: "0.5rem",
-          transition: "gap 0.3s",
-          _groupHover: {
-            gap: "1rem",
-          }
-        })}>
-          Read More 
-          <span className={css({
-            fontSize: "1rem",
-            fontWeight: "normal",
-            fontFamily: "Material Symbols Outlined"
-          })}>
-            arrow_forward
-          </span>
-        </div>
+        <ReadMoreLink />
       </div>
     </Link>
   );

@@ -2,6 +2,7 @@ import { css, cx } from "@/styled-system/css";
 import Image from "next/image";
 import Link from "next/link";
 import { urlFor } from "@/sanity/lib/image";
+import ReadMoreLink from "../common/ReadMoreLink";
 
 interface ArchiveProjectCardProps {
   project: {
@@ -201,30 +202,7 @@ export default function ArchiveProjectCard({ project, priority = false }: Archiv
             </div>
           )}
 
-          <div className={css({
-            fontSize: "xs",
-            fontWeight: "black",
-            textTransform: "uppercase",
-            letterSpacing: "widest",
-            display: "flex",
-            alignItems: "center",
-            gap: "0.5rem",
-            transition: "gap 0.3s",
-            color: "white",
-            _groupHover: {
-              gap: "1rem",
-              color: "tertiary"
-            }
-          })}>
-            Read More 
-            <span className={css({
-              fontSize: "1rem",
-              fontWeight: "normal",
-              fontFamily: "Material Symbols Outlined"
-            })}>
-              arrow_forward
-            </span>
-          </div>
+          <ReadMoreLink color="white" />
         </div>
       </div>
     </Link>

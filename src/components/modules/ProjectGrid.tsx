@@ -1,10 +1,11 @@
 "use client";
 
-import { useState, useMemo, useEffect } from "react";
 import { css } from "@/styled-system/css";
 import ArchiveProjectCard from "./ArchiveProjectCard";
 import ArchiveFilter from "../common/ArchiveFilter";
 import ArchivePagination from "../common/ArchivePagination";
+import SectionHeader from "../common/SectionHeader";
+import { useArchiveFilter } from "@/hooks/useArchiveFilter";
 
 interface ProjectGridProps {
   heading?: string;
@@ -21,59 +22,10 @@ export default function ProjectGrid({
   limit,
   projects = [],
 }: ProjectGridProps) {
-  const [activeFilter, setActiveFilter] = useState("All");
-  const [visibleCount, setVisibleCount] = useState(6);
-  const [shouldScroll, setShouldScroll] = useState(false);
+  const { activeFilters, activeFilter, visibleItems, totalInFilter, handleFilterChange, handleSeeMore } =
+    useArchiveFilter({ items: projects, filterKey: "sector", idPrefix: "project" });
 
-  // Dynamically determine which sectors have projects
-  const activeSectors = useMemo(() => {
-    const sectorsWithContent = new Set(projects.map(p => p.sector).filter(Boolean));
-    return ["All", ...Array.from(sectorsWithContent).sort()];
-  }, [projects]);
-
-  // Handle filter changes and reset visibility
-  const handleFilterChange = (sector: string) => {
-    setActiveFilter(sector);
-    setVisibleCount(6);
-    setShouldScroll(false);
-  };
-
-  const allFilteredProjects = useMemo(() => {
-    return activeFilter === "All" 
-      ? projects 
-      : projects.filter(p => p.sector === activeFilter);
-  }, [activeFilter, projects]);
-
-  const displayedProjects = allFilteredProjects.slice(0, visibleCount);
-  const totalInFilter = allFilteredProjects.length;
-
-  // Smooth scroll logic
-  useEffect(() => {
-    if (shouldScroll && visibleCount > 6) {
-      // Find the card that was just appended (the one at index visibleCount - 6)
-      const targetId = `project-${visibleCount - 6}`;
-      const element = document.getElementById(targetId);
-      if (element) {
-        // Delay slightly to ensure DOM has rendered new items
-        setTimeout(() => {
-          const offset = 100; // Leave some space at the top
-          const elementPosition = element.getBoundingClientRect().top;
-          const offsetPosition = elementPosition + window.pageYOffset - offset;
-
-          window.scrollTo({
-            top: offsetPosition,
-            behavior: "smooth"
-          });
-        }, 50);
-      }
-      setShouldScroll(false);
-    }
-  }, [visibleCount, shouldScroll]);
-
-  const handleSeeMore = () => {
-    setShouldScroll(true);
-    setVisibleCount(prev => prev + 6);
-  };
+  const displayedProjects = limit ? visibleItems.slice(0, limit) : visibleItems;
 
   return (
     <section className={css({
@@ -92,41 +44,13 @@ export default function ProjectGrid({
         gap: { base: "2.5rem", md: "4rem" },
         marginBottom: { base: "4rem", md: "6rem" },
       })}>
-        <div>
-          {heading && (
-            <h2 className={css({
-              fontFamily: "headline",
-              fontWeight: "bold",
-              fontSize: { base: "5xl", md: "5rem" },
-              color: "primary",
-              letterSpacing: "tighter",
-              lineHeight: "0.85",
-              marginBottom: subheading ? "1.5rem" : "0",
-              textTransform: "uppercase"
-            })}>
-              {heading}
-            </h2>
-          )}
-          {subheading && (
-            <p className={css({
-              color: "on-surface-variant",
-              maxWidth: "2xl",
-              fontSize: "lg",
-              lineHeight: "relaxed",
-            })}>
-              {subheading}
-            </p>
-          )}
-        </div>
+        <SectionHeader heading={heading} subheading={subheading} size="large" />
 
-        <div className={css({
-          flex: 1,
-          minWidth: 0,
-        })}>
+        <div className={css({ flex: 1, minWidth: 0 })}>
           {showFilters && (
             <ArchiveFilter
               activeFilter={activeFilter}
-              filters={activeSectors}
+              filters={activeFilters}
               onFilterChange={handleFilterChange}
               allLabel="ALL WORKS"
             />
@@ -137,23 +61,17 @@ export default function ProjectGrid({
       {/* Grid */}
       <div className={css({
         display: "grid",
-        gridTemplateColumns: {
-          base: "1fr",
-          md: "repeat(2, 1fr)"
-        },
-        gap: { base: "1.5rem", md: "3rem" }, // Larger gap for architectural scale
+        gridTemplateColumns: { base: "1fr", md: "repeat(2, 1fr)" },
+        gap: { base: "1.5rem", md: "3rem" },
         width: "100%",
       })}>
         {displayedProjects.map((project, index) => (
           <div key={project._id || index} id={`project-${index}`}>
-            <ArchiveProjectCard
-              project={project}
-              priority={index < 2}
-            />
+            <ArchiveProjectCard project={project} priority={index < 2} />
           </div>
         ))}
       </div>
-      
+
       <ArchivePagination
         displayedCount={displayedProjects.length}
         totalCount={totalInFilter}

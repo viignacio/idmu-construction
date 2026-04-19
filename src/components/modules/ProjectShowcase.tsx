@@ -1,6 +1,7 @@
 import { css } from "@/styled-system/css";
 import ProjectCard from "./ProjectCard";
 import Link from "next/link";
+import SectionHeader from "../common/SectionHeader";
 
 interface ProjectShowcaseProps {
   heading?: string;
@@ -33,32 +34,12 @@ export default function ProjectShowcase({
         marginBottom: "6rem",
         gap: "2rem",
       })}>
-        <div>
-          {heading && (
-            <h2 className={css({
-              fontFamily: "headline",
-              fontWeight: "bold",
-              fontSize: { base: "5xl", md: "7xl" }, // Matched to design reference
-              color: "primary",
-              letterSpacing: "tighter",
-              textTransform: "uppercase",
-              lineHeight: "0.9",
-              marginBottom: "1.5rem"
-            })}>
-              {heading}
-            </h2>
-          )}
-          {subheading && (
-            <p className={css({
-              color: "secondary",
-              maxWidth: "2xl",
-              fontSize: "lg",
-              lineHeight: "relaxed",
-            })}>
-              {subheading}
-            </p>
-          )}
-        </div>
+        <SectionHeader
+          heading={heading}
+          subheading={subheading}
+          size="large"
+          subheadingColor="secondary"
+        />
 
         {cta?.label && cta?.link && (
           <Link

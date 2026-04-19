@@ -1,10 +1,11 @@
 "use client";
 
-import { useState, useMemo, useEffect } from "react";
 import { css } from "@/styled-system/css";
 import ArchiveNewsCard from "./ArchiveNewsCard";
 import ArchiveFilter from "../common/ArchiveFilter";
 import ArchivePagination from "../common/ArchivePagination";
+import SectionHeader from "../common/SectionHeader";
+import { useArchiveFilter } from "@/hooks/useArchiveFilter";
 
 interface NewsGridProps {
   heading?: string;
@@ -19,57 +20,8 @@ export default function NewsGrid({
   showFilters = true,
   news = [],
 }: NewsGridProps) {
-  const [activeFilter, setActiveFilter] = useState("All");
-  const [visibleCount, setVisibleCount] = useState(6);
-  const [shouldScroll, setShouldScroll] = useState(false);
-
-  // Dynamically determine which categories have news
-  const activeCategories = useMemo(() => {
-    const categoriesWithContent = new Set(news.map(n => n.category).filter(Boolean));
-    return ["All", ...Array.from(categoriesWithContent).sort()];
-  }, [news]);
-
-  // Handle filter changes and reset visibility
-  const handleFilterChange = (category: string) => {
-    setActiveFilter(category);
-    setVisibleCount(6);
-    setShouldScroll(false);
-  };
-
-  const allFilteredNews = useMemo(() => {
-    return activeFilter === "All" 
-      ? news 
-      : news.filter(n => n.category === activeFilter);
-  }, [activeFilter, news]);
-
-  const displayedNews = allFilteredNews.slice(0, visibleCount);
-  const totalInFilter = allFilteredNews.length;
-
-  // Smooth scroll logic
-  useEffect(() => {
-    if (shouldScroll && visibleCount > 6) {
-      const targetId = `news-${visibleCount - 6}`;
-      const element = document.getElementById(targetId);
-      if (element) {
-        setTimeout(() => {
-          const offset = 100;
-          const elementPosition = element.getBoundingClientRect().top;
-          const offsetPosition = elementPosition + window.pageYOffset - offset;
-
-          window.scrollTo({
-            top: offsetPosition,
-            behavior: "smooth"
-          });
-        }, 50);
-      }
-      setShouldScroll(false);
-    }
-  }, [visibleCount, shouldScroll]);
-
-  const handleSeeMore = () => {
-    setShouldScroll(true);
-    setVisibleCount(prev => prev + 6);
-  };
+  const { activeFilters, activeFilter, visibleItems, totalInFilter, handleFilterChange, handleSeeMore } =
+    useArchiveFilter({ items: news, filterKey: "category", idPrefix: "news" });
 
   return (
     <section className={css({
@@ -88,41 +40,13 @@ export default function NewsGrid({
         gap: { base: "2.5rem", md: "4rem" },
         marginBottom: { base: "4rem", md: "6rem" },
       })}>
-        <div>
-          {heading && (
-            <h2 className={css({
-              fontFamily: "headline",
-              fontWeight: "bold",
-              fontSize: { base: "5xl", md: "5rem" },
-              color: "primary",
-              letterSpacing: "tighter",
-              lineHeight: "0.85",
-              marginBottom: subheading ? "1.5rem" : "0",
-              textTransform: "uppercase"
-            })}>
-              {heading}
-            </h2>
-          )}
-          {subheading && (
-            <p className={css({
-              color: "on-surface-variant",
-              maxWidth: "2xl",
-              fontSize: "lg",
-              lineHeight: "relaxed",
-            })}>
-              {subheading}
-            </p>
-          )}
-        </div>
+        <SectionHeader heading={heading} subheading={subheading} size="large" />
 
-        <div className={css({
-          flex: 1,
-          minWidth: 0,
-        })}>
+        <div className={css({ flex: 1, minWidth: 0 })}>
           {showFilters && (
             <ArchiveFilter
               activeFilter={activeFilter}
-              filters={activeCategories}
+              filters={activeFilters}
               onFilterChange={handleFilterChange}
               allLabel="ALL TECHNICAL UPDATES"
             />
@@ -133,26 +57,19 @@ export default function NewsGrid({
       {/* Grid */}
       <div className={css({
         display: "grid",
-        gridTemplateColumns: {
-          base: "1fr",
-          md: "repeat(2, 1fr)",
-          lg: "repeat(3, 1fr)"
-        },
+        gridTemplateColumns: { base: "1fr", md: "repeat(2, 1fr)", lg: "repeat(3, 1fr)" },
         gap: { base: "3rem", md: "3rem" },
         width: "100%",
       })}>
-        {displayedNews.map((article, index) => (
+        {visibleItems.map((article, index) => (
           <div key={article._id || index} id={`news-${index}`}>
-            <ArchiveNewsCard
-              news={article}
-              priority={index < 3}
-            />
+            <ArchiveNewsCard news={article} priority={index < 3} />
           </div>
         ))}
       </div>
-      
+
       <ArchivePagination
-        displayedCount={displayedNews.length}
+        displayedCount={visibleItems.length}
         totalCount={totalInFilter}
         onSeeMore={handleSeeMore}
         itemType="technical updates"
