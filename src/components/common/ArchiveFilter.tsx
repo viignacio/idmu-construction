@@ -1,6 +1,6 @@
 "use client";
-
-import { css } from "@/styled-system/css";
+import { css, cx } from "@/styled-system/css";
+import { useEffect, useRef, useState } from "react";
 
 interface ArchiveFilterProps {
   activeFilter: string;
@@ -15,52 +15,83 @@ export default function ArchiveFilter({
   onFilterChange,
   allLabel = "ALL",
 }: ArchiveFilterProps) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const itemsRef = useRef<HTMLDivElement>(null);
+  const [isOverflowing, setIsOverflowing] = useState(false);
+
+  useEffect(() => {
+    const checkOverflow = () => {
+      if (containerRef.current && itemsRef.current) {
+        setIsOverflowing(itemsRef.current.scrollWidth > containerRef.current.clientWidth);
+      }
+    };
+
+    const observer = new ResizeObserver(checkOverflow);
+    if (containerRef.current) observer.observe(containerRef.current);
+    
+    checkOverflow();
+    window.addEventListener('resize', checkOverflow);
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener('resize', checkOverflow);
+    };
+  }, [filters]);
+
   if (filters.length <= 1) return null;
 
   return (
     <>
-      {/* Desktop Filters */}
-      <div className={css({
-        display: { base: "none", md: "flex" },
-        // On medium screens: scroll horizontally, on large screens: allow wrapping
-        flexWrap: { md: "nowrap", lg: "wrap" },
-        overflowX: { md: "auto", lg: "visible" },
-        // Hide scrollbar but allow scrolling
-        scrollbarWidth: "none",
-        "&::-webkit-scrollbar": { display: "none" },
-        gap: { md: "2rem", lg: "2.5rem" },
-        justifyContent: { md: "flex-start", lg: "flex-end" },
-        borderBottom: "2px solid",
-        borderColor: "rgba(196, 198, 204, 0.2)",
-        paddingBottom: "1.25rem",
-        width: { md: "100%", lg: "auto" },
-        marginLeft: "auto",
-        whiteSpace: "nowrap",
-        WebkitOverflowScrolling: "touch",
-      })}>
-        {filters.map((filter) => (
-          <button
-            key={filter}
-            onClick={() => onFilterChange(filter)}
-            className={css({
-              fontSize: "xs",
-              fontWeight: "900",
-              fontFamily: "headline",
-              letterSpacing: "0.2em",
-              textTransform: "uppercase",
-              paddingBottom: "0.25rem",
-              transition: "all 0.3s",
-              cursor: "pointer",
-              color: activeFilter === filter ? "primary" : "on-surface-variant",
-              borderBottom: activeFilter === filter ? "2px solid {colors.tertiary}" : "none",
-              _hover: {
-                color: "primary",
-              }
-            })}
-          >
-            {filter === "All" ? allLabel : filter}
-          </button>
-        ))}
+      {/* Scrollable / Row Filters */}
+      <div 
+        ref={containerRef}
+        className={css({
+          display: { base: "none", md: "flex" },
+          width: "100%",
+          borderBottom: "2px solid",
+          borderColor: "rgba(196, 198, 204, 0.2)",
+          paddingBottom: "1.25rem",
+          overflowX: isOverflowing ? "auto" : "visible",
+          scrollbarWidth: "none",
+          "&::-webkit-scrollbar": { display: "none" },
+          WebkitOverflowScrolling: "touch",
+        })}
+      >
+        <div 
+          ref={itemsRef}
+          className={css({
+            display: "flex",
+            gap: "2.5rem",
+            width: "max-content", // Ensure it doesn't wrap inside the measurement ref
+            marginLeft: isOverflowing ? "0" : "auto", // Align to right if it fits
+            flexWrap: "nowrap",
+          })}
+        >
+          {filters.map((filter) => (
+            <button
+              key={filter}
+              onClick={() => onFilterChange(filter)}
+              className={css({
+                fontSize: "xs",
+                fontWeight: "900",
+                fontFamily: "headline",
+                letterSpacing: "0.2em",
+                textTransform: "uppercase",
+                paddingBottom: "0.25rem",
+                transition: "all 0.3s",
+                cursor: "pointer",
+                whiteSpace: "nowrap",
+                color: activeFilter === filter ? "primary" : "on-surface-variant",
+                borderBottom: activeFilter === filter ? "2px solid {colors.tertiary}" : "none",
+                _hover: {
+                  color: "primary",
+                }
+              })}
+            >
+              {filter === "All" ? allLabel : filter}
+            </button>
+          ))}
+        </div>
       </div>
 
       {/* Mobile Dropdown */}
