@@ -24,11 +24,10 @@ export default function ArchiveNewsCard({ news, priority = false }: ArchiveNewsC
   }).format(new Date(news.date));
 
   return (
-    <article className={css({
+    <article className={"group " + css({
       display: "flex",
       flexDirection: "column",
       height: "100%",
-      group: true,
     })}>
       <Link href={`/news/${news.slug.current}`} className={css({
         display: "flex",

@@ -84,7 +84,7 @@ export default function NewsGrid({
         display: "flex",
         flexDirection: { base: "column", md: "row" },
         justifyContent: "space-between",
-        alignItems: { base: "start", md: "sm:end" },
+        alignItems: { base: "start", md: "end" },
         gap: "4rem",
         marginBottom: "6rem",
       })}>

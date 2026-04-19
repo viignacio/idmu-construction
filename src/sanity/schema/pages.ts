@@ -256,7 +256,6 @@ export const page = defineType({
                       type: "file",
                       title: "Icon (SVG)",
                       options: { accept: ".svg" },
-                      iconColor: { value: "{colors.slate}" },
                     },
                     { name: "title", type: "string", title: "Title" },
                     { name: "description", type: "text", title: "Description" },

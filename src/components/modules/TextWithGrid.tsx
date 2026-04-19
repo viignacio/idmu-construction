@@ -11,7 +11,7 @@ interface GridItem {
 }
 
 interface TextWithGridProps {
-  variant?: "3-grid" | "3-grid-gradient" | "3-grid-checkered" | "4-grid";
+  variant?: "3-grid" | "3-grid-gradient" | "3-grid-checkered" | "4-grid" | "4-grid-method";
   preamble?: string;
   heading?: string;
   subheading?: string;

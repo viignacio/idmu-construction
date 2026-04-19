@@ -220,7 +220,7 @@ export default function Hero({
                   paddingY: "0.25rem",
                   fontSize: "12px",
                   fontWeight: "bold",
-                  tracking: "widest",
+                  letterSpacing: "0.2em",
                   textTransform: "uppercase",
                   fontFamily: "body",
                   zIndex: 20,
@@ -258,7 +258,7 @@ export default function Hero({
                   color: getOnSurfaceColor(backgroundColor, "muted"),
                   fontSize: "sm",
                   fontWeight: "bold",
-                  tracking: "widest",
+                  letterSpacing: "0.1em",
                   textTransform: "uppercase",
                   marginBottom: "1rem",
                   fontFamily: "body",
@@ -275,7 +275,7 @@ export default function Hero({
                   fontWeight: "bold",
                   lineHeight: "1",
                   marginBottom: "1.5rem",
-                  tracking: "tighter",
+                  letterSpacing: "tighter",
                   color: getOnSurfaceColor(backgroundColor, "primary"),
                 })}
               >
