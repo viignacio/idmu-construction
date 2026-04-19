@@ -10,6 +10,7 @@ const ProjectGrid = dynamic(() => import("./ProjectGrid"));
 const PersonnelGrid = dynamic(() => import("./PersonnelGrid"));
 const SplitTextContent = dynamic(() => import("./SplitTextContent"));
 const HighlightsGrid = dynamic(() => import("./HighlightsGrid"));
+const NewsGrid = dynamic(() => import("./NewsGrid"));
 
 const components: Record<string, any> = {
   hero: Hero,
@@ -22,6 +23,7 @@ const components: Record<string, any> = {
   personnelGrid: PersonnelGrid,
   splitTextContent: SplitTextContent,
   highlightsGrid: HighlightsGrid,
+  newsGrid: NewsGrid,
 };
 
 

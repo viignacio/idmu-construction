@@ -127,6 +127,19 @@ export const PAGE_QUERY = defineQuery(`*[_type == "page" && (slug.current == $sl
         bio,
         socialLinks
       }
+    },
+    _type == "newsGrid" => {
+      ...,
+      "news": *[_type == "news"] | order(date desc) {
+        _id,
+        title,
+        category,
+        date,
+        author,
+        mainImage,
+        excerpt,
+        "slug": slug.current
+      }
     }
   }
 }`);
