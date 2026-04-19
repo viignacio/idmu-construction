@@ -40,7 +40,7 @@ export function getOnSurfaceColor(
     case "secondary":
       return "on-surface-variant";
     case "muted":
-      return "on-primary-container";
+      return "on-surface-variant";
     default:
       return "primary";
   }
