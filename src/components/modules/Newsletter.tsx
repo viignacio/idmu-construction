@@ -1,7 +1,6 @@
 "use client";
 
 import { css } from "@/styled-system/css";
-import SectionContainer from "../common/SectionContainer";
 import { getThemeColors } from "@/lib/theme";
 
 interface NewsletterProps {
@@ -13,7 +12,7 @@ interface NewsletterProps {
 }
 
 export default function Newsletter({
-  heading = "Stay Ahead of the Build",
+  heading = "STAY AHEAD OF THE BUILD",
   subheading = "Get technical whitepapers, project updates, and industrial insights delivered to your inbox every month.",
   placeholder = "Professional Email",
   buttonText = "Subscribe",
@@ -22,8 +21,17 @@ export default function Newsletter({
   const theme = getThemeColors(backgroundColor);
 
   return (
-    <SectionContainer backgroundColor={backgroundColor}>
+    <section className={css({
+      paddingY: { base: "4rem", md: "6rem" },
+      paddingX: { base: "2rem", md: "6rem" }, // 96px padding
+      width: "100%",
+      backgroundColor: "background", // Root background is site background
+    })}>
       <div className={css({
+        maxWidth: "7xl",
+        marginX: "auto",
+        backgroundColor: theme.bg,
+        padding: { base: "3rem", md: "6rem" },
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
@@ -31,10 +39,10 @@ export default function Newsletter({
       })}>
         <h2 className={css({
           fontFamily: "headline",
-          fontWeight: "bold",
-          fontSize: { base: "3rem", md: "4.5rem" },
+          fontWeight: "black",
+          fontSize: { base: "2.5rem", md: "4rem" },
           letterSpacing: "tighter",
-          lineHeight: "0.85",
+          lineHeight: "0.9",
           marginBottom: "1.5rem",
           textTransform: "uppercase",
           color: theme.text,
@@ -45,7 +53,7 @@ export default function Newsletter({
         <p className={css({
           fontSize: { base: "lg", md: "xl" },
           lineHeight: "relaxed",
-          marginBottom: "3.5rem",
+          marginBottom: "3rem",
           opacity: 0.8,
           color: theme.subtext,
           maxWidth: "2xl",
@@ -67,12 +75,12 @@ export default function Newsletter({
               flex: 1,
               backgroundColor: "white",
               _placeholder: {
-                color: "rgba(13, 27, 42, 0.5)",
+                color: "rgba(13, 27, 42, 0.4)",
               },
               border: "none",
               borderBottom: "2px solid",
-              borderColor: "rgba(13, 27, 42, 0.2)",
-              padding: "1rem",
+              borderColor: "rgba(13, 27, 42, 0.1)",
+              padding: "1.25rem",
               fontFamily: "body",
               fontSize: "sm",
               outline: "none",
@@ -89,10 +97,10 @@ export default function Newsletter({
             className={css({
               backgroundColor: "primary",
               color: "white",
-              paddingX: "2.5rem",
-              paddingY: "1rem",
+              paddingX: "3rem",
+              paddingY: "1.25rem",
               fontFamily: "headline",
-              fontWeight: "bold",
+              fontWeight: "black",
               textTransform: "uppercase",
               letterSpacing: "widest",
               fontSize: "xs",
@@ -108,6 +116,6 @@ export default function Newsletter({
           </button>
         </form>
       </div>
-    </SectionContainer>
+    </section>
   );
 }
