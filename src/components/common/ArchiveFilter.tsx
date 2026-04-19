@@ -22,14 +22,21 @@ export default function ArchiveFilter({
       {/* Desktop Filters */}
       <div className={css({
         display: { base: "none", md: "flex" },
-        flexWrap: "wrap",
-        gap: "2.5rem",
-        justifyContent: "flex-end",
+        // On medium screens: scroll horizontally, on large screens: allow wrapping
+        flexWrap: { md: "nowrap", lg: "wrap" },
+        overflowX: { md: "auto", lg: "visible" },
+        // Hide scrollbar but allow scrolling
+        scrollbarWidth: "none",
+        "&::-webkit-scrollbar": { display: "none" },
+        gap: { md: "2rem", lg: "2.5rem" },
+        justifyContent: { md: "flex-start", lg: "flex-end" },
         borderBottom: "2px solid",
         borderColor: "rgba(196, 198, 204, 0.2)",
         paddingBottom: "1.25rem",
-        width: "auto",
-        marginLeft: "auto"
+        width: { md: "100%", lg: "auto" },
+        marginLeft: "auto",
+        whiteSpace: "nowrap",
+        WebkitOverflowScrolling: "touch",
       })}>
         {filters.map((filter) => (
           <button

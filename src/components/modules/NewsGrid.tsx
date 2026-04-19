@@ -93,7 +93,7 @@ export default function NewsGrid({
             <h2 className={css({
               fontFamily: "headline",
               fontWeight: "bold",
-              fontSize: { base: "5xl", md: "8xl" },
+              fontSize: { base: "5xl", md: "5rem" },
               color: "primary",
               letterSpacing: "tighter",
               lineHeight: "0.85",
