@@ -119,14 +119,19 @@ export default function ProjectGrid({
           )}
         </div>
 
-        {showFilters && (
-          <ArchiveFilter
-            activeFilter={activeFilter}
-            filters={activeSectors}
-            onFilterChange={handleFilterChange}
-            allLabel="ALL WORKS"
-          />
-        )}
+        <div className={css({
+          flex: 1,
+          minWidth: 0,
+        })}>
+          {showFilters && (
+            <ArchiveFilter
+              activeFilter={activeFilter}
+              filters={activeSectors}
+              onFilterChange={handleFilterChange}
+              allLabel="ALL WORKS"
+            />
+          )}
+        </div>
       </div>
 
       {/* Grid */}

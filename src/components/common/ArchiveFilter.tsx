@@ -48,6 +48,7 @@ export default function ArchiveFilter({
         className={css({
           display: { base: "none", md: "flex" },
           width: "100%",
+          maxWidth: "100%",
           borderBottom: "2px solid",
           borderColor: "rgba(196, 198, 204, 0.2)",
           paddingBottom: "1.25rem",
