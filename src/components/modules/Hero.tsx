@@ -160,11 +160,11 @@ export default function Hero({
     return (
       <section
         className={css({
-          paddingX: { base: "2rem", md: "6rem" },
-          paddingY: "5rem",
-          maxWidth: "100%",
+          paddingX: { base: "2rem", md: "8rem" },
+          paddingTop: { base: "4rem", md: "6rem" },
+          paddingBottom: { base: "6rem", md: "10rem" },
+          maxWidth: "1440px",
           marginX: "auto",
-          marginBottom: "8rem",
         })}
       >
         <div
@@ -174,18 +174,19 @@ export default function Hero({
               base: "column",
               md: alignment === "left" ? "row" : "row-reverse",
             },
+            alignItems: "stretch",
             gap: "0",
-            maxWidth: "72rem",
-            marginX: "auto",
+            position: "relative",
           })}
         >
           {/* Image Part (2/3) */}
           <div
             className={css({
-              width: { base: "full", md: "66.666667%" },
+              width: { base: "full", md: "70%" },
               position: "relative",
-              height: { base: "400px", md: "600px" },
+              height: { base: "400px", md: "650px" },
               overflow: "hidden",
+              zIndex: 1,
             })}
           >
             {backgroundImage && (
@@ -203,15 +204,15 @@ export default function Hero({
               <div
                 className={css({
                   position: "absolute",
-                  top: "2rem",
-                  left: "2rem",
+                  top: "2.5rem",
+                  left: "2.5rem",
                   backgroundColor: "tertiary",
-                  color: "primary",
-                  paddingX: "1rem",
-                  paddingY: "0.25rem",
-                  fontSize: "xs",
+                  color: "white",
+                  paddingX: "1.25rem",
+                  paddingY: "0.5rem",
+                  fontSize: "10px",
                   fontWeight: "bold",
-                  tracking: "widest",
+                  tracking: "0.2em",
                   textTransform: "uppercase",
                   fontFamily: "body",
                   zIndex: 20,
@@ -225,22 +226,23 @@ export default function Hero({
           {/* Text Part (1/3) */}
           <div
             className={css({
-              width: { base: "full", md: "41.666667%" }, // Slightly wider than 1/3 to allow for overlap without squeeze
+              width: { base: "full", md: "38%" },
               backgroundColor: backgroundColor || "surface-container-high",
-              padding: { base: "2rem", md: "4rem" },
+              padding: { base: "3rem", md: "4.5rem" },
               display: "flex",
               flexDirection: "column",
               justifyContent: "center",
+              marginTop: { base: "-2rem", md: "4rem" }, // Vertical shift
               marginLeft: {
                 base: "0",
-                md: alignment === "left" ? "-8%" : "0",
+                md: alignment === "left" ? "-8rem" : "0",
               },
               marginRight: {
                 base: "0",
-                md: alignment === "right" ? "-8%" : "0",
+                md: alignment === "right" ? "-8rem" : "0",
               },
               zIndex: 10,
-              alignSelf: "center",
+              boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.15)",
             })}
           >
             {preamble && (
@@ -266,12 +268,12 @@ export default function Hero({
             {heading && (
               <h1
                 className={css({
-                  fontSize: { base: "2.5rem", md: "3.5rem" },
+                  fontSize: { base: "2.25rem", md: "3.25rem" },
                   fontFamily: "headline",
                   fontWeight: "bold",
-                  lineHeight: "0.95",
+                  lineHeight: "1",
                   marginBottom: "1.5rem",
-                  tracking: "tighter",
+                  tracking: "tightest",
                   color:
                     backgroundColor === "primary" ||
                     backgroundColor === "secondary" ||
