@@ -11,6 +11,7 @@
     "prepare": "panda codegen"
   },
   "dependencies": {
+    "@hookform/resolvers": "^5.2.2",
     "@portabletext/react": "latest",
     "gsap": "3.13.0",
     "lenis": "1.3.11",
@@ -18,9 +19,11 @@
     "next-sanity": "9.12.3",
     "react": "19.2.0",
     "react-dom": "19.2.0",
+    "react-hook-form": "^7.72.1",
     "sanity": "3.99.0",
     "sharp": "latest",
-    "styled-components": "6.1.13"
+    "styled-components": "6.1.13",
+    "zod": "^4.3.6"
   },
   "devDependencies": {
     "@pandacss/dev": "0.54.0",

@@ -13,7 +13,8 @@ export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  const page = await client.fetch(PAGE_QUERY, { slug });
+  const data = await client.fetch(PAGE_QUERY, { slug });
+  const page = data?.page;
 
   if (!page) {
     return {
@@ -31,16 +32,18 @@ export default async function Page({ params }: PageProps) {
   
   // If slug is "home", redirect to root or just handle it
   if (slug === "home") {
-    const page = await client.fetch(PAGE_QUERY, { slug: "home" });
+    const data = await client.fetch(PAGE_QUERY, { slug: "home" });
+    const page = data?.page;
     if (!page) notFound();
     return (
       <div className={css({ display: "flex", flexDirection: "column", width: "full" })}>
-        <ModuleRenderer modules={page.modules} />
+        <ModuleRenderer modules={page.modules} business={data?.business} />
       </div>
     );
   }
 
-  const page = await client.fetch(PAGE_QUERY, { slug });
+  const data = await client.fetch(PAGE_QUERY, { slug });
+  const page = data?.page;
 
   if (!page) {
     notFound();
@@ -48,7 +51,7 @@ export default async function Page({ params }: PageProps) {
 
   return (
     <div className={css({ display: "flex", flexDirection: "column", width: "full" })}>
-      <ModuleRenderer modules={page.modules} />
+      <ModuleRenderer modules={page.modules} business={data?.business} />
     </div>
   );
 }

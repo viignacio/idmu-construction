@@ -12,6 +12,7 @@ const SplitTextContent = dynamic(() => import("./SplitTextContent"));
 const HighlightsGrid = dynamic(() => import("./HighlightsGrid"));
 const NewsGrid = dynamic(() => import("./NewsGrid"));
 const Newsletter = dynamic(() => import("./Newsletter"));
+const ContactForm = dynamic(() => import("./ContactForm"));
 
 
 const components: Record<string, any> = {
@@ -27,6 +28,7 @@ const components: Record<string, any> = {
   highlightsGrid: HighlightsGrid,
   newsGrid: NewsGrid,
   newsletter: Newsletter,
+  contactForm: ContactForm,
 };
 
 
@@ -34,9 +36,10 @@ const components: Record<string, any> = {
 
 interface ModuleRendererProps {
   modules?: any[];
+  business?: any;
 }
 
-export default function ModuleRenderer({ modules }: ModuleRendererProps) {
+export default function ModuleRenderer({ modules, business }: ModuleRendererProps) {
   if (!modules || !Array.isArray(modules)) return null;
 
   return (
@@ -47,7 +50,7 @@ export default function ModuleRenderer({ modules }: ModuleRendererProps) {
           console.warn(`No component found for module type: ${module._type}`);
           return null;
         }
-        return <Component key={module._key || index} {...module} />;
+        return <Component key={module._key || index} {...module} business={business} />;
       })}
     </>
   );

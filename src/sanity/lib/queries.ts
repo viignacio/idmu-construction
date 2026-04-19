@@ -44,103 +44,113 @@ export const BUSINESS_INFO_QUERY = defineQuery(`*[_type == "business"][0]{
   address
 }`);
 
-export const PAGE_QUERY = defineQuery(`*[_type == "page" && (slug.current == $slug || ($slug == "home" && slug.current == "/"))][0]{
-  title,
-  modules[]{
-    ...,
-    _type == "hero" => {
+export const PAGE_QUERY = defineQuery(`{
+  "page": *[_type == "page" && (slug.current == $slug || ($slug == "home" && slug.current == "/"))][0]{
+    title,
+    modules[]{
       ...,
-      "backgroundVideoUrl": backgroundVideo.asset->url
-    },
-    _type == "textWithGrid" => {
-      ...,
-      gridItems[]{
+      _type == "hero" => {
         ...,
-        "iconUrl": icon.asset->url
-      }
-    },
-    _type == "projectShowcase" => {
-      ...,
-      projects[]{
+        "backgroundVideoUrl": backgroundVideo.asset->url
+      },
+      _type == "textWithGrid" => {
         ...,
-        project->{
+        gridItems[]{
+          ...,
+          "iconUrl": icon.asset->url
+        }
+      },
+      _type == "projectShowcase" => {
+        ...,
+        projects[]{
+          ...,
+          project->{
+            title,
+            sector,
+            "year": select(
+              defined(completionDate) => string::split(completionDate, "-")[0],
+              defined(startDate) => string::split(startDate, "-")[0],
+              year
+            ),
+            status,
+            completionPercentage,
+            location,
+            mainImage,
+            "slug": slug.current
+          }
+        }
+      },
+      _type == "projectGrid" => {
+        ...,
+        "projects": *[_type == "project"] | order(startDate desc) {
           title,
           sector,
           "year": select(
             defined(completionDate) => string::split(completionDate, "-")[0],
-            defined(startDate) => string::split(startDate, "-")[0],
+            defined(startDate) => "Est. " + string::split(startDate, "-")[0],
             year
           ),
           status,
           completionPercentage,
           location,
+          ctaLabel,
           mainImage,
           "slug": slug.current
         }
-      }
-    },
-    _type == "projectGrid" => {
-      ...,
-      "projects": *[_type == "project"] | order(startDate desc) {
-        title,
-        sector,
-        "year": select(
-          defined(completionDate) => string::split(completionDate, "-")[0],
-          defined(startDate) => "Est. " + string::split(startDate, "-")[0],
-          year
-        ),
-        status,
-        completionPercentage,
-        location,
-        ctaLabel,
-        mainImage,
-        "slug": slug.current
-      }
-    },
-    _type == "newsShowcase" => {
-      ...,
-      "featuredUpdate": *[_type == "news" && category == "Technical Update"] | order(date desc)[0] {
-        title,
-        excerpt,
-        category,
-        date,
-        author,
-        mainImage,
-        "slug": slug.current
       },
-      "recentNews": *[_type == "news" && category != "Technical Update"] | order(date desc)[0...2] {
-        title,
-        excerpt,
-        category,
-        date,
-        author,
-        mainImage,
-        "slug": slug.current
-      }
-    },
-    _type == "personnelGrid" => {
-      ...,
-      members[]->{
-        name,
-        position,
-        profileImage,
-        bio,
-        socialLinks
-      }
-    },
-    _type == "newsGrid" => {
-      ...,
-      "news": *[_type == "news"] | order(date desc) {
-        _id,
-        title,
-        category,
-        date,
-        author,
-        mainImage,
-        excerpt,
-        "slug": slug.current
+      _type == "newsShowcase" => {
+        ...,
+        "featuredUpdate": *[_type == "news" && category == "Technical Update"] | order(date desc)[0] {
+          title,
+          excerpt,
+          category,
+          date,
+          author,
+          mainImage,
+          "slug": slug.current
+        },
+        "recentNews": *[_type == "news" && category != "Technical Update"] | order(date desc)[0...2] {
+          title,
+          excerpt,
+          category,
+          date,
+          author,
+          mainImage,
+          "slug": slug.current
+        }
+      },
+      _type == "personnelGrid" => {
+        ...,
+        members[]->{
+          name,
+          position,
+          profileImage,
+          bio,
+          socialLinks
+        }
+      },
+      _type == "newsGrid" => {
+        ...,
+        "news": *[_type == "news"] | order(date desc) {
+          _id,
+          title,
+          category,
+          date,
+          author,
+          mainImage,
+          excerpt,
+          "slug": slug.current
+        }
       }
     }
+  },
+  "business": *[_type == "business"][0]{
+    name,
+    logo,
+    email,
+    phone,
+    address,
+    socials
   }
 }`);
 
