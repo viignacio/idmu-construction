@@ -70,6 +70,13 @@ export const page = defineType({
               validation: (Rule) => Rule.required(),
             },
             {
+              name: "preamble",
+              type: "string",
+              title: "Preamble (Text above Hero)",
+              group: "content",
+              hidden: ({ parent }) => parent?.variant !== "image-text",
+            },
+            {
               name: "subheading",
               type: "text",
               title: "Subheading",
