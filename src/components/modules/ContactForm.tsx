@@ -15,7 +15,7 @@ const contactSchema = z.object({
   budget: z.string().min(1, "Please select a budget range"),
   description: z.string().min(10, "Please provide at least 10 characters"),
   consent: z.literal(true, {
-    errorMap: () => ({ message: "You must agree to the technical standards" }),
+    message: "You must agree to the technical standards",
   }),
 });
 
