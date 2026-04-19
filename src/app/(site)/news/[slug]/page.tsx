@@ -104,7 +104,7 @@ export default async function NewsPage({ params }: NewsPageProps) {
           })}>
             <Image 
               src={urlFor(news.mainImage).width(1600).auto("format").quality(85).url()} 
-              alt={news.title} 
+              alt={news.title || ""} 
               fill 
               priority
               className={css({ objectFit: "cover", filter: "grayscale(5%)" })} 
@@ -155,7 +155,7 @@ export default async function NewsPage({ params }: NewsPageProps) {
               marginBottom: "1.5rem"
           }
         })}>
-          <PortableTextContent value={news.content} />
+          <PortableTextContent value={news.content as any} />
         </div>
       </div>
 

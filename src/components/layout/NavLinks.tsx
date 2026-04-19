@@ -5,11 +5,11 @@ import { css } from "../../../styled-system/css";
 import Link from "next/link";
 
 interface NavLink {
-  text: string;
-  url: string;
+  text: string | null;
+  url: string | null;
 }
 
-export default function NavLinks({ links }: { links?: NavLink[] }) {
+export default function NavLinks({ links }: { links?: NavLink[] | null }) {
   const pathname = usePathname();
 
   if (!links) return null;
@@ -21,6 +21,7 @@ export default function NavLinks({ links }: { links?: NavLink[] }) {
       alignItems: 'center'
     })}>
       {links.map((link) => {
+        if (!link.url || !link.text) return null;
         const isActive = pathname === link.url;
         return (
           <Link

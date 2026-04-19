@@ -1,14 +1,29 @@
 export type Theme = "light" | "dark";
 
+export interface ThemeColors {
+  bg: string;
+  isDark: boolean;
+  text: string;
+  subtext: string;
+}
+
+// Single source of truth for matching background colors to their contrast needs
+export const THEME_MAP: Record<string, ThemeColors> = {
+  primary: { bg: "primary", isDark: true, text: "white", subtext: "rgba(255, 255, 255, 0.9)" },
+  secondary: { bg: "secondary", isDark: true, text: "white", subtext: "rgba(255, 255, 255, 0.9)" },
+  tertiary: { bg: "tertiary", isDark: false, text: "text.main", subtext: "on-surface-variant" },
+  surface: { bg: "surface", isDark: true, text: "white", subtext: "rgba(255, 255, 255, 0.9)" },
+  background: { bg: "background", isDark: false, text: "text.main", subtext: "on-surface-variant" },
+  blueprint: { bg: "blueprint", isDark: true, text: "white", subtext: "rgba(255, 255, 255, 0.9)" },
+  white: { bg: "white", isDark: false, text: "text.main", subtext: "on-surface-variant" },
+};
+
 /**
  * Returns whether a given background color token should use a light or dark theme for its content.
  */
 export function getThemeForBackground(backgroundColor?: string): Theme {
-  const darkBackgrounds = ["primary", "secondary", "tertiary", "surface"];
-  if (backgroundColor && darkBackgrounds.includes(backgroundColor)) {
-    return "dark";
-  }
-  return "light";
+  const config = THEME_MAP[backgroundColor || "primary"] || THEME_MAP.primary;
+  return config.isDark ? "dark" : "light";
 }
 
 /**
@@ -18,60 +33,23 @@ export function getOnSurfaceColor(
   backgroundColor?: string,
   variant: "primary" | "secondary" | "muted" = "primary"
 ): string {
-  const isDark = getThemeForBackground(backgroundColor) === "dark";
+  const config = THEME_MAP[backgroundColor || "primary"] || THEME_MAP.primary;
 
-  if (isDark) {
-    switch (variant) {
-      case "primary":
-        return "white";
-      case "secondary":
-        return "rgba(255, 255, 255, 0.9)";
-      case "muted":
-        return "rgba(255, 255, 255, 0.7)";
-      default:
-        return "white";
-    }
-  }
-
-  // Light theme defaults
-  switch (variant) {
-    case "primary":
-      return "primary";
-    case "secondary":
-      return "on-surface-variant";
-    case "muted":
-      return "on-surface-variant";
-    default:
-      return "primary";
-  }
+  if (variant === "primary") return config.text;
+  if (variant === "secondary") return config.subtext;
+  // Fallback for mutated (like preambles)
+  return config.isDark ? "rgba(255, 255, 255, 0.7)" : "on-surface-variant";
 }
 
 /**
  * Shared utility for mapping Sanity background colors to Panda tokens and contrast logic.
  */
 export const getThemeColors = (bg: string) => {
-  // Map Sanity values to their semantic counterparts in the Panda config
-  const colors: Record<string, string> = {
-    primary: "primary",
-    secondary: "secondary",
-    tertiary: "tertiary",
-    surface: "surface",
-    background: "background",
-    blueprint: "blueprint",
-  };
-
-  const activeToken = colors[bg] || "primary";
-
-  // Logical color detection for contrast
-  const isDark = ["primary", "secondary", "surface"].includes(activeToken);
-  
-  // Use white text on dark backgrounds; primary text on light backgrounds
-  const mainTextColor = isDark ? "white" : "text.main";
-  
+  const config = THEME_MAP[bg] || THEME_MAP.primary;
   return {
-    bg: activeToken,
-    text: mainTextColor,
-    subtext: mainTextColor,
-    isDark,
+    bg: config.bg,
+    text: config.text,
+    subtext: config.subtext,
+    isDark: config.isDark,
   };
 };

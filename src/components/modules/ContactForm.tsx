@@ -161,6 +161,7 @@ export default function ContactForm({
                       target="_blank"
                       rel="noopener noreferrer"
                       title={social.platform || "Social Media"}
+                      aria-label={`Follow us on ${social.platform || "Social Media"}`}
                       className={css({
                         width: "2.5rem",
                         height: "2.5rem",

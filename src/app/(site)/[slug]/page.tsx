@@ -37,7 +37,7 @@ export default async function Page({ params }: PageProps) {
     if (!page) notFound();
     return (
       <div className={css({ display: "flex", flexDirection: "column", width: "full" })}>
-        <ModuleRenderer modules={page.modules} business={data?.business} />
+        <ModuleRenderer modules={(page.modules || []) as any[]} business={data?.business} />
       </div>
     );
   }
@@ -51,7 +51,7 @@ export default async function Page({ params }: PageProps) {
 
   return (
     <div className={css({ display: "flex", flexDirection: "column", width: "full" })}>
-      <ModuleRenderer modules={page.modules} business={data?.business} />
+      <ModuleRenderer modules={(page.modules || []) as any[]} business={data?.business} />
     </div>
   );
 }

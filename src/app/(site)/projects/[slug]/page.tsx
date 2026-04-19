@@ -51,7 +51,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         {project.mainImage && (
           <Image
             src={urlFor(project.mainImage).width(2000).auto("format").quality(90).url()}
-            alt={project.title}
+            alt={project.title || ""}
             fill
             priority
             className={css({ objectFit: "cover", filter: "grayscale(10%)" })}
@@ -237,12 +237,12 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
               letterSpacing: "tight"
           }
         })}>
-          <PortableTextContent value={project.description} />
+          <PortableTextContent value={project.description as any} />
         </div>
       </div>
 
       {/* Gallery */}
-      <GalleryCarousel images={project.gallery} title={project.title} />
+      <GalleryCarousel images={(project.gallery as any[]) || []} title={project.title || undefined} />
 
       {/* Navigation */}
       <ArchiveNavigation next={project.next} prev={project.prev} type="projects" />

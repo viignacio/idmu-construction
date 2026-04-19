@@ -5,8 +5,14 @@ import { css } from "@/styled-system/css";
 import Link from "next/link";
 import { urlFor } from "@/sanity/lib/image";
 import { getSocialIcon } from "@/lib/icons";
+import { FOOTER_QUERYResult, BUSINESS_INFO_QUERYResult } from "../../../sanity.types";
 
-export default function Footer({ data, business }: any) {
+interface FooterProps {
+  data: FOOTER_QUERYResult;
+  business: BUSINESS_INFO_QUERYResult;
+}
+
+export default function Footer({ data, business }: FooterProps) {
   if (!data) return null;
 
   return (
@@ -46,7 +52,7 @@ export default function Footer({ data, business }: any) {
           {business?.logo ? (
             <img
               src={urlFor(business.logo).width(400).auto("format").url()}
-              alt={data?.brandName || business?.name}
+              alt={data?.brandName || business?.name || ""}
               className={css({
                 height: "full",
                 width: "auto",
@@ -75,7 +81,7 @@ export default function Footer({ data, business }: any) {
             paddingTop: "0.5rem",
           })}
         >
-          <PortableText value={data.description} />
+          <PortableText value={data.description as any} />
         </div>
       </div>
 
@@ -246,7 +252,8 @@ export default function Footer({ data, business }: any) {
                   href={social.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  title={social.platform}
+                  title={social.platform || "Social Media"}
+                  aria-label={`Follow us on ${social.platform || "Social Media"}`}
                   className={css({
                     width: "2.25rem",
                     height: "2.25rem",

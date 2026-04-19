@@ -2,13 +2,13 @@ import Link from "next/link";
 import { css, cx } from "@/styled-system/css";
 
 interface NavLink {
-  title: string;
-  slug: string;
+  title: string | null;
+  slug: string | null;
 }
 
 interface ArchiveNavigationProps {
-  next?: NavLink;
-  prev?: NavLink;
+  next?: NavLink | null;
+  prev?: NavLink | null;
   type: "projects" | "news";
 }
 

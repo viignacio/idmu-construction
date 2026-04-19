@@ -3,11 +3,18 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import Image from "next/image";
 import { css, cx } from "@/styled-system/css";
 import NavLinks from "./NavLinks";
 import { urlFor } from "@/sanity/lib/image";
+import { HEADER_QUERYResult, BUSINESS_INFO_QUERYResult } from "../../../sanity.types";
 
-export default function Header({ data, business }: any) {
+interface HeaderProps {
+  data: HEADER_QUERYResult;
+  business: BUSINESS_INFO_QUERYResult;
+}
+
+export default function Header({ data, business }: HeaderProps) {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
   
@@ -72,9 +79,11 @@ export default function Header({ data, business }: any) {
             })}
           >
             {logo ? (
-              <img
+              <Image
                 src={urlFor(logo).width(400).auto("format").url()}
                 alt={brandName}
+                width={200}
+                height={50}
                 className={css({
                   height: "full",
                   width: "auto",
