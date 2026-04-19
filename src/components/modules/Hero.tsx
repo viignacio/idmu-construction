@@ -227,7 +227,7 @@ export default function Hero({
               width: { base: "full", md: "calc(33.333333% + 3rem)" },
               height: "fit-content",
               backgroundColor: backgroundColor || "surface-container-high",
-              padding: { base: "2rem", md: "4rem" },
+              padding: { base: "2rem", md: "3rem" },
               display: "flex",
               flexDirection: "column",
               justifyContent: "center",
