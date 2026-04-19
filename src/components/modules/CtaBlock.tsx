@@ -1,5 +1,7 @@
 import { css } from "@/styled-system/css";
 import { CtaButton } from "@/components/common/CtaButton";
+import { getThemeColors } from "@/lib/theme";
+
 
 interface CTA {
   text?: string;
@@ -20,34 +22,8 @@ interface CtaBlockProps {
   ctaVariant?: "primary" | "secondary" | "tertiary";
 }
 
-const getThemeColors = (bg: string) => {
-  // Map Sanity values to their semantic counterparts in the Panda config
-  const colors: Record<string, string> = {
-    primary: "primary",
-    secondary: "secondary",
-    tertiary: "tertiary",
-    surface: "surface",
-    background: "background",
-    blueprint: "blueprint",
-  };
-
-  const activeToken = colors[bg] || "primary";
-
-  // Logical color detection for contrast
-  const isDark = ["primary", "secondary", "surface"].includes(activeToken);
-  
-  // Use white text on dark backgrounds; primary text on light backgrounds
-  const mainTextColor = isDark ? "white" : "text.main";
-  
-  return {
-    bg: activeToken,
-    text: mainTextColor,
-    subtext: mainTextColor,
-    isDark,
-  };
-};
-
 export default function CtaBlock({
+
   layout = "one",
   heading,
   subheading,
