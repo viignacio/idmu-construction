@@ -14,8 +14,16 @@ interface HeroProps {
   backgroundVideoUrl?: string;
   videoPlaceholder?: any;
   backgroundType?: "image" | "video";
-  primaryCTA?: { label: string; link: string };
-  secondaryCTA?: { label: string; link: string };
+  primaryCTA?: {
+    label?: string;
+    link?: string;
+    variant?: "primary" | "secondary" | "tertiary" | "ghost";
+  };
+  secondaryCTA?: {
+    label?: string;
+    link?: string;
+    variant?: "primary" | "secondary" | "tertiary" | "ghost";
+  };
   highlightedWord?: string;
   preamble?: string;
   alignment?: "left" | "right";
@@ -292,7 +300,7 @@ export default function Hero({
                 <CtaButton
                   text={primaryCTA.label}
                   link={primaryCTA.link}
-                  variant="tertiary"
+                  variant={primaryCTA.variant || "tertiary"}
                   theme={getThemeForBackground(backgroundColor)}
                 />
               )}

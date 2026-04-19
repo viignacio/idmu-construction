@@ -161,6 +161,20 @@ export const page = defineType({
               fields: [
                 { name: "label", type: "string" },
                 { name: "link", type: "string" },
+                {
+                  name: "variant",
+                  title: "Variant",
+                  type: "string",
+                  initialValue: "tertiary",
+                  options: {
+                    list: [
+                      { title: "Primary (Solid)", value: "primary" },
+                      { title: "Secondary (Underlined)", value: "secondary" },
+                      { title: "Tertiary (Arrow)", value: "tertiary" },
+                      { title: "Ghost (Outline)", value: "ghost" },
+                    ],
+                  },
+                },
               ],
               hidden: ({ parent }) => parent?.variant === "text",
             },
