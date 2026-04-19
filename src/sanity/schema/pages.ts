@@ -104,6 +104,7 @@ export const page = defineType({
               group: "background",
               hidden: ({ parent }) => parent?.variant !== "image-text",
             },
+            backgroundColorField("background", "surface"),
             {
               name: "backgroundType",
               type: "string",

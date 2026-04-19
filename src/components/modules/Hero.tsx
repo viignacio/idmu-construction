@@ -18,6 +18,7 @@ interface HeroProps {
   highlightedWord?: string;
   preamble?: string;
   alignment?: "left" | "right";
+  backgroundColor?: string;
 }
 
 export default function Hero({
@@ -35,6 +36,7 @@ export default function Hero({
   highlightedWord,
   preamble,
   alignment = "left",
+  backgroundColor = "surface-container-high",
 }: HeroProps) {
   const isDarkTheme = variant !== "text";
 
@@ -224,7 +226,7 @@ export default function Hero({
           <div
             className={css({
               width: { base: "full", md: "41.666667%" }, // Slightly wider than 1/3 to allow for overlap without squeeze
-              backgroundColor: "surface-container-high",
+              backgroundColor: backgroundColor || "surface-container-high",
               padding: { base: "2rem", md: "4rem" },
               display: "flex",
               flexDirection: "column",
@@ -244,7 +246,12 @@ export default function Hero({
             {preamble && (
               <span
                 className={css({
-                  color: "on-primary-container",
+                  color:
+                    backgroundColor === "primary" ||
+                    backgroundColor === "secondary" ||
+                    backgroundColor === "surface"
+                      ? "rgba(255,255,255,0.7)"
+                      : "on-primary-container",
                   fontSize: "sm",
                   fontWeight: "bold",
                   tracking: "widest",
@@ -265,7 +272,12 @@ export default function Hero({
                   lineHeight: "0.95",
                   marginBottom: "1.5rem",
                   tracking: "tighter",
-                  color: "primary",
+                  color:
+                    backgroundColor === "primary" ||
+                    backgroundColor === "secondary" ||
+                    backgroundColor === "surface"
+                      ? "white"
+                      : "primary",
                 })}
               >
                 {getHighlightedHeading()}
@@ -274,7 +286,12 @@ export default function Hero({
             {subheading && (
               <p
                 className={css({
-                  color: "on-surface-variant",
+                  color:
+                    backgroundColor === "primary" ||
+                    backgroundColor === "secondary" ||
+                    backgroundColor === "surface"
+                      ? "rgba(255,255,255,0.9)"
+                      : "on-surface-variant",
                   lineHeight: "relaxed",
                   marginBottom: "2.5rem",
                   fontFamily: "body",
@@ -290,7 +307,13 @@ export default function Hero({
                   text={primaryCTA.label}
                   link={primaryCTA.link}
                   variant="tertiary"
-                  theme="light"
+                  theme={
+                    backgroundColor === "primary" ||
+                    backgroundColor === "secondary" ||
+                    backgroundColor === "surface"
+                      ? "dark"
+                      : "light"
+                  }
                 />
               )}
             </div>
