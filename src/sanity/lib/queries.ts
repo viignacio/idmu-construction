@@ -41,7 +41,8 @@ export const BUSINESS_INFO_QUERY = defineQuery(`*[_type == "business"][0]{
   logo,
   email,
   phone,
-  address
+  address,
+  socials
 }`);
 
 export const PAGE_QUERY = defineQuery(`{
