@@ -22,7 +22,7 @@
     "react-hook-form": "^7.72.1",
     "sanity": "3.99.0",
     "sharp": "latest",
-    "styled-components": "6.1.13",
+    "styled-components": "^6.1.15",
     "zod": "^4.3.6"
   },
   "devDependencies": {
