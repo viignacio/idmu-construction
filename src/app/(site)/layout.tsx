@@ -8,6 +8,10 @@ import {
 } from "@/sanity/lib/queries";
 import { css } from "../../../styled-system/css";
 
+// Revalidate all pages in this route group every 60 seconds (ISR).
+// CMS changes will reflect within ~1 minute without a full redeploy.
+export const revalidate = 60;
+
 export default async function SiteLayout({
   children,
 }: {
