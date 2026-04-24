@@ -1,4 +1,5 @@
 import Footer from "@/components/layout/Footer";
+import Link from "next/link";
 import Header from "@/components/layout/Header";
 import { client } from "@/sanity/lib/client";
 import {
@@ -71,7 +72,7 @@ export default async function NotFound() {
           The architectural path you followed does not exist in our current blueprints or has been demolished.
         </p>
 
-        <a
+        <Link
           href="/"
           className={css({
             backgroundColor: "primary",
@@ -89,7 +90,7 @@ export default async function NotFound() {
           })}
         >
           Return to Ground Zero →
-        </a>
+        </Link>
       </main>
       <Footer data={footerData} business={businessData} />
     </>

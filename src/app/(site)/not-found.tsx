@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { css } from "../../../styled-system/css";
 
 export default function NotFound() {
@@ -53,7 +54,7 @@ export default function NotFound() {
         The architectural path you followed does not exist in our current blueprints or has been demolished.
       </p>
       
-      <a
+      <Link
         href="/"
         className={css({
           backgroundColor: "primary",
@@ -71,7 +72,7 @@ export default function NotFound() {
         })}
       >
         Return to Ground Zero →
-      </a>
+      </Link>
     </div>
   );
 }
